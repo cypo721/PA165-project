@@ -1,5 +1,8 @@
 package entity;
 
+import enums.PersonType;
+import enums.Role;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
@@ -8,6 +11,8 @@ import java.util.Date;
 
 /**
  * Created by pato on 26.10.2016.
+ *
+ * Class used for saving informations about customers and employees.
  */
 @Entity
 //In Derby, its forbiden to 'USER' is reserved keyword, we need to rename table
@@ -20,17 +25,29 @@ public class User {
 
     private String passwordHash;
 
-    @Column(nullable=false,unique=true)
-    @Pattern(regexp=".+@.+\\....?")
-    @NotNull
-    private String email;
-    @NotNull
     private String givenName;
     @NotNull
     private String surname;
 
+    @Column(nullable=false,unique=true)
+    @Pattern(regexp=".+@.+\\....?")
+    private String email;
+    @NotNull
+
     @Pattern(regexp="\\+?\\d+")
     private String phone;
+
+    /*
+     * decides if user is legal or natural person
+     */
+    @Enumerated(EnumType.STRING)
+    private PersonType personType;
+
+    /*
+     * decides if user is employee or customer
+     */
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -93,6 +110,22 @@ public class User {
         this.joinedDate = joinedDate;
     }
 
+    public PersonType getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(PersonType personType) {
+        this.personType = personType;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -118,5 +151,16 @@ public class User {
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "givenName='" + givenName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", personType=" + personType +
+                ", role=" + role +
+                ", joinedDate=" + joinedDate +
+                '}';
+    }
 }
