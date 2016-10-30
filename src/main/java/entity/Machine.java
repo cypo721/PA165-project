@@ -5,12 +5,16 @@
  */
 package entity;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
-import java.util.Collections;
 import java.util.Objects;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,11 +28,18 @@ public class Machine {
     @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
-    private Date lastRevision;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBuy;
+    
+    @Temporal(TemporalType.DATE)
+    private Date dateOfLastRevision;
 
     @Column(nullable = false)
-    private String lastRevisionInfo;
+    private BigDecimal pricePerDay;
+    
+    @Enumerated(EnumType.STRING)
+    private MachineType machineType;
     
     public Long getId() {
         return id;
@@ -38,14 +49,22 @@ public class Machine {
         return name;
     }
 
-    public Date getLastRevision() {
-        return lastRevision;
-    }
-    
-    public String getLastRevisionInfo() {
-        return lastRevisionInfo;
+    public Date getDateOfLastRevision() {
+        return dateOfLastRevision;
     }
 
+    public Date getDateOfBuy() {
+        return dateOfBuy;
+    }
+
+    public BigDecimal getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public MachineType getMachineType() {
+        return machineType;
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -54,21 +73,31 @@ public class Machine {
         this.name = name;
     }
 
-    public void setLastRevision(Date lastRevision) {
-        this.lastRevision = lastRevision;
-    }
-    
-    public void setLastRevisionInfo(String lastRevisionInfo) {
-        this.lastRevisionInfo = lastRevisionInfo;
+    public void setDateOfLastRevision(Date dateOfLastRevision) {
+        this.dateOfLastRevision = dateOfLastRevision;
     }
 
+    public void setDateOfBuy(Date dateOfBuy) {
+        this.dateOfBuy = dateOfBuy;
+    }
+
+    public void setPricePerDay(BigDecimal pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
+
+    public void setMachineType(MachineType machineType) {
+        this.machineType = machineType;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         final int prime = 45;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((lastRevision == null) ? 0 : lastRevision.hashCode());
-        result = prime * result + ((lastRevisionInfo == null) ? 0 : lastRevisionInfo.hashCode());
+        result = prime * result + ((dateOfLastRevision == null) ? 0 : dateOfLastRevision.hashCode());
+//        result = prime * result + ((lastRevisionInfo == null) ? 0 : lastRevisionInfo.hashCode());
         return result;
     }
 
@@ -80,32 +109,40 @@ public class Machine {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Machine)) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        Machine other = (Machine) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
+        final Machine other = (Machine) obj;
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (lastRevision == null) {
-            if (other.lastRevision != null) {
-                return false;
-            }
-        } else if (!lastRevision.equals(other.lastRevision)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (lastRevisionInfo == null) {
-            if (other.lastRevisionInfo != null) {
-                return false;
-            }
-        } else if (!lastRevisionInfo.equals(other.lastRevisionInfo)) {
+        if (!Objects.equals(this.dateOfLastRevision, other.dateOfLastRevision)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateOfBuy, other.dateOfBuy)) {
+            return false;
+        }
+        if (!Objects.equals(this.pricePerDay, other.pricePerDay)) {
+            return false;
+        }
+        if (this.machineType != other.machineType) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Machine {" +
+                "name='" + name + '\'' +
+                ", dateOfBuy='" + dateOfBuy + '\'' +
+                ", dateOfLastRevision='" + dateOfLastRevision + '\'' +
+                ", pricePerDay='" + pricePerDay + '\'' +
+                ", machienType=" + machineType +
+                '}';
     }
 }
     
