@@ -5,42 +5,49 @@
  */
 package tests;
 
+import config.PersistenceSampleApplicationContext;
 import dao.UserDao;
 import entity.User;
 import enums.PersonType;
 import enums.Role;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import org.junit.Before;
-import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 /**
  *
  * @author eduard
  */
-public class UserDaoTest {
-    @PersistenceContext
-    private EntityManager em;
+@ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
-    @Inject
+    @PersistenceUnit
+    private EntityManagerFactory emf;
+
+    @Autowired
     UserDao userDao;
     
-    private User user1;
+    private User user1 = new User();
     private User user2;
     
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public void beforeClass() {
+        EntityManager em = emf.createEntityManager();
         user1 = new User();
+        em.getTransaction().begin();
         
         user1.setGivenName("Michal");
         user1.setSurname("Skaredy");
@@ -68,7 +75,9 @@ public class UserDaoTest {
                 
         em.persist(user1);
         em.persist(user2);
-        em.flush();
+        //em.flush();
+        em.getTransaction().commit();
+        em.close();
     }
     
     @Test

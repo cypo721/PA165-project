@@ -10,12 +10,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author eduard
  */
+@Transactional
 @Repository
 public class MachineDaoImpl implements MachineDao {
     
@@ -33,8 +36,8 @@ public class MachineDaoImpl implements MachineDao {
     }
 
     @Override
-    public void delete(Machine machine) throws IllegalArgumentException{
-        em.remove(machine);
+    public void delete(Machine machine) {
+        em.remove(em.contains(machine) ? machine : em.merge(machine));
     }
 
     @Override

@@ -3,6 +3,7 @@ package entity;
 import enums.PersonType;
 import enums.Role;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;

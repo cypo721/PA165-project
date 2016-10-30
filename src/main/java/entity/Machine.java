@@ -7,23 +7,20 @@ package entity;
 
 import enums.MachineType;
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author eduard
  */
+@Entity
 public class Machine {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id; 
     
     @Column(nullable = false)
