@@ -5,6 +5,7 @@
  */
 package entity;
 
+import enums.MachineType;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Id;
