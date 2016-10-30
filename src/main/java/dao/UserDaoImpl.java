@@ -22,6 +22,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public void update(User u) {
+		em.merge(u);
+	}
+
+	@Override
+	public void delete(User u) {
+		em.remove(u);
+	}
+
+	@Override
 	public User findUserByEmail(String email) {
 		if (email == null || email.isEmpty())
 			throw new IllegalArgumentException("Cannot search for null e-mail");
