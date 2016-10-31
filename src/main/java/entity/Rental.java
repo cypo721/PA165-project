@@ -11,9 +11,6 @@ import java.util.Objects;
 @Entity
 @Table(name="Rentals")
 public class Rental {
-    
-    //test
-    private final int blabalbal = 10 + 5;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -87,7 +84,6 @@ public class Rental {
     @Override
     public String toString() {
         return "Rental{" +
-                "blabalbal=" + blabalbal +
                 ", id=" + id +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
@@ -98,47 +94,28 @@ public class Rental {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 23;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (!(o instanceof Rental))
+            return false;
+        Rental rental = (Rental) o;
+
+        if (dateFrom != null ? !dateFrom.equals(rental.dateFrom) : rental.dateFrom != null) return false;
+        if (dateTo != null ? !dateTo.equals(rental.dateTo) : rental.dateTo != null) return false;
+        if (price != null ? !price.equals(rental.price) : rental.price != null) return false;
+        if (user != null ? !user.equals(rental.user) : rental.user != null) return false;
+        return machine != null ? machine.equals(rental.machine) : rental.machine == null;
+
     }
-    
-    
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Rental other = (Rental) obj;
-        if (!Objects.equals(this.user, other.user)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.dateFrom, other.dateFrom)) {
-            return false;
-        }
-        if (!Objects.equals(this.dateTo, other.dateTo)) {
-            return false;
-        }
-        if (!Objects.equals(this.price, other.price)) {
-            return false;
-        }
-        if (!Objects.equals(this.machine, other.machine)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        int result = dateFrom != null ? dateFrom.hashCode() : 0;
+        result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (machine != null ? machine.hashCode() : 0);
+        return result;
     }
-
-
 }

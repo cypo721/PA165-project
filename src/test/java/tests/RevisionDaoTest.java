@@ -133,20 +133,12 @@ public class RevisionDaoTest extends AbstractTestNGSpringContextTests {
         revisionDao.create(r);
     }
 
-    @Test
+    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
     public void testNullMachine(){
         Revision r = getRevision();
         r.setUser(u);
-        try{
-            revisionDao.create(r);;
-            Assert.fail("Machine cannot be null");
-        } catch(Exception e) {
-            Assert.assertEquals("Validation failed for classes [entity.Revision] during persist time for groups [javax.validation.groups.Default, ]\n" +
-                    "List of constraint violations:[\n" +
-                    "\tConstraintViolationImpl{interpolatedMessage='nemôže byť null', propertyPath=machine, rootBeanClass=class entity.Revision, messageTemplate='{javax.validation.constraints.NotNull.message}'}\n" +
-                    "]", e.getMessage());
-        }
 
+        revisionDao.create(r);
     }
 
     private Revision getRevision() {
