@@ -14,7 +14,9 @@ import entity.Machine;
 import entity.Rental;
 import enums.MachineType;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +44,15 @@ public class RentalDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testCreate(){
         Rental rental = new Rental();
+        
+        Calendar cal1 = new GregorianCalendar();
+        cal1.set(2016, Calendar.OCTOBER, 30, 0, 0);
+        
+        Calendar cal2 = new GregorianCalendar();
+        cal2.set(2016, Calendar.NOVEMBER, 1, 0, 0);
 
-        Date dat1 = new Date(116, 9, 30);
-        Date dat2 = new Date(116, 10, 1);
-
-        rental.setDateFrom(dat1);
-        rental.setDateTo(dat2);
+        rental.setDateFrom(cal1.getTime());
+        rental.setDateTo(cal2.getTime());
 
         rental.setPrice(2000);
         
@@ -55,8 +60,8 @@ public class RentalDaoTest extends AbstractTestNGSpringContextTests {
         
         Machine machine = new Machine();
         machine.setName("Cat");
-        machine.setDateOfBuy(dat1);
-        machine.setDateOfLastRevision(dat1);
+        machine.setDateOfBuy(cal1.getTime());
+        machine.setDateOfLastRevision(cal1.getTime());
         machine.setPricePerDay(new BigDecimal(10));
         machine.setMachineType(MachineType.EXCAVATOR);
         
