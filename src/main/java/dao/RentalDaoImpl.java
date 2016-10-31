@@ -36,7 +36,7 @@ public class RentalDaoImpl implements RentalDao {
 
     @Override
     public void delete(Rental rental) throws IllegalArgumentException{
-        em.remove(rental);
+        em.remove(em.contains(rental) ? rental : em.merge(rental));
     }
 
     @Override
