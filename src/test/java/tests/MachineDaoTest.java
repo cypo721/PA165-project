@@ -25,109 +25,72 @@ public class MachineDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     MachineDao machineDao;
 
-//    private Machine machine1;
-//    private Machine machine2;
-//
-//    @BeforeClass
-//    public void beforeClass(){
-//        machine1 = new Machine();
-//        machine1.setName("Test1");
-//        machine1.setPricePerDay(BigDecimal.TEN);
-//        machine1.setMachineType(MachineType.CRANE);
-//        Calendar cal1 = Calendar.getInstance();
-//        cal1.set(Calendar.YEAR, 2011);
-//        cal1.set(Calendar.MONTH, 0);
-//        cal1.set(Calendar.DAY_OF_MONTH, 20);
-//        machine1.setDateOfBuy(cal1.getTime());
-//        machine1.setDateOfLastRevision(cal1.getTime());
-//
-//        machine2 = new Machine();
-//        machine2.setName("Test2");
-//        machine2.setPricePerDay(BigDecimal.ONE);
-//        machine2.setMachineType(MachineType.LORRY);
-//        Calendar cal2 = Calendar.getInstance();
-//        cal1.set(Calendar.YEAR, 2012);
-//        cal1.set(Calendar.MONTH, 0);
-//        cal1.set(Calendar.DAY_OF_MONTH, 20);
-//        machine2.setDateOfBuy(cal2.getTime());
-//        machine2.setDateOfLastRevision(cal2.getTime());
-//    }
-
     @Test
     public void testCreate(){
-        Machine machine1 = new Machine();
-        machine1.setName("Test1");
-        machine1.setPricePerDay(BigDecimal.TEN);
-        machine1.setMachineType(MachineType.CRANE);
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2011);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        machine1.setDateOfBuy(cal1.getTime());
-        machine1.setDateOfLastRevision(cal1.getTime());
+        Machine m = getMachine();
+        machineDao.create(m);
 
-        machineDao.create(machine1);
-        Assert.assertNotNull(machine1.getId());
-        machineDao.delete(machine1);
+        Assert.assertNotNull(m.getId());
+        Assert.assertEquals(BigDecimal.TEN, m.getPricePerDay());
+    }
+
+    @Test
+    public void testfindById(){
+        Machine m = getMachine();
+        machineDao.create(m);
+        Assert.assertEquals(m.getName(), machineDao.findById(m.getId()).getName());
     }
 
     @Test
     public void testUpdate(){
-        Machine machine1 = new Machine();
-        machine1.setName("Test1");
-        machine1.setPricePerDay(BigDecimal.TEN);
-        machine1.setMachineType(MachineType.CRANE);
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2011);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        machine1.setDateOfBuy(cal1.getTime());
-        machine1.setDateOfLastRevision(cal1.getTime());
-
-        machineDao.create(machine1);
-        machine1.setName("Updated");
-        machineDao.update(machine1);
-        Assert.assertEquals(machineDao.findById(machine1.getId()).getName(),"Updated");
-        machineDao.delete(machine1);
+        Machine m = getMachine();
+        machineDao.create(m);
+        m.setName("Updated");
+        machineDao.update(m);
+        Assert.assertEquals("Updated", machineDao.findById(m.getId()).getName());
     }
+
+
 
     @Test
     public void createFindDeleteTest(){
-        Machine machine1 = new Machine();
-        machine1.setName("Test1");
-        machine1.setPricePerDay(BigDecimal.TEN);
-        machine1.setMachineType(MachineType.CRANE);
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2011);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        machine1.setDateOfBuy(cal1.getTime());
-        machine1.setDateOfLastRevision(cal1.getTime());
-        machineDao.create(machine1);
-
-        Machine machine2 = new Machine();
-        machine2.setName("Test2");
-        machine2.setPricePerDay(BigDecimal.ONE);
-        machine2.setMachineType(MachineType.LORRY);
-        Calendar cal2 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2012);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        machine2.setDateOfBuy(cal2.getTime());
-        machine2.setDateOfLastRevision(cal2.getTime());
-        machineDao.create(machine2);
-
-        Assert.assertEquals(machineDao.findById(machine1.getId()).getName(), "Test1");
+        Machine m = getMachine();
+        machineDao.create(m);
+        Machine m2 = getMachine();
+        machineDao.create(m2);
+        Assert.assertEquals(machineDao.findById(m.getId()).getName(), "Test1");
         Assert.assertEquals(machineDao.findAllMachines().size(), 2);
-        machineDao.delete(machine1);
+        machineDao.delete(m2);
         Assert.assertEquals(machineDao.findAllMachines().size(), 1);
-        machineDao.delete(machine2);
+        machineDao.delete(m);
         Assert.assertEquals(machineDao.findAllMachines().size(), 0);
+
     }
 
     @Test(expectedExceptions = javax.persistence.PersistenceException.class)
     public void testNullName(){
+        Machine m = getMachine();
+        m.setName(null);
+        machineDao.create(m);
+    }
+
+    @Test
+    public void testNullDateOfBuy(){
+        Machine m = getMachine();
+        machineDao.create(m);
+        m.setDateOfBuy(null);
+        try{
+            machineDao.update(m);
+            Assert.fail("Day of buy cannot be null");
+        } catch(Exception e) {
+            Assert.assertEquals("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction", e.getMessage());
+        }
+
+    }
+
+    private Machine getMachine() {
         Machine machine1 = new Machine();
+        machine1.setName("Test1");
         machine1.setPricePerDay(BigDecimal.TEN);
         machine1.setMachineType(MachineType.CRANE);
         Calendar cal1 = Calendar.getInstance();
@@ -136,7 +99,7 @@ public class MachineDaoTest extends AbstractTestNGSpringContextTests {
         cal1.set(Calendar.DAY_OF_MONTH, 20);
         machine1.setDateOfBuy(cal1.getTime());
         machine1.setDateOfLastRevision(cal1.getTime());
-        machine1.setName(null);
-        machineDao.create(machine1);
+
+        return machine1;
     }
 }
