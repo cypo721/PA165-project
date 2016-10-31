@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
  * @author eduard
  */
 @Entity
+@Table(name="Machines")
 public class Machine {
 
     @Id
@@ -95,7 +96,6 @@ public class Machine {
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((dateOfLastRevision == null) ? 0 : dateOfLastRevision.hashCode());
-//        result = prime * result + ((lastRevisionInfo == null) ? 0 : lastRevisionInfo.hashCode());
         return result;
     }
 

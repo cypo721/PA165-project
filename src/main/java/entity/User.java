@@ -30,7 +30,7 @@ public class User {
     @NotNull
     private String surname;
 
-    @Column(nullable=false,unique=true)
+    @Column(nullable=false, unique=true)
     @Pattern(regexp=".+@.+\\....?")
     private String email;
     @NotNull
