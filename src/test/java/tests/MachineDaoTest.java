@@ -74,18 +74,13 @@ public class MachineDaoTest extends AbstractTestNGSpringContextTests {
         machineDao.create(m);
     }
 
-    @Test
+    @Test(expectedExceptions = org.springframework.transaction.TransactionSystemException.class)
     public void testNullDateOfBuy(){
         Machine m = getMachine();
         machineDao.create(m);
         m.setDateOfBuy(null);
-        try{
-            machineDao.update(m);
-            Assert.fail("Day of buy cannot be null");
-        } catch(Exception e) {
-            Assert.assertEquals("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction", e.getMessage());
-        }
 
+        machineDao.update(m);
     }
 
     private Machine getMachine() {
