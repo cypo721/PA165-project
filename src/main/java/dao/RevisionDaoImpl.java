@@ -9,11 +9,13 @@ import entity.Revision;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Václav Zouzalík
  */
+@Transactional
 @Repository
 public class RevisionDaoImpl implements RevisionDao {
     @PersistenceContext
@@ -31,7 +33,7 @@ public class RevisionDaoImpl implements RevisionDao {
 
     @Override
     public void delete(Revision revision) throws IllegalArgumentException{
-        em.remove(revision);
+        em.remove(em.contains(revision) ? revision : em.merge(revision));
     }
 
     @Override
