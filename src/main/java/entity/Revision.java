@@ -102,13 +102,19 @@ public class Revision {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
         
         final Revision other = (Revision) obj;
         
+        if(this.isFunctionable != other.isFunctionable) {
+            return false;
+        }
         if (!Objects.equals(this.machine, other.machine)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
