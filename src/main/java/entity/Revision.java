@@ -34,6 +34,10 @@ public class Revision {
     @NotNull
     private Machine machine;
     
+    private String info;
+    
+    private boolean isFuctionable;
+    
     public Long getId() {
         return id;
     }
@@ -44,6 +48,16 @@ public class Revision {
 
     public User getUser() {
         return user;
+    }
+    
+    public String getInfo()
+    {
+        return info;
+    }
+    
+    public boolean getIsFunctionable()
+    {
+        return isFuctionable;
     }
 
     public void setUser(User user) {
@@ -56,6 +70,16 @@ public class Revision {
 
     public void setMachine(Machine machine) {
         this.machine = machine;
+    }
+    
+    public void setInfo(String info)
+    {
+        this.info = info;
+    }
+    
+    public void setIsFunctionable(boolean isFunctionable)
+    {
+        this.isFuctionable = isFunctionable;
     }
 
     @Override
