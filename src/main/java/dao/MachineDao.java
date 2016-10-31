@@ -21,25 +21,18 @@ import java.util.List;
      public void create(Machine machine);
     
      /**
-     * 
-     * @param machine 
      * Update machine item in database
      * @param machine item to be updated      
      */
      public void update(Machine machine);
    
      /**
-     * 
-     * @param machine 
      * Delete machine item in database
      * @param machine item to be deleted
      */
      public void delete(Machine machine);
     
      /**
-     * 
-     * @param id
-     * @return 
      * Find machine by id
      * @param id of desired machine 
      * @return found machine item
@@ -47,8 +40,6 @@ import java.util.List;
      public Machine findById(Long id);
     
      /**
-     * 
-     * @return 
      * Finds list of all machines in persistent storage 
      * @return list of all machines in storage
      */
