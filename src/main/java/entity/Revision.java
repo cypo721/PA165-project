@@ -24,7 +24,7 @@ public class Revision {
     
     @NotNull
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date dateOfRevision;
 
     @ManyToOne(optional=false)
     @NotNull
@@ -41,9 +41,13 @@ public class Revision {
     public Long getId() {
         return id;
     }
-    
-    public Date getDate() {
-        return date;
+
+    public Date getDateOfRevision() {
+        return dateOfRevision;
+    }
+
+    public void setDateOfRevision(Date dateOfRevision) {
+        this.dateOfRevision = dateOfRevision;
     }
 
     public User getUser() {
@@ -86,7 +90,7 @@ public class Revision {
     public int hashCode() {
         final int prime = 13;
         int result = 1;
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((dateOfRevision == null) ? 0 : dateOfRevision.hashCode());
         return result;
     }
     
@@ -110,7 +114,7 @@ public class Revision {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
+        if (!Objects.equals(this.dateOfRevision, other.dateOfRevision)) {
             return false;
         }
         

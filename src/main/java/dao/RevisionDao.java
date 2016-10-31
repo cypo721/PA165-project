@@ -7,6 +7,8 @@ package dao;
 
 import entity.Revision;
 
+import java.util.List;
+
 /**
  *
  * @author Václav Zouzalík
@@ -36,4 +38,10 @@ public interface RevisionDao {
      * @return Revision
      */
     public Revision findById(Long id);
+
+    /**
+     * Finds list of all revisions in persistent storage
+     * @return list of all revisions in storage
+     */
+    public List<Revision> findAllRevisions();
 }
