@@ -15,33 +15,33 @@ import java.util.List;
 public interface RentalDao {
     
     /**
-     * 
-     * @param rental 
+     * Creates persistent representation of rental in database.
+     * @param rental rental to persist
      */    
     public void create(Rental rental);
    
     /**
-     * 
-     * @param rental 
+     * Update rental in database.
+     * @param rental rental to update.
      */
     public void update(Rental rental);
   
     /**
-     * 
-     * @param rental 
+     * Delete rental from database.
+     * @param rental Rental to delete.
      */
     public void delete(Rental rental);
    
     /**
-     * 
-     * @param id
-     * @return 
+     * Find rental database.
+     * @param id rental id to be found.
+     * @return Rental with given id.
      */
     public Rental findById(Long id);
    
     /**
-     * 
-     * @return 
+     * Method for retrieving all rentals from database.
+     * @return All rentals from database.
      */
     public List<Rental> findAllRentals();
 }

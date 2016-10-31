@@ -8,8 +8,12 @@ package dao;
 import entity.Revision;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  *
@@ -39,5 +43,11 @@ public class RevisionDaoImpl implements RevisionDao {
     @Override
     public Revision findById(Long id) {
         return em.find(Revision.class, id);
+    }
+
+    @Override
+    public List<Revision> findAllRevisions(){
+        TypedQuery<Revision> query = em.createQuery("SELECT revision FROM Revision revision", Revision.class);
+        return (List<Revision>) query.getResultList();
     }
 }

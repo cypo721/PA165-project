@@ -50,18 +50,17 @@ public class RentalDaoTest extends AbstractTestNGSpringContextTests {
         rental.setDateTo(dat2);
 
         rental.setPrice(2000);
-        
         rental.setUser(userDao.findUserByEmail("test.test@gmail.com"));
-        
+
         Machine machine = new Machine();
         machine.setName("Cat");
         machine.setDateOfBuy(dat1);
         machine.setDateOfLastRevision(dat1);
         machine.setPricePerDay(new BigDecimal(10));
         machine.setMachineType(MachineType.EXCAVATOR);
-        
+
         rental.setMachine(machine);
-        
+
         machineDao.create(machine);
 
         rentalDao.create(rental);

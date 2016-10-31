@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDao {
 	/**
-	 * Create persistent representation of userin database.
+	 * Create persistent representation of user in database.
 	 * @param u User to persist
 	 */
 	 public void create(User u);
