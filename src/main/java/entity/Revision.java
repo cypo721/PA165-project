@@ -91,6 +91,9 @@ public class Revision {
         final int prime = 13;
         int result = 1;
         result = prime * result + ((dateOfRevision == null) ? 0 : dateOfRevision.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((machine == null) ? 0 : machine.hashCode());
+        result = prime * result + ((info == null) ? 0 : info.hashCode());
         return result;
     }
     
@@ -102,7 +105,7 @@ public class Revision {
         if (obj == null) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (!(obj instanceof Revision)) {
             return false;
         }
         
