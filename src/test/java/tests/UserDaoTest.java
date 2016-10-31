@@ -11,26 +11,16 @@ import entity.User;
 import enums.PersonType;
 import enums.Role;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.transaction.Transactional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -144,19 +134,13 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         }
     }
     
-    @Test
+    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
     public void testEmailBadPattern(){
         User user = getUser();
         user.setEmail("test8.testgmail.com");
-        try {
+        
             userDao.create(user);
-            Assert.fail("Good pattern of email");
-        } catch(Exception e) {
-            Assert.assertEquals("Validation failed for classes [entity.User] during persist time for groups [javax.validation.groups.Default, ]\n" +
-            "List of constraint violations:[\n" +
-            "	ConstraintViolationImpl{interpolatedMessage='must match \".+@.+\\....?\"', propertyPath=email, rootBeanClass=class entity.User, messageTemplate='{javax.validation.constraints.Pattern.message}'}\n" +
-            "]", e.getMessage());
-        }
+        
     }
     
      private User getUser() {
