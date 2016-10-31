@@ -36,7 +36,7 @@ public class Revision {
     
     private String info;
     
-    private boolean isFuctionable;
+    private boolean isFunctionable;
     
     public Long getId() {
         return id;
@@ -61,7 +61,7 @@ public class Revision {
     
     public boolean getIsFunctionable()
     {
-        return isFuctionable;
+        return isFunctionable;
     }
 
     public void setUser(User user) {
@@ -83,7 +83,7 @@ public class Revision {
     
     public void setIsFunctionable(boolean isFunctionable)
     {
-        this.isFuctionable = isFunctionable;
+        this.isFunctionable = isFunctionable;
     }
 
     @Override
