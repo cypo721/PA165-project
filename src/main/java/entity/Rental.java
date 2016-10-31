@@ -3,7 +3,6 @@ package entity;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.Objects;
 /**
@@ -19,32 +18,26 @@ public class Rental {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-     
-    @Column(nullable=false,unique=true)
-    @Pattern(regexp=".+@.+\\....?")
-    @NotNull
-    private String email;
-    
+
     @NotNull
     @Temporal(TemporalType.DATE)
     private Date dateFrom;
-    
-    @NotNull
+
     @Temporal(TemporalType.DATE)
     private Date dateTo;
     
-    @NotNull
     private Integer price;
-    
+
+    @ManyToOne(optional=false)
     @NotNull
-    private Long machineId;
+    private User user;
+
+    @ManyToOne(optional=false)
+    @NotNull
+    private Machine machine;
 
     public Long getId() {
         return id;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public Date getDateFrom() {
@@ -59,16 +52,8 @@ public class Rental {
         return price;
     }
 
-    public Long getMachineId() {
-        return machineId;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setDateFrom(Date dateFrom) {
@@ -83,14 +68,33 @@ public class Rental {
         this.price = price;
     }
 
-    public void setMachineId(Long machineId) {
-        this.machineId = machineId;
+    public User getUser() {
+        return user;
     }
-    
-    
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
     @Override
-    public String toString(){
-        return email + " " + machineId + " " + dateFrom;
+    public String toString() {
+        return "Rental{" +
+                "blabalbal=" + blabalbal +
+                ", id=" + id +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                ", price=" + price +
+                ", user=" + user +
+                ", machine=" + machine +
+                '}';
     }
 
     @Override
@@ -115,7 +119,7 @@ public class Rental {
             return false;
         }
         final Rental other = (Rental) obj;
-        if (!Objects.equals(this.email, other.email)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -130,7 +134,7 @@ public class Rental {
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
-        if (!Objects.equals(this.machineId, other.machineId)) {
+        if (!Objects.equals(this.machine, other.machine)) {
             return false;
         }
         return true;

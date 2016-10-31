@@ -25,9 +25,14 @@ public class Revision {
     @NotNull
     @Temporal(TemporalType.DATE)
     private Date date;
-    
+
+    @ManyToOne(optional=false)
     @NotNull
-    private Long machineId;
+    private User user;
+
+    @ManyToOne(optional=false)
+    @NotNull
+    private Machine machine;
     
     public Long getId() {
         return id;
@@ -36,22 +41,28 @@ public class Revision {
     public Date getDate() {
         return date;
     }
-    
-    public Long getMachineId() {
-        return machineId;
+
+    public User getUser() {
+        return user;
     }
-    
-    @Override
-    public String toString(){
-        return "Revision " + id + " of " + machineId + " on " + date;
+
+    public void setUser(User user) {
+        this.user = user;
     }
-    
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 13;
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((machineId == 0) ? 0 : machineId.hashCode());
         return result;
     }
     
@@ -69,7 +80,7 @@ public class Revision {
         
         final Revision other = (Revision) obj;
         
-        if (!Objects.equals(this.machineId, other.machineId)) {
+        if (!Objects.equals(this.machine, other.machine)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
