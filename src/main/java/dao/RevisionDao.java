@@ -15,27 +15,27 @@ import java.util.List;
  */
 public interface RevisionDao {
     /**
-     * 
-     * @param revision 
+     * Create persistent representation of revision in database.
+     * @param revision revision to persist
      */    
     public void create(Revision revision);
    
     /**
-     * 
-     * @param revision 
+     * Update revision in database
+     * @param revision revision to update
      */
     public void update(Revision revision);
   
     /**
-     * 
-     * @param revision 
+     * Delete revision from database
+     * @param revision revision to delete 
      */
     public void delete(Revision revision);
    
     /**
-     * 
-     * @param id
-     * @return Revision
+     * Find revision in database by given id
+     * @param id id of a wanted revision
+     * @return Revision with given id
      */
     public Revision findById(Long id);
 
