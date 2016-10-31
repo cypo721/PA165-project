@@ -8,7 +8,6 @@ package tests;
 import config.PersistenceSampleApplicationContext;
 import dao.MachineDao;
 import dao.RentalDao;
-import dao.RentalDaoImpl;
 import dao.UserDao;
 import entity.Machine;
 import entity.Rental;
@@ -18,10 +17,7 @@ import enums.PersonType;
 import enums.Role;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -115,19 +111,45 @@ public class RentalDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(new Integer(8500), rentalDao.findById(rent.getId()).getPrice());
     }
     
+    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
+    public void testNullUser(){
+        Rental rent = getRental();
+        rent.setUser(null);
+        rent.setMachine(machine1);
+
+        rentalDao.create(rent);
+    }
+
+    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
+    public void testNullMachine(){
+        Rental rent = getRental();
+        rent.setUser(usr);
+        rent.setMachine(null);
+
+        rentalDao.create(rent);
+    }
+    
+    @Test
+    public void testEquals() {
+        Rental rent1 = getRental();
+        
+        Assert.assertEquals(rent1, rent1);
+        
+        Rental rent2 = getRental();
+        rent2.setPrice(12000);
+        
+        Assert.assertNotEquals(rent1, rent2);
+    }
+    
     private Rental getRental() {
         Rental rent = new Rental();
         
         Calendar cal1 = new GregorianCalendar();
-        cal1.set(Calendar.YEAR, 2016);
-        cal1.set(Calendar.MONTH, Calendar.OCTOBER);
-        cal1.set(Calendar.DAY_OF_MONTH, 30);
+        cal1.set(2016, Calendar.OCTOBER, 30, 0, 0, 0);
         rent.setDateFrom(cal1.getTime());
         
         Calendar cal2 = Calendar.getInstance();
-        cal2.set(Calendar.YEAR, 2016);
-        cal2.set(Calendar.MONTH, Calendar.NOVEMBER);
-        cal2.set(Calendar.DAY_OF_MONTH, 1);
+        cal2.set(2016, Calendar.NOVEMBER, 1, 0, 0, 0);
         rent.setDateTo(cal2.getTime());
         
         rent.setPrice(5000);
