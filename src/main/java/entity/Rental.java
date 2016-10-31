@@ -6,13 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.Objects;
-
 /**
  * @Author Marek Bohm
  */
 @Entity
 @Table(name="Rentals")
 public class Rental {
+    
+    //test
+    private final int blabalbal = 10 + 5;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
