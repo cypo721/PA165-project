@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void delete(User u) {
-		em.remove(u);
+		em.remove(em.contains(u) ? u : em.merge(u));
 	}
 
 	@Override
