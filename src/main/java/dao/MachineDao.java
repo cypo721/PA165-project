@@ -12,36 +12,45 @@ import java.util.List;
  *
  * @author eduard
  */
-public interface MachineDao {
-    
-    /**
-     * 
+ public interface MachineDao {
+
+     /**   
+     * Create persistent representation of machine in database.
      * @param machine 
      */    
-    public void create(Machine machine);
-   
-    /**
+     public void create(Machine machine);
+    
+     /**
      * 
      * @param machine 
+     * Update machine item in database
+     * @param machine item to be updated      
      */
-    public void update(Machine machine);
-  
-    /**
+     public void update(Machine machine);
+   
+     /**
      * 
      * @param machine 
+     * Delete machine item in database
+     * @param machine item to be deleted
      */
-    public void delete(Machine machine);
-   
-    /**
+     public void delete(Machine machine);
+    
+     /**
      * 
      * @param id
      * @return 
-     */
-    public Machine findById(Long id);
-   
-    /**
+     * Find machine by id
+     * @param id of desired machine 
+     * @return found machine item
+      */
+     public Machine findById(Long id);
+    
+     /**
      * 
      * @return 
+     * Finds list of all machines in persistent storage 
+     * @return list of all machines in storage
      */
-    public List<Machine> findAllMachines();
-}
+     public List<Machine> findAllMachines();
+ }
