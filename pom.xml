@@ -6,7 +6,15 @@
 
     <groupId>team6</groupId>
     <artifactId>project</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>api-layer</module>
+        <module>dao-layer</module>
+        <module>service-layer</module>
+    </modules>
+
     <build>
         <plugins>
             <plugin>
