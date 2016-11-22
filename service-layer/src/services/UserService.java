@@ -18,4 +18,8 @@ public interface UserService {
     User createUser(String givenName, String surname, String email, String password, String phone, String personType, String role);
     
     void changePassword(Long id, String newPassword);
+    
+    boolean authenticate(Long id, String password);
+    
+    boolean isEmployee(Long id);
 }
