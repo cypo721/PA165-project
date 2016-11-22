@@ -1,11 +1,9 @@
 package service;
 
 import dao.UserDao;
-import dao.UserDaoImpl;
 import entity.User;
 import enums.*;
 import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -34,9 +32,9 @@ public class UserServiceImpl implements UserService {
         usr.setGivenName(givenName);
         usr.setSurname(surname);
         usr.setEmail(email);
-        
+
         usr.setPasswordHash(createHash(password));
-        
+
         usr.setPhone(phone);
         
         if(personType.trim().equalsIgnoreCase("legal"))
