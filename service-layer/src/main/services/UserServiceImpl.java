@@ -1,12 +1,12 @@
 package service;
 
 import dao.UserDao;
-import dao.UserDaoImpl;
 import entity.User;
 import enums.*;
 import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +57,9 @@ public class UserServiceImpl implements UserService {
             usr.setRole(Role.CUSTOMER);
         }
         ud.create(usr);
+        
+        Calendar cal = new GregorianCalendar();
+        usr.setJoinedDate(cal.getTime());
         
         return usr;
     }
