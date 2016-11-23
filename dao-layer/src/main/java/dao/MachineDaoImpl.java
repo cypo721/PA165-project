@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository
-public class MachineDaoImpl implements MachineDao {
+public class    MachineDaoImpl implements MachineDao {
     
     @PersistenceContext
 	private EntityManager em;
