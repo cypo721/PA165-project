@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao ud;
+    private UserDao userdao;
     
     @Override
     public User createUser(String givenName, String surname, String email, String password, String phone, String personType, String role)
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         {
             usr.setRole(Role.CUSTOMER);
         }
-        ud.create(usr);
+        userdao.create(usr);
         
         return usr;
     }
@@ -62,34 +62,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(Long id, String newPassword)
     {
-        User usr = ud.findById(id);
+        User usr = userdao.findById(id);
         usr.setPasswordHash(createHash(newPassword));
     }
     
     @Override
     public boolean authenticate(Long id, String password)
     {
-        User usr = ud.findById(id);
+        User usr = userdao.findById(id);
         return validatePassword(password, usr.getPasswordHash());
     }
     
     @Override
     public boolean isEmployee(Long id)
     {
-        User usr = ud.findById(id);
+        User usr = userdao.findById(id);
         return usr.getRole() == Role.EMPLOYEE;
     }
     
     @Override
     public User getUserById(Long id)
     {
-        return ud.findById(id);
+        return userdao.findById(id);
     }
     
     @Override
     public User getUserByEmail(String email)
     {
-        return ud.findUserByEmail(email);
+        return userdao.findUserByEmail(email);
     }
     
     private static String createHash(String password)
