@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author venca
+ * @author Václav Zouzalík
  */
 @Service
 public interface UserService {
@@ -22,4 +22,8 @@ public interface UserService {
     boolean authenticate(Long id, String password);
     
     boolean isEmployee(Long id);
+    
+    User getUserById(Long id);
+    
+    User getUserByEmail(String email);
 }

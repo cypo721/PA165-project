@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author venca
+ * @author Václav Zouzalík
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -80,6 +80,18 @@ public class UserServiceImpl implements UserService {
     {
         User usr = ud.findById(id);
         return usr.getRole() == Role.EMPLOYEE;
+    }
+    
+    @Override
+    public User getUserById(Long id)
+    {
+        return ud.findById(id);
+    }
+    
+    @Override
+    public User getUserByEmail(String email)
+    {
+        return ud.findUserByEmail(email);
     }
     
     private static String createHash(String password)
