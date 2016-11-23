@@ -12,11 +12,15 @@ import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.Mapper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.RentalService;
 /**
  *
  * @author eduard
  */
+@Service
+@Transactional
 public class RentalFacadeImpl implements RentalFacade {
     @Inject
     private RentalService rentalService;

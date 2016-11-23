@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface MachineFacade {
 
-    public void createMachine();
-    public void updateMachine();
-    public void deleteMachine();
-    public MachineDTO findById();
+    public Long createMachine(MachineDTO m);
+    public void updateMachine(MachineDTO m);
+    public void deleteMachine(Long id);
+    public MachineDTO findById(Long id);
     public List<MachineDTO> findAllMachines();
 }

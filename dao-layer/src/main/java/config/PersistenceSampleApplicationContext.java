@@ -5,6 +5,7 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
@@ -58,5 +59,13 @@ public class PersistenceSampleApplicationContext {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).build();
 		return db;
+	}
+
+	/**
+	  * Enables automatic translation of exceptions to DataAccessExceptions.
+	  */
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor postProcessor() {
+		return new PersistenceExceptionTranslationPostProcessor();
 	}
 }

@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Service
 public interface MachineService {
-    public void create(Machine machine);
+    public Machine create(Machine machine);
     public void update(Machine machine);
     public void delete(Machine machine);
     public Machine findById(Long id);

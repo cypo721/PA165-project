@@ -16,6 +16,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -83,7 +84,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(userDao.findAll().size(), 0);
     }
     
-    @Test(expectedExceptions = javax.persistence.PersistenceException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void testNullEmail(){
         User user1 = getUser();
         user1.setEmail(null);
