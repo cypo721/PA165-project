@@ -80,6 +80,18 @@ public class UserServiceImpl implements UserService {
         return usr.getRole() == Role.EMPLOYEE;
     }
     
+    @Override
+    public User getUserById(Long id)
+    {
+        return ud.findById(id);
+    }
+    
+    @Override
+    public User getUserByEmail(String email)
+    {
+        return ud.findUserByEmail(email);
+    }
+    
     private static String createHash(String password)
     {
         final int SALT_BYTE_SIZE = 24;
