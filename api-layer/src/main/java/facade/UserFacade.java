@@ -12,11 +12,9 @@ import dto.UserDTO;
  * @author venca
  */
 public interface UserFacade {
-    UserDTO createUser(String givenName, String surname, String email, String password, String phone, String personType, String role);
+    UserDTO createUser(UserDTO userDTO);
+   
+    public UserDTO findById(Long id);
     
-    void changePassword(Long id, String newPassword);
-    
-    boolean authenticate(Long id, String password);
-    
-    boolean isEmployee(Long id);
+    public UserDTO findByEmail(String email);
 }

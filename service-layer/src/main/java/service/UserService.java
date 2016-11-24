@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author venca
+ * @author Václav Zouzalík
  */
 @Service
 public interface UserService {
-    User createUser(String givenName, String surname, String email, String password, String phone, String personType, String role);
+    User createUser(User usr);
     
     void changePassword(Long id, String newPassword);
     

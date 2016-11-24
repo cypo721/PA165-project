@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author venca
+ * @author Václav Zouzalík
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,34 +26,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userdao;
     
     @Override
-    public User createUser(String givenName, String surname, String email, String password, String phone, String personType, String role)
-    {
-        User usr = new User();
-        usr.setGivenName(givenName);
-        usr.setSurname(surname);
-        usr.setEmail(email);
-
-        usr.setPasswordHash(createHash(password));
-
-        usr.setPhone(phone);
-        
-        if(personType.trim().equalsIgnoreCase("legal"))
-        {
-            usr.setPersonType(PersonType.LEGAL);
-        }
-        if(personType.trim().equalsIgnoreCase("natural"))
-        {
-            usr.setPersonType(PersonType.NATURAL);
-        }
-        
-        if(role.trim().equalsIgnoreCase("employee"))
-        {
-            usr.setRole(Role.EMPLOYEE);
-        }
-        if(role.trim().equalsIgnoreCase("customer"))
-        {
-            usr.setRole(Role.CUSTOMER);
-        }
+    public User createUser(User usr)
+    {        
         userdao.create(usr);
         
         return usr;
