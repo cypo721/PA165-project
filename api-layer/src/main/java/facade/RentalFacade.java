@@ -12,9 +12,11 @@ import java.util.List;
  * @author eduard
  */
 public interface RentalFacade {
-    public RentalDTO createRental(RentalDTO rentalDTO);
+    public Long createRental(RentalDTO rentalDTO);
 
-    public RentalDTO updateRental(RentalDTO rentalDTO);
+    public void updateRental(RentalDTO rentalDTO);
+    
+    public void deleteRental(Long id);
    
     public RentalDTO findById(Long id);
   

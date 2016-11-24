@@ -31,10 +31,14 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public Rental update(Rental rental) {
+    public void update(Rental rental) {
         Validate.notNull(rental.getId());
         rentalDao.create(rental);
-        return rental;
+    }
+    
+    @Override
+    public void delete(Rental rental) {
+        rentalDao.delete(rental);
     }
 
     @Override

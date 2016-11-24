@@ -14,7 +14,9 @@ import org.apache.commons.lang3.Validate;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import service.BeanMappingService;
 import service.RentalService;
+import static service.facade.MachineFacadeImpl.log;
 /**
  *
  * @author eduard
@@ -25,47 +27,51 @@ public class RentalFacadeImpl implements RentalFacade {
     @Inject
     private RentalService rentalService;
     
-    @Inject
-    private Mapper dozer;
-
+      @Inject
+    private BeanMappingService beanMappingService;
 
     @Override
-    public RentalDTO createRental(RentalDTO rentalDTO) {
+    public Long createRental(RentalDTO rentalDTO) {
         Validate.isTrue(rentalDTO.getId() == null);
         
-        Rental rental = convert(rentalDTO);
+        log.debug("Trying to create rentalDTO {}", rentalDTO);
+        Rental rental = beanMappingService.mapTo(rentalDTO, Rental.class);
         Rental saved = rentalService.create(rental);
         
-        return convert(saved);
+        return rental.getId();
     }
 
     @Override
-    public RentalDTO updateRental(RentalDTO rentalDTO) {
+    public void updateRental(RentalDTO rentalDTO) {
         Validate.notNull(rentalDTO.getId());
         
-        Rental entity = convert(rentalDTO);
-        Rental updated = rentalService.update(entity);
-        
-        return convert(updated);
+        log.debug("Trying to update rentalDTO {}", rentalDTO);
+        Rental mappedRental = beanMappingService.mapTo(rentalDTO, Rental.class);
+        rentalService.update(mappedRental);    
     }
 
+        @Override
+    public void deleteRental(Long id) {
+        
+        log.debug("Trying to delete machine with id {}", id);
+        Rental rental = new Rental(); //todo
+        rental.setId(id);
+        rentalService.delete(rental);
+    }
 
     @Override
     public RentalDTO findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        log.debug("Trying to find machine with id {}", id);
+        return beanMappingService.mapTo(rentalService.findRentalById(id), RentalDTO.class);
     }
 
     @Override
     public List<RentalDTO> findAllRentals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        log.debug("Trying to get all rentals with id");
+        return beanMappingService.mapTo(rentalService.findAllRentals(), RentalDTO.class);
     }
+
+
     
-    private Rental convert(RentalDTO dto) {
-        return dozer.map(dto, Rental.class);
-    }
-    
-    private RentalDTO convert(Rental entity) {
-        return dozer.map(entity, RentalDTO.class);
-    }
 
 }

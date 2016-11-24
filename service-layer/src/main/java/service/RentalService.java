@@ -14,7 +14,8 @@ import java.util.List;
  */
 public interface RentalService {
     public Rental create(Rental rental);
-    public Rental update(Rental rental);
+    public void update(Rental rental);
+    public void delete(Rental rental);
     public Rental findRentalById(Long id);
     public List<Rental> findAllRentals();
 }
