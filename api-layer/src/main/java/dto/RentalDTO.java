@@ -17,7 +17,7 @@ public class RentalDTO {
     private Date dateFrom;
     private Date dateTo;
     private Integer price;
-  //  private UserDTO user;
+    private UserDTO user;
     private MachineDTO machine;
 
     public Long getId() {
@@ -52,13 +52,13 @@ public class RentalDTO {
         this.price = price;
     }
 
-//    public UserDTO getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(UserDTO user) {
-//        this.user = user;
-//    }
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
 
     public MachineDTO getMachine() {
         return machine;
@@ -75,7 +75,7 @@ public class RentalDTO {
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 ", price=" + price +
-              //  ", user=" + user +
+                ", user=" + user +
                 ", machine=" + machine +
                 '}';
     }

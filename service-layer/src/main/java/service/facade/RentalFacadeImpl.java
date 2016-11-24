@@ -12,6 +12,8 @@ import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.BeanMappingService;
@@ -24,6 +26,10 @@ import static service.facade.MachineFacadeImpl.log;
 @Service
 @Transactional
 public class RentalFacadeImpl implements RentalFacade {
+    
+    final static Logger log = LoggerFactory.getLogger(RentalFacadeImpl.class);
+
+    
     @Inject
     private RentalService rentalService;
     
@@ -31,9 +37,7 @@ public class RentalFacadeImpl implements RentalFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long createRental(RentalDTO rentalDTO) {
-        Validate.isTrue(rentalDTO.getId() == null);
-        
+    public Long createRental(RentalDTO rentalDTO) {        
         log.debug("Trying to create rentalDTO {}", rentalDTO);
         Rental rental = beanMappingService.mapTo(rentalDTO, Rental.class);
         Rental saved = rentalService.create(rental);
@@ -70,8 +74,4 @@ public class RentalFacadeImpl implements RentalFacade {
         log.debug("Trying to get all rentals with id");
         return beanMappingService.mapTo(rentalService.findAllRentals(), RentalDTO.class);
     }
-
-
-    
-
 }
