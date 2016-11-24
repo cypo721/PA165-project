@@ -12,7 +12,7 @@ import dto.UserDTO;
  * @author venca
  */
 public interface UserFacade {
-    UserDTO createUser(UserDTO userDTO);
+    UserDTO createUser(UserDTO userDTO, String password);
    
     public UserDTO findById(Long id);
     

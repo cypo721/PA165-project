@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UserService {
-    User createUser(User usr);
+    User createUser(User usr, String password);
     
     void changePassword(Long id, String newPassword);
     
