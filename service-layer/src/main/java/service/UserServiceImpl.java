@@ -5,6 +5,7 @@ import entity.User;
 import enums.*;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email)
     {
         return userdao.findUserByEmail(email);
+    }
+    
+    @Override
+    public List<User> getAllUsers() {
+        return userdao.findAll();
     }
     
     private static String createHash(String password)

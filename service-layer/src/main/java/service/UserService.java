@@ -1,6 +1,7 @@
 package service;
 
 import entity.User;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /*
@@ -26,4 +27,6 @@ public interface UserService {
     User getUserById(Long id);
     
     User getUserByEmail(String email);
+    
+    public List<User> getAllUsers();
 }
