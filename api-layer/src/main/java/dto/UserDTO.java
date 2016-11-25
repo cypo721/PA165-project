@@ -31,7 +31,11 @@ public class UserDTO {
     private Role role;
     
     private Date joinedDate;
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

@@ -14,9 +14,11 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Assert;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;
@@ -28,6 +30,7 @@ import service.config.ServiceConfiguration;
  *
  * @author Václav Zouzalík
  */
+@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class RevisionServiceTest {
     

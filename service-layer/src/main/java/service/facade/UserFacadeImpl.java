@@ -5,11 +5,10 @@ import entity.User;
 import facade.UserFacade;
 import java.util.Collection;
 import javax.inject.Inject;
-import org.dozer.Mapper;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.UserService;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.BeanMappingService;
@@ -42,6 +41,7 @@ public class UserFacadeImpl implements UserFacade {
         log.debug("Trying to create userDto {}", userDTO);
         User usr = beanMappingService.mapTo(userDTO, User.class);
         userService.createUser(usr, password);
+        userDTO.setId(usr.getId());
         return userDTO;
     }
     

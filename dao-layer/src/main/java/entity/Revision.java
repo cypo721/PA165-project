@@ -37,7 +37,11 @@ public class Revision {
     private String info;
     
     private boolean isFunctionable;
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

@@ -11,14 +11,13 @@ import facade.RentalFacade;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
-import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.BeanMappingService;
 import service.RentalService;
-import static service.facade.MachineFacadeImpl.log;
+
 /**
  *
  * @author eduard
@@ -42,7 +41,7 @@ public class RentalFacadeImpl implements RentalFacade {
         Rental rental = beanMappingService.mapTo(rentalDTO, Rental.class);
         Rental saved = rentalService.create(rental);
         
-        return rental.getId();
+        return saved.getId();
     }
 
     @Override

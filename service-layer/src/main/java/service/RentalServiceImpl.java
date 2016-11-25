@@ -25,7 +25,7 @@ public class RentalServiceImpl implements RentalService {
  
     @Override
     public Rental create(Rental rental) {
-        Validate.isTrue(rental.getId() == null);    
+        Validate.isTrue(rental.getId() == null);
         rentalDao.create(rental);
         return rental;
     }

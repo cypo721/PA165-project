@@ -2,6 +2,7 @@ package service;
 
 import dao.MachineDao;
 import entity.Machine;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by pato on 22.11.2016.
  */
+@Service
 public class MachineServiceImpl implements MachineService {
 
     @Inject

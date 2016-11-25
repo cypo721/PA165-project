@@ -5,11 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 import dao.RevisionDao;
 import org.apache.commons.lang3.Validate;
+import org.springframework.stereotype.Service;
 
 
 /**
  * Created by Marek Bohm on 23.11.2016.
  */
+@Service
 public class RevisionServiceImpl implements RevisionService {
 
     @Inject
