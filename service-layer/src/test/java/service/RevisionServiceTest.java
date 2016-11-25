@@ -11,6 +11,7 @@ import enums.MachineType;
 import enums.PersonType;
 import enums.Role;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Assert;
@@ -29,6 +30,7 @@ import service.config.ServiceConfiguration;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -121,21 +123,17 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
     }
     
     @Test
-    public void testFindById()
-    {
-        Long id;
-        String testString = "Test";
-        testRevision.setInfo(testString);
-        revisionService.create(testRevision);
-        id = testRevision.getId();
-        Assert.assertEquals(testString, revisionService.findById(id).getInfo());
-        Assert.assertNull(revisionService.findById(-2L));
+    public void findById() {
+        when(revisionService.findById(2L)).thenReturn(testRevision);
+
+        Assert.assertEquals(revisionService.findById(2L), testRevision);
+        Assert.assertNull(revisionService.findById(-5L));
     }
     
     @Test
-    public void testFindAll()
-    {
-        revisionService.create(testRevision);
+    public void findAllRentals() {
+        when(revisionService.findAllRevisions()).thenReturn(Arrays.asList(testRevision));
+
         Assert.assertEquals(1, revisionService.findAllRevisions().size());
     }
 }
