@@ -48,7 +48,6 @@ public class RevisionFacadeImpl implements RevisionFacade {
 
     @Override
     public RevisionDTO findById(Long id) {
-
         Validate.notNull(id);
         return  beanMappingService.mapTo(revisionService.findById(id), RevisionDTO.class);
     }

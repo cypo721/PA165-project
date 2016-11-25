@@ -11,6 +11,7 @@ import enums.MachineType;
 import enums.PersonType;
 import enums.Role;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Assert;
@@ -28,7 +29,9 @@ import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -108,26 +111,45 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
         }).when(revisionDao).create(any(Revision.class));
 
         revisionService.create(testRevision);
-//        verify(rentalDao).create(rental1);
         org.testng.Assert.assertEquals(id, testRevision.getId());
     }
-
-//    @Test
-//    public void testCreateAndUpdate()
-//    {
-//        revisionService.create(testRevision);
-//        Assert.assertNotNull(testRevision.getId());
-//        testRevision.setInfo("Test");
-//        revisionService.update(testRevision);
-//        Assert.assertEquals("Test", revisionService.findById(testRevision.getId()).getInfo());
-//    }
-//
-    public void testDelete()
-    {
-        Long id;
-        revisionService.create(testRevision);
-        id = testRevision.getId();
+    
+    @Test
+    public void testUpdate() {
+        testRevision.setId(2L);
+        when(revisionService.findById(2L)).thenReturn(testRevision);
+        doAnswer(invocation -> {
+            Object arg = invocation.getArguments()[0];
+            Rental rental = (Rental) arg;
+            return rental;
+        }).when(revisionDao).update(any(Revision.class));
+        testRevision.setInfo("Test");
+        revisionService.update(testRevision);
+        Revision updated = revisionService.findById(2L);
+        Assert.assertEquals(testRevision.getInfo(), updated.getInfo());
+    }
+    
+    @Test
+    public void testDelete() {
+        testRevision.setId(1L);
+        when(revisionService.findById(eq(testRevision.getId()))).thenReturn(testRevision).thenReturn(null);
+        Assert.assertNotNull(revisionService.findById(testRevision.getId()));
         revisionService.delete(testRevision);
-        Assert.assertNull(revisionService.findById(id));
+        Assert.assertNull(revisionService.findById(testRevision.getId()));
+    }
+    
+    @Test
+    public void findById() {
+        when(revisionService.findById(2L)).thenReturn(testRevision);
+
+        Assert.assertEquals(revisionService.findById(2L), testRevision);
+        Assert.assertNull(revisionService.findById(-5L));
+    }
+    
+    @Test
+    public void findAllRentals() {
+        when(revisionService.findAllRevisions()).thenReturn(Arrays.asList(testRevision));
+
+        Assert.assertEquals(1, revisionService.findAllRevisions().size());
     }
 }

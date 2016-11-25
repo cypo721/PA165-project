@@ -52,6 +52,7 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
     private final UserFacade userFacade = new UserFacadeImpl();
     
     private Revision revision;
+    private Revision revision2;
     private Machine machine;
     private User user;
     
@@ -84,12 +85,20 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         user.setJoinedDate(cal.getTime());
         
         revision = new Revision();
-       // revision.setId(1L);
+        // revision.setId(1L);
         revision.setInfo("Test");
         revision.setIsFunctionable(true);
         revision.setDateOfRevision(cal.getTime());
         revision.setMachine(machine);
         revision.setUser(user);
+
+        revision2 = new Revision();
+        revision2.setId(2L);
+        revision2.setInfo("Test2");
+        revision2.setIsFunctionable(true);
+        revision2.setDateOfRevision(cal.getTime());
+        revision2.setMachine(machine);
+        revision2.setUser(user);
     }
     
     @Test
@@ -102,7 +111,7 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
     
     @Test
     public void testUpdateRevision() {
-        RevisionDTO revisionDTO = mappingService.mapTo(revision, RevisionDTO.class);
+        RevisionDTO revisionDTO = mappingService.mapTo(revision2, RevisionDTO.class);
         revisionDTO.setInfo("Test3");
         revisionFacade.updateRevision(revisionDTO);
         verify(revisionService).update(any(Revision.class));
@@ -110,8 +119,8 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
 
     @Test
     public void testFindById() {
-        when(revisionService.findById(revision.getId())).thenReturn(revision);
-        RevisionDTO revisionDTO = revisionFacade.findById(revision.getId());
+        when(revisionService.findById(revision2.getId())).thenReturn(revision2);
+        RevisionDTO revisionDTO = revisionFacade.findById(revision2.getId());
         verify(revisionService).findById(revisionDTO.getId());
     }
 
