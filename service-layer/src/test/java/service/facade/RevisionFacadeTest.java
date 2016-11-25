@@ -13,7 +13,9 @@ import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import javax.inject.Inject;
 import static org.mockito.Matchers.any;
 import org.mockito.InjectMocks;
@@ -35,12 +37,6 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         
     @Mock
     private RevisionService revisionService;
-    
-    @Mock
-    private MachineService machineService;
-    
-    @Mock
-    private UserService userService;
     
     @Spy
     @Inject
@@ -103,5 +99,27 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         revisionFacade.createRevision(revisionDTO);
         verify(revisionService).create(any(Revision.class));
     }
+    
+    @Test
+    public void testUpdateRevision() {
+        RevisionDTO revisionDTO = mappingService.mapTo(revision, RevisionDTO.class);
+        revisionDTO.setInfo("Test3");
+        revisionFacade.updateRevision(revisionDTO);
+        verify(revisionService).update(any(Revision.class));
+    }
 
+    @Test
+    public void testFindById() {
+        when(revisionService.findById(revision.getId())).thenReturn(revision);
+        RevisionDTO revisionDTO = revisionFacade.findById(revision.getId());
+        verify(revisionService).findById(revisionDTO.getId());
+    }
+
+    @Test
+    public void testFindAllRentals() {
+        when(revisionService.findAllRevisions()).thenReturn(Arrays.asList(revision));
+        List<RevisionDTO> dtos = revisionFacade.findAllRevisions();
+        verify(revisionService).findAllRevisions();
+        Assert.assertEquals(dtos.size(), 1);
+    }
 }
