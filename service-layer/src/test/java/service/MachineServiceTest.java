@@ -9,37 +9,29 @@ import dao.MachineDao;
 import entity.Machine;
 import enums.MachineType;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import javax.inject.Inject;
-import org.dozer.Mapper;
+import java.util.List;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doAnswer;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import service.MachineService;
-import service.MachineServiceImpl;
 import service.config.ServiceConfiguration;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -57,8 +49,11 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
     private MachineService machineService;
     
     
-    private Machine machine;
+    private Machine machine1;
     private Machine machine2;
+    private Machine machine3;
+    private Machine machine4;
+    private Machine machine5;
  
     @BeforeClass
     public void setup() throws ServiceException
@@ -70,18 +65,18 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
     public void setUpMachines()
     {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2016);
+        cal.set(Calendar.YEAR, 2014);
         cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.DAY_OF_MONTH, 20);
 
-        machine = new Machine();
-        machine.setId(1L);
-        machine.setName("Crane 2500+");
-        machine.setPricePerDay(new BigDecimal("15.36"));
-        machine.setDateOfBuy(cal.getTime());
-        machine.setDateOfLastRevision(cal.getTime());
-        machine.setMachineType(MachineType.CRANE);
-        
+        machine1 = new Machine();
+//        machine1.setId(1L);
+        machine1.setName("Crane 2500+");
+        machine1.setPricePerDay(new BigDecimal("15.36"));
+        machine1.setDateOfBuy(cal.getTime());
+        machine1.setDateOfLastRevision(cal.getTime());
+        machine1.setMachineType(MachineType.CRANE);
+
         machine2 = new Machine();
         machine2.setId(2L);
         machine2.setName("Excavator 2500+");
@@ -89,21 +84,59 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
         machine2.setDateOfBuy(cal.getTime());
         machine2.setDateOfLastRevision(cal.getTime());
         machine2.setMachineType(MachineType.EXCAVATOR);
+        
+        machine4 = new Machine();
+        machine4.setId(3L);
+        machine4.setName("Excavator 200");
+        machine4.setPricePerDay(new BigDecimal("10.00"));
+        machine4.setDateOfBuy(cal.getTime());
+        machine4.setDateOfLastRevision(cal.getTime());
+        machine4.setMachineType(MachineType.EXCAVATOR);
+        
+        cal.set(Calendar.YEAR, 2016);
+        
+        machine5 = new Machine();
+        machine5.setId(4L);
+        machine5.setName("Ex 200");
+        machine5.setPricePerDay(new BigDecimal("10.00"));
+        machine5.setDateOfBuy(cal.getTime());
+        machine5.setDateOfLastRevision(cal.getTime());
+        machine5.setMachineType(MachineType.EXCAVATOR);
     }   
-    
-
     
     @Test
     public void createMachineTest(){
-        machineService.create(machine);
-        verify(machineDao).create(machine);               
+        Long machineId = 1L;
+        doAnswer(invocation -> {
+            Object arg = invocation.getArguments()[0];
+            Machine machine = (Machine) arg;
+            machine.setId(machineId);
+            return null;
+        }).when(machineDao).create(any(Machine.class));
+
+        machineService.create(machine1);
+        Assert.assertEquals(machineId, machine1.getId());             
     } 
     
     @Test
+    public void testDelete() {
+        when(machineService.findById(eq(machine2.getId()))).thenReturn(machine2).thenReturn(null);
+        Assert.assertNotNull(machineService.findById(machine2.getId()));
+        machineService.delete(machine2);
+        org.testng.Assert.assertNull(machineService.findById(machine2.getId()));
+    }
+    
+    @Test(expectedExceptions = {DataAccessException.class})
+    public void testDeleteNonExistingRental(){
+        doThrow(new DataAccessException("Deleting non existing rental") {}).when(machineDao).delete(eq(machine3));
+        machineService.delete(machine3);
+    }
+    
+    @Test
     public void findAllMachine() {
-        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine, machine2));
+        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2));
 
-        Assert.assertEquals(machineService.findAllMachines().size(), 2);
+        Assert.assertEquals(2, machineService.findAllMachines().size());
     }
     
     @Test
@@ -111,5 +144,37 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
         when(machineService.findById(2L)).thenReturn(machine2);
 
         Assert.assertEquals(machineService.findById(2L), machine2);
+    }
+    
+    @Test
+    public void findByNonExistingId() {
+        when(machineService.findById(-3L)).thenReturn(null);
+
+        Assert.assertNull(machineService.findById(-3L));
+    }
+    
+    @Test
+    public void testUpdate() {
+        when(machineService.findById(2L)).thenReturn(machine2);
+        doAnswer(invocation -> {
+            Object arg = invocation.getArguments()[0];
+            Machine machine = (Machine) arg;
+            return machine;
+        }).when(machineDao).update(any(Machine.class));
+        machine2.setName("TestName");
+        machineService.update(machine2);
+        Machine updated = machineService.findById(2L);
+        Assert.assertEquals(updated.getName(), machine2.getName());
+    }
+    
+    @Test
+    public void testGetMachinesInLastYearWithoutRevision() {        
+        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2, machine4, machine5));
+//        when(machineService.getMachinesInLastYearWithoutRevision()).thenReturn(Arrays.asList(machine2));
+        
+     
+        List<Machine> machines = machineService.getMachinesInLastYearWithoutRevision();
+        
+        Assert.assertEquals(3, machines.size());
     }
 }
