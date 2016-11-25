@@ -10,10 +10,14 @@ import service.RevisionService;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Marek Bohm on 23.11.2016.
  */
+@Service
+@Transactional
 public class RevisionFacadeImpl implements RevisionFacade {
 
     @Inject
