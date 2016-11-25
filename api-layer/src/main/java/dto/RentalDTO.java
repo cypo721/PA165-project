@@ -71,7 +71,7 @@ public class RentalDTO {
     @Override
     public String toString() {
         return "RentalDTO{" +
-                ", id=" + id +
+                "id=" + id +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 ", price=" + price +

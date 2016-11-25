@@ -32,7 +32,7 @@ public class RentalFacadeImpl implements RentalFacade {
     @Inject
     private RentalService rentalService;
     
-      @Inject
+    @Inject
     private BeanMappingService beanMappingService;
 
     @Override
