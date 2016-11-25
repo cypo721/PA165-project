@@ -108,20 +108,9 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
         }).when(revisionDao).create(any(Revision.class));
 
         revisionService.create(testRevision);
-//        verify(rentalDao).create(rental1);
         org.testng.Assert.assertEquals(id, testRevision.getId());
     }
-
-//    @Test
-//    public void testCreateAndUpdate()
-//    {
-//        revisionService.create(testRevision);
-//        Assert.assertNotNull(testRevision.getId());
-//        testRevision.setInfo("Test");
-//        revisionService.update(testRevision);
-//        Assert.assertEquals("Test", revisionService.findById(testRevision.getId()).getInfo());
-//    }
-//
+    
     public void testDelete()
     {
         Long id;
@@ -129,5 +118,24 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
         id = testRevision.getId();
         revisionService.delete(testRevision);
         Assert.assertNull(revisionService.findById(id));
+    }
+    
+    @Test
+    public void testFindById()
+    {
+        Long id;
+        String testString = "Test";
+        testRevision.setInfo(testString);
+        revisionService.create(testRevision);
+        id = testRevision.getId();
+        Assert.assertEquals(testString, revisionService.findById(id).getInfo());
+        Assert.assertNull(revisionService.findById(-2L));
+    }
+    
+    @Test
+    public void testFindAll()
+    {
+        revisionService.create(testRevision);
+        Assert.assertEquals(1, revisionService.findAllRevisions().size());
     }
 }
