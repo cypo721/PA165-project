@@ -53,8 +53,10 @@ public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
     @Inject
     private BeanMappingService mappingService;
 
+    private Rental rentalCurrent;
     private Rental rental1;
     private Rental rental2;
+    private Machine machine2;
 
     @BeforeMethod
     public void setUp() {
@@ -100,6 +102,17 @@ public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         verify(rentalService).update(any(Rental.class));
     }
 
+    @Test
+    public void testFindAllMachinesRentedCurrentWeek(){
+
+        when(rentalService.findAllMachinesRentedCurrentWeek()).thenReturn(Arrays.asList(machine2));
+
+        List<MachineDTO> dtos = rentalFacade.findAllMachinesRentedCurrentWeek();
+        verify(rentalService).findAllMachinesRentedCurrentWeek();
+        Assert.assertEquals(dtos.size(), 1);
+
+    }
+
 
     private void prepareRentals(){
         Calendar cal2 = Calendar.getInstance();
@@ -134,6 +147,13 @@ public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         machine1.setDateOfBuy(cal2.getTime());
         machine1.setDateOfLastRevision(cal2.getTime());
 
+        machine2 = new Machine();
+        machine2.setName("Test2");
+        machine2.setPricePerDay(BigDecimal.TEN);
+        machine2.setMachineType(MachineType.LORRY);
+        machine2.setDateOfBuy(cal2.getTime());
+        machine2.setDateOfLastRevision(cal2.getTime());
+
         rental1 = new Rental();
         Calendar cal1 = new GregorianCalendar();
         cal1.set(2016, Calendar.OCTOBER, 30, 0, 0, 0);
@@ -152,6 +172,24 @@ public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         rental2.setPrice(5000);
         rental2.setUser(user2);
         rental2.setMachine(machine1);
+
+        /**
+         * current rental
+         */
+        rentalCurrent = new Rental();
+        rentalCurrent.setId(3L);
+
+        Calendar calCurrentFrom = new GregorianCalendar();
+        calCurrentFrom.set(2016, Calendar.MONTH, Calendar.DATE -2, 0, 0, 0);
+        rentalCurrent.setDateFrom(calCurrentFrom.getTime());
+
+        Calendar calCurrentTo = new GregorianCalendar();
+        calCurrentTo.set(2016, Calendar.MONTH, Calendar.DATE + 10, 0, 0, 0);
+        rentalCurrent.setDateTo(calCurrentTo.getTime());
+
+        rentalCurrent.setPrice(5000);
+        rentalCurrent.setUser(user1);
+        rentalCurrent.setMachine(machine2);
     }
 
 }
