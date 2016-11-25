@@ -21,10 +21,14 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
 
 /**
  *
@@ -32,7 +36,7 @@ import service.config.ServiceConfiguration;
  */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
-public class RevisionServiceTest {
+public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Mock
     private RevisionDao revisionDao;
@@ -41,7 +45,7 @@ public class RevisionServiceTest {
     @InjectMocks
     private RevisionService revisionService;
     
-    @BeforeClass
+    @BeforeMethod
     public void setup() throws ServiceException
     {
         MockitoAnnotations.initMocks(this);
@@ -92,17 +96,32 @@ public class RevisionServiceTest {
         testRevision.setUser(testUser);
         testRevision.setMachine(testMachine);
     }
-    
+
     @Test
-    public void testCreateAndUpdate()
-    {
+    public void testCreate() {
+        Long id = 1L;
+        doAnswer(invocation -> {
+            Object arg = invocation.getArguments()[0];
+            Revision revision = (Revision) arg;
+            revision.setId(id);
+            return null;
+        }).when(revisionDao).create(any(Revision.class));
+
         revisionService.create(testRevision);
-        Assert.assertNotNull(testRevision.getId());
-        testRevision.setInfo("Test");
-        revisionService.update(testRevision);
-        Assert.assertEquals("Test", revisionService.findById(testRevision.getId()).getInfo());
+//        verify(rentalDao).create(rental1);
+        org.testng.Assert.assertEquals(id, testRevision.getId());
     }
-    
+
+//    @Test
+//    public void testCreateAndUpdate()
+//    {
+//        revisionService.create(testRevision);
+//        Assert.assertNotNull(testRevision.getId());
+//        testRevision.setInfo("Test");
+//        revisionService.update(testRevision);
+//        Assert.assertEquals("Test", revisionService.findById(testRevision.getId()).getInfo());
+//    }
+//
     public void testDelete()
     {
         Long id;

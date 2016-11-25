@@ -24,9 +24,7 @@ import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -45,10 +43,14 @@ public class RentalServiceTest extends AbstractTransactionalTestNGSpringContextT
     @Autowired
     @InjectMocks
     private RentalService rentalService;
+    @Autowired
+    @InjectMocks
+    private MachineService machineService;
 
     private User user1;
     private User user2;
     private Machine machine1;
+    private Machine machine2;
     private Rental rental1;
     private Rental rental2;
     private Rental rental3;
@@ -87,21 +89,28 @@ public class RentalServiceTest extends AbstractTransactionalTestNGSpringContextT
         machine1.setDateOfBuy(cal2.getTime());
         machine1.setDateOfLastRevision(cal2.getTime());
 
+        machine2 = new Machine();
+        machine2.setName("Test2");
+        machine2.setPricePerDay(BigDecimal.TEN);
+        machine2.setMachineType(MachineType.EXCAVATOR);
+        machine2.setDateOfBuy(cal2.getTime());
+        machine2.setDateOfLastRevision(cal2.getTime());
+
         rental1 = new Rental();
-        Calendar cal1 = new GregorianCalendar();
-        cal1.set(2016, Calendar.OCTOBER, 30, 0, 0, 0);
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(Calendar.DAY_OF_MONTH,-15);
         rental1.setDateFrom(cal1.getTime());
         Calendar cal3 = Calendar.getInstance();
-        cal2.set(2016, Calendar.NOVEMBER, 1, 0, 0, 0);
+        cal3.set(Calendar.DAY_OF_MONTH,-15);
         rental1.setDateTo(cal3.getTime());
         rental1.setPrice(5000);
         rental1.setUser(user1);
-        rental1.setMachine(machine1);
+        rental1.setMachine(machine2);
 
         rental2 = new Rental();
         rental2.setId(2L);
-        rental2.setDateFrom(cal2.getTime());
-        rental2.setDateTo(cal1.getTime());
+        rental2.setDateFrom(new Date());
+        rental2.setDateTo(new Date());
         rental2.setPrice(5000);
         rental2.setUser(user2);
         rental2.setMachine(machine1);
@@ -177,5 +186,14 @@ public class RentalServiceTest extends AbstractTransactionalTestNGSpringContextT
         rentalService.update(rental2);
         Rental updated = rentalService.findRentalById(2L);
         Assert.assertEquals(updated.getPrice(), rental2.getPrice());
+    }
+
+    @Test
+    public void testfindAllMachinesRentedCurrentWeek() {
+        when(rentalService.findAllRentals()).thenReturn(Arrays.asList(rental1, rental2));
+
+        List<Machine> machines = rentalService.findAllMachinesRentedCurrentWeek();
+
+        Assert.assertEquals(machines.size(), 1);
     }
 }
