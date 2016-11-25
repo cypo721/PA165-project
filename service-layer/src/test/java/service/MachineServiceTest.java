@@ -70,7 +70,6 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
         cal.set(Calendar.DAY_OF_MONTH, 20);
 
         machine1 = new Machine();
-//        machine1.setId(1L);
         machine1.setName("Crane 2500+");
         machine1.setPricePerDay(new BigDecimal("15.36"));
         machine1.setDateOfBuy(cal.getTime());
@@ -170,9 +169,7 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
     @Test
     public void testGetMachinesInLastYearWithoutRevision() {        
         when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2, machine4, machine5));
-//        when(machineService.getMachinesInLastYearWithoutRevision()).thenReturn(Arrays.asList(machine2));
-        
-     
+             
         List<Machine> machines = machineService.getMachinesInLastYearWithoutRevision();
         
         Assert.assertEquals(3, machines.size());

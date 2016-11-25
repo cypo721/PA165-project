@@ -6,7 +6,10 @@
 package service;
 
 import dao.RentalDao;
+import entity.Machine;
 import entity.Rental;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
@@ -49,6 +52,26 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public List<Rental> findAllRentals() {
         return rentalDao.findAllRentals();
+    }
+   
+    @Override
+    public List<Machine> findAllMachinesRentedCurrentWeek(){
+        List<Rental> rentals = findAllRentals();
+        List<Machine> rentedMachines = new ArrayList<>();
+        
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c2.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        
+        for(int i = 0; i < rentals.size(); i++){
+            Rental r = rentals.get(i);
+            if( (r.getDateFrom().after(c1.getTime()) && r.getDateTo().after(c2.getTime())) || (r.getDateTo().after(c1.getTime()) && r.getDateTo().before(c2.getTime()))) {
+                rentedMachines.add(r.getMachine());
+            }
+        }
+        
+        return rentedMachines;
     }
     
 }

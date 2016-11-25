@@ -5,6 +5,7 @@
  */
 package service;
 
+import entity.Machine;
 import entity.Rental;
 import java.util.List;
 
@@ -45,4 +46,10 @@ public interface RentalService {
      * @return List of rentals.
      */
     public List<Rental> findAllRentals();
+    
+    /**
+     * Return all machines rented current week.
+     * @return List of machines.
+     */
+    public List<Machine> findAllMachinesRentedCurrentWeek();
 }
