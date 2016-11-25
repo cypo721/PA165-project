@@ -5,6 +5,7 @@ import entity.Revision;
 import facade.RevisionFacade;
 import org.apache.commons.lang3.Validate;
 import org.dozer.Mapper;
+import service.BeanMappingService;
 import service.RevisionService;
 
 import javax.inject.Inject;
@@ -24,27 +25,24 @@ public class RevisionFacadeImpl implements RevisionFacade {
     private RevisionService revisionService;
 
     @Inject
-    private Mapper dozer;
+    private BeanMappingService beanMappingService;
 
 
     @Override
-    public RevisionDTO createRevision(RevisionDTO revisionDTO) {
+    public Long createRevision(RevisionDTO revisionDTO) {
         Validate.isTrue(revisionDTO.getId() == null);
 
-        Revision revision = convert(revisionDTO);
+        Revision revision =  beanMappingService.mapTo(revisionDTO, Revision.class);
         Revision saved = revisionService.create(revision);
 
-        return convert(saved);
+        return saved.getId();
     }
 
     @Override
-    public RevisionDTO updateRevision(RevisionDTO revisionDTO) {
+    public void updateRevision(RevisionDTO revisionDTO) {
         Validate.notNull(revisionDTO.getId());
-
-        Revision entity = convert(revisionDTO);
-        Revision updated = revisionService.update(entity);
-
-        return convert(updated);
+        Revision entity =  beanMappingService.mapTo(revisionDTO, Revision.class);
+        revisionService.update(entity);
     }
 
 
@@ -52,24 +50,14 @@ public class RevisionFacadeImpl implements RevisionFacade {
     public RevisionDTO findById(Long id) {
 
         Validate.notNull(id);
-        return convert(revisionService.findById(id));
+        return  beanMappingService.mapTo(revisionService.findById(id), RevisionDTO.class);
     }
 
     @Override
     public List<RevisionDTO> findAllRevisions() {
 
-        return  convert(revisionService.findAllRevisions());
+        return  beanMappingService.mapTo(revisionService.findAllRevisions(), RevisionDTO.class);
     }
 
-    private Revision convert(RevisionDTO dto) {
-        return dozer.map(dto, Revision.class);
-    }
 
-    private RevisionDTO convert(Revision entity) {
-        return dozer.map(entity, RevisionDTO.class);
-    }
-
-    private List<RevisionDTO> convert(List<Revision> revisions){
-        return revisions.stream().map(revision -> convert(revision)).collect(Collectors.toList());
-    }
 }

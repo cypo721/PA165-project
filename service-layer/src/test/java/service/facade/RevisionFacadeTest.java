@@ -88,7 +88,7 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         user.setJoinedDate(cal.getTime());
         
         revision = new Revision();
-        revision.setId(1L);
+       // revision.setId(1L);
         revision.setInfo("Test");
         revision.setIsFunctionable(true);
         revision.setDateOfRevision(cal.getTime());
@@ -96,19 +96,12 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         revision.setUser(user);
     }
     
-    /*@Test
-    public void testCreateRevision() {        
-        when(machineService.create(any(Machine.class))).thenReturn(machine);
-        MachineDTO mDTO = mappingService.mapTo(machine, MachineDTO.class);
-        machineFacade.createMachine(mDTO);
-        
-        when(userService.createUser(any(User.class), any(String.class))).thenReturn(user);
-        UserDTO uDTO = mappingService.mapTo(user, UserDTO.class);
-        userFacade.createUser(uDTO, "dwefwtr");
-        
+    @Test
+    public void testCreateRevision() {
         when(revisionService.create(any(Revision.class))).thenReturn(revision);
-        RevisionDTO rDTO = mappingService.mapTo(revision, RevisionDTO.class);
-        revisionFacade.createRevision(rDTO);
-        Assert.assertNotNull(rDTO.getId());
-    }*/
+        RevisionDTO revisionDTO = mappingService.mapTo(revision, RevisionDTO.class);
+        revisionFacade.createRevision(revisionDTO);
+        verify(revisionService).create(any(Revision.class));
+    }
+
 }

@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface RevisionFacade {
 
-    RevisionDTO createRevision(RevisionDTO revisionDTO);
-    RevisionDTO updateRevision(RevisionDTO revisionDTO);
+    Long createRevision(RevisionDTO revisionDTO);
+    void updateRevision(RevisionDTO revisionDTO);
     RevisionDTO findById(Long id);
     List<RevisionDTO> findAllRevisions();
 

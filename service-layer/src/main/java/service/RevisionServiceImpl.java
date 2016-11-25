@@ -19,7 +19,6 @@ public class RevisionServiceImpl implements RevisionService {
 
     @Override
     public Revision create(Revision revision) {
-
         Validate.isTrue(revision.getId() == null);
         revisionDao.create(revision);
         return revision;
