@@ -29,6 +29,7 @@ import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
@@ -113,13 +114,13 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
         org.testng.Assert.assertEquals(id, testRevision.getId());
     }
     
-    public void testDelete()
-    {
-        Long id;
-        revisionService.create(testRevision);
-        id = testRevision.getId();
+    @Test
+    public void testDelete() {
+        testRevision.setId(1L);
+        when(revisionService.findById(eq(testRevision.getId()))).thenReturn(testRevision).thenReturn(null);
+        Assert.assertNotNull(revisionService.findById(testRevision.getId()));
         revisionService.delete(testRevision);
-        Assert.assertNull(revisionService.findById(id));
+        Assert.assertNull(revisionService.findById(testRevision.getId()));
     }
     
     @Test
