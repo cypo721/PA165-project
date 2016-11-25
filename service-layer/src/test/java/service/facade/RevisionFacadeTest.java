@@ -80,7 +80,7 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
     }
 
     @Test
-    public void testCreateRental(){
+    public void testRentalFacade(){
         MachineDTO m = getMachineDTO();
         m = machineFacade.findById(machineFacade.createMachine(m));
         
@@ -92,5 +92,11 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         rev.setUser(u);
         
         Assert.assertNotNull(revisionFacade.createRevision(rev));
+        
+        rev.setInfo("Test2");
+        revisionFacade.updateRevision(rev);
+        Assert.assertEquals("Test2", revisionFacade.findById(rev.getId()).getInfo());
+        
+        Assert.assertNotNull(revisionFacade.findAllRevisions());
     }
 }
