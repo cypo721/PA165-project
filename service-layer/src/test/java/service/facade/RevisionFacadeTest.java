@@ -15,9 +15,10 @@ import service.config.ServiceConfiguration;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import org.testng.annotations.BeforeMethod;
 
 /**
- * Created by pato on 23.11.2016.
+ * @author Václav Zouzalík
  */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
@@ -32,71 +33,71 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
     @Autowired
     private UserFacade userFacade;
 
+    private RevisionDTO testRevision;
+    private MachineDTO testMachine;
+    private UserDTO testUser;
     
-
-    private UserDTO getUserDTO() {
-        UserDTO dto = new UserDTO();
-        dto.setGivenName("Alex");
-        dto.setSurname("Mack");
-        dto.setPasswordHash("fretgrz");
-        dto.setEmail("alex@mack.name");
-        dto.setPersonType(PersonType.NATURAL);
+    @BeforeMethod
+    public void prepareTestMachine()
+    {
+        testMachine = new MachineDTO();
+        testMachine.setName("Caterpilar");
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 1996);
+        cal.set(Calendar.MONTH, Calendar.NOVEMBER);
+        cal.set(Calendar.DAY_OF_MONTH, 24);
+        
+        testMachine.setDateOfBuy(cal.getTime());
+        testMachine.setPricePerDay(new BigDecimal(5000));
+        testMachine.setMachineType(MachineType.EXCAVATOR);
+    }
+    
+    @BeforeMethod
+    public void prepareTestUser()
+    {
+        testUser = new UserDTO();
+        testUser.setGivenName("Julia");
+        testUser.setSurname("Green");
+        testUser.setEmail("julia@green.name");
+        testUser.setPersonType(PersonType.NATURAL);
+        testUser.setRole(Role.EMPLOYEE);
         
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2016);
         cal.set(Calendar.MONTH, Calendar.NOVEMBER);
-        cal.set(Calendar.DAY_OF_MONTH, 25);
-        dto.setJoinedDate(cal.getTime());
-        dto.setRole(Role.EMPLOYEE);
-
-        return dto;
-    }
-
-    private MachineDTO getMachineDTO(){
-        MachineDTO dto = new MachineDTO();
-        dto.setName("Caterpillar");
-        dto.setPricePerDay(new BigDecimal(5000));
-        dto.setMachineType(MachineType.EXCAVATOR);
-        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 24);
         
-        cal.set(Calendar.YEAR, 2016);
-        cal.set(Calendar.MONTH, Calendar.NOVEMBER);
-        cal.set(Calendar.DAY_OF_MONTH, 17);
-        dto.setDateOfBuy(cal.getTime());
-        dto.setDateOfLastRevision(cal.getTime());
-
-        return dto;
+        testUser.setJoinedDate(cal.getTime());
     }
     
-    private RevisionDTO getRevisionDTO(){
-        RevisionDTO dto = new RevisionDTO();
-        Date now = new Date();
+    @BeforeMethod
+    public void prepareTestRevision()
+    {
+        testRevision = new RevisionDTO();
         
-        dto.setDateOfRevision(now);
-        dto.setFunctionable(true);
-        dto.setInfo("Test");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2016);
+        cal.set(Calendar.MONTH, Calendar.NOVEMBER);
+        cal.set(Calendar.DAY_OF_MONTH, 24);
         
-        return dto;
+        testRevision.setDateOfRevision(cal.getTime());
+        /*testRevision.setUser(testUser);
+        testRevision.setMachine(testMachine);*/
     }
-
+    
     @Test
-    public void testRentalFacade(){
-        MachineDTO m = getMachineDTO();
-        m = machineFacade.findById(machineFacade.createMachine(m));
+    public void testCreateAndUpdate()
+    {
+        userFacade.createUser(testUser, "dewfrt");
+        machineFacade.createMachine(testMachine);
+        testRevision.setUser(testUser);
+        testRevision.setMachine(testMachine);
+        revisionFacade.createRevision(testRevision);
+        Assert.assertNotNull(testRevision.getId());
         
-        UserDTO u = getUserDTO();
-        u = userFacade.createUser(u,"123456");
-        
-        RevisionDTO rev = getRevisionDTO();
-        rev.setMachine(m);
-        rev.setUser(u);
-        
-        Assert.assertNotNull(revisionFacade.createRevision(rev));
-        
-        rev.setInfo("Test2");
-        revisionFacade.updateRevision(rev);
-        Assert.assertEquals("Test2", revisionFacade.findById(rev.getId()).getInfo());
-        
-        Assert.assertNotNull(revisionFacade.findAllRevisions());
+        testRevision.setInfo("Test");
+        revisionFacade.updateRevision(testRevision);
+        Assert.assertEquals("Test", revisionFacade.findById(testRevision.getId()).getInfo());
     }
 }
