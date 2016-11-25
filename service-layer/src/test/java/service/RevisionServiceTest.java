@@ -115,6 +115,21 @@ public class RevisionServiceTest extends AbstractTransactionalTestNGSpringContex
     }
     
     @Test
+    public void testUpdate() {
+        testRevision.setId(2L);
+        when(revisionService.findById(2L)).thenReturn(testRevision);
+        doAnswer(invocation -> {
+            Object arg = invocation.getArguments()[0];
+            Rental rental = (Rental) arg;
+            return rental;
+        }).when(revisionDao).update(any(Revision.class));
+        testRevision.setInfo("Test");
+        revisionService.update(testRevision);
+        Revision updated = revisionService.findById(2L);
+        Assert.assertEquals(testRevision.getInfo(), updated.getInfo());
+    }
+    
+    @Test
     public void testDelete() {
         testRevision.setId(1L);
         when(revisionService.findById(eq(testRevision.getId()))).thenReturn(testRevision).thenReturn(null);
