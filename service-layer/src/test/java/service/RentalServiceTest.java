@@ -30,9 +30,7 @@ import java.util.GregorianCalendar;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by pato on 23.11.2016.
@@ -149,6 +147,7 @@ public class RentalServiceTest extends AbstractTransactionalTestNGSpringContextT
         }).when(rentalDao).create(any(Rental.class));
 
         rentalService.create(rental1);
+//        verify(rentalDao).create(rental1);
         Assert.assertEquals(userId, rental1.getId());
     }
 

@@ -1,6 +1,13 @@
 package service.facade;
 
+import entity.Machine;
+import entity.Rental;
+import entity.User;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import dto.MachineDTO;
 import dto.RentalDTO;
@@ -15,12 +22,19 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import service.BeanMappingService;
+import service.RentalService;
 import service.config.ServiceConfiguration;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by pato on 23.11.2016.
@@ -29,70 +43,115 @@ import java.util.Date;
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
-    private RentalFacade rentalFacade;
+    @Mock
+    private RentalService rentalService;
 
-    @Autowired
-    private MachineFacade machineFacade;
+    @InjectMocks
+    private RentalFacade rentalFacade = new RentalFacadeImpl();
 
-    @Autowired
-    private UserFacade userFacade;
+    @Spy
+    @Inject
+    private BeanMappingService mappingService;
 
+    private Rental rental1;
+    private Rental rental2;
+
+    @BeforeMethod
+    public void setUp() {
+        prepareRentals();
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
-    public void testCreateRental(){
-        MachineDTO m = getMachineDTO();
-        m = machineFacade.findById(machineFacade.createMachine(m));
-        UserDTO u = getUserDTO();
-        u = userFacade.createUser(u,"heslo");
-        RentalDTO r = getRentalDTO();
-        r.setMachine(m);
-        r.setUser(u);
-        Assert.assertNotNull(rentalFacade.createRental(r));
+    public void testCreateRental() {
+        when(rentalService.create(any(Rental.class))).thenReturn(rental2);
+        RentalDTO rental = mappingService.mapTo(rental2, RentalDTO.class);
+        rentalFacade.createRental(rental);
+        verify(rentalService).create(any(Rental.class));
+    }
+
+    @Test
+    public void testFindAllRentals() {
+        when(rentalService.findAllRentals()).thenReturn(Arrays.asList(rental1, rental2));
+        List<RentalDTO> dtos = rentalFacade.findAllRentals();
+        verify(rentalService).findAllRentals();
+        Assert.assertEquals(dtos.size(), 2);
+    }
+
+    @Test
+    public void testFindById() {
+        when(rentalService.findRentalById(rental2.getId())).thenReturn(rental2);
+        RentalDTO retDto = rentalFacade.findById(rental2.getId());
+        verify(rentalService).findRentalById(2L);
+    }
+
+    @Test
+    public void testDeleteRental() {
+        RentalDTO rental = mappingService.mapTo(rental2, RentalDTO.class);
+        rentalFacade.deleteRental(rental.getId());
+        verify(rentalService).delete(any(Rental.class));
+    }
+
+    @Test
+    public void testUpdateRental() {
+        RentalDTO rental = mappingService.mapTo(rental2, RentalDTO.class);
+        rental.setPrice(1);
+        rentalFacade.updateRental(rental);
+        verify(rentalService).update(any(Rental.class));
     }
 
 
-    private RentalDTO getRentalDTO(){
-        RentalDTO dto = new RentalDTO();
-        Date now = new Date();
-
-        dto.setPrice(10);
-        dto.setDateFrom(now);
-        dto.setDateTo(now);
-        dto.setMachine(new MachineDTO());
-        return dto;
-    }
-
-    private UserDTO getUserDTO() {
-        UserDTO dto = new UserDTO();
-        dto.setGivenName("Albus");
-        dto.setSurname("Dumbledore");
-        dto.setPasswordHash("adfbgnh");
-        dto.setEmail("albus@hogwarts.edu");
-        dto.setPersonType(PersonType.NATURAL);
+    private void prepareRentals(){
         Calendar cal2 = Calendar.getInstance();
         cal2.set(Calendar.YEAR, 2016);
         cal2.set(Calendar.MONTH, Calendar.JANUARY);
         cal2.set(Calendar.DAY_OF_MONTH, 20);
-        dto.setJoinedDate(cal2.getTime());
-        dto.setPhone("800123456");
-        dto.setRole(Role.EMPLOYEE);
 
-        return dto;
+        User user1 = new User();
+        user1.setId(8L);
+        user1.setGivenName("test");
+        user1.setSurname("test");
+        user1.setEmail("test.test@gmail.com");
+        user1.setPhone("0915702446");
+        user1.setPasswordHash("test");
+        user1.setPersonType(PersonType.LEGAL);
+        user1.setRole(Role.EMPLOYEE);
+
+        User user2 = new User();
+        user2.setGivenName("Albus");
+        user2.setSurname("Dumbledore");
+        user2.setPasswordHash("adfbgnh");
+        user2.setEmail("albus@hogwarts.edu");
+        user2.setPersonType(PersonType.NATURAL);
+        user2.setJoinedDate(cal2.getTime());
+        user2.setPhone("800123456");
+        user2.setRole(Role.EMPLOYEE);
+
+        Machine machine1 = new Machine();
+        machine1.setName("Test1");
+        machine1.setPricePerDay(BigDecimal.TEN);
+        machine1.setMachineType(MachineType.CRANE);
+        machine1.setDateOfBuy(cal2.getTime());
+        machine1.setDateOfLastRevision(cal2.getTime());
+
+        rental1 = new Rental();
+        Calendar cal1 = new GregorianCalendar();
+        cal1.set(2016, Calendar.OCTOBER, 30, 0, 0, 0);
+        rental1.setDateFrom(cal1.getTime());
+        Calendar cal3 = Calendar.getInstance();
+        cal2.set(2016, Calendar.NOVEMBER, 1, 0, 0, 0);
+        rental1.setDateTo(cal3.getTime());
+        rental1.setPrice(5000);
+        rental1.setUser(user1);
+        rental1.setMachine(machine1);
+
+        rental2 = new Rental();
+        rental2.setId(2L);
+        rental2.setDateFrom(cal2.getTime());
+        rental2.setDateTo(cal1.getTime());
+        rental2.setPrice(5000);
+        rental2.setUser(user2);
+        rental2.setMachine(machine1);
     }
 
-    private MachineDTO getMachineDTO(){
-        MachineDTO dto = new MachineDTO();
-        dto.setName("Cat");
-        dto.setPricePerDay(BigDecimal.TEN);
-        dto.setMachineType(MachineType.EXCAVATOR);
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2014);
-        cal1.set(Calendar.MONTH, Calendar.JANUARY);
-        cal1.set(Calendar.DAY_OF_MONTH, 6);
-        dto.setDateOfBuy(cal1.getTime());
-        dto.setDateOfLastRevision(cal1.getTime());
-
-        return dto;
-    }
 }
