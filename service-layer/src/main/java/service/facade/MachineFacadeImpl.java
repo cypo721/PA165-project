@@ -63,4 +63,10 @@ public class MachineFacadeImpl implements MachineFacade {
         log.debug("Trying to get all machines");
         return beanMappingService.mapTo(machineService.findAllMachines(), MachineDTO.class);
     }
+
+    @Override
+    public List<MachineDTO> getMachinesInLastYearWithoutRevision() {
+        log.debug("Trying to get all unrevisioned machines in last year.");
+        return beanMappingService.mapTo(machineService.getMachinesInLastYearWithoutRevision(), MachineDTO.class);
+    }
 }
