@@ -43,10 +43,6 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
     private User user1;
     private User user2;
     private User user3;
-    private Machine machine1;
-    private Rental rental1;
-    private Rental rental2;
-//    private Rental rental3;
 
     @BeforeTest
     public void setUp() {
