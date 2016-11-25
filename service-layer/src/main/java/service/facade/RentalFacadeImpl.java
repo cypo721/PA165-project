@@ -5,6 +5,7 @@
  */
 package service.facade;
 
+import dto.MachineDTO;
 import dto.RentalDTO;
 import entity.Rental;
 import facade.RentalFacade;
@@ -72,5 +73,11 @@ public class RentalFacadeImpl implements RentalFacade {
     public List<RentalDTO> findAllRentals() {
         log.debug("Trying to get all rentals with id");
         return beanMappingService.mapTo(rentalService.findAllRentals(), RentalDTO.class);
+    }
+
+    @Override
+    public List<MachineDTO> findAllMachinesRentedCurrentWeek() {
+        log.debug("Trying to get all rented machines in current week.");
+        return beanMappingService.mapTo(rentalService.findAllMachinesRentedCurrentWeek(), MachineDTO.class);   
     }
 }

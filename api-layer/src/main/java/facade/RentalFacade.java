@@ -5,6 +5,7 @@
  */
 package facade;
 
+import dto.MachineDTO;
 import dto.RentalDTO;
 import java.util.List;
 /**
@@ -44,4 +45,10 @@ public interface RentalFacade {
      * @return List of all rentals.
      */
     public List<RentalDTO> findAllRentals();
+    
+    /**
+     * Return all machines which are rented in current week (Monday-Sunday)
+     * @return all rented machines in current week
+     */
+    public List<MachineDTO> findAllMachinesRentedCurrentWeek();
 }
