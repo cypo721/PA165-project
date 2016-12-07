@@ -13,6 +13,7 @@
         <module>api-layer</module>
         <module>dao-layer</module>
         <module>service-layer</module>
+        <module>Rest Layer</module>
     </modules>
 
     <!-- defines compatible versions of many libraries -->
