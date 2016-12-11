@@ -9,6 +9,7 @@ import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.stereotype.Service;
 
 /*
@@ -28,9 +29,18 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User createUser(User usr, String password)
-    {        
-        usr.setPasswordHash(createHash(password));
-        userdao.create(usr);
+    {
+        if (usr == null) throw new IllegalArgumentException("User is null.");
+        if (password == null) throw new IllegalArgumentException("Password is null.");
+        try
+        {
+            usr.setPasswordHash(createHash(password));
+            userdao.create(usr);
+        }
+        catch(Exception e)
+        {
+            throw new TransientDataAccessResourceException("Creating user failed", e);
+        }
         
         return usr;
     }
@@ -38,39 +48,66 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(Long id, String newPassword)
     {
-        User usr = userdao.findById(id);
+        if (newPassword == null) throw new IllegalArgumentException("Password is null.");
+        User usr = getUserById(id);
         usr.setPasswordHash(createHash(newPassword));
     }
     
     @Override
     public boolean authenticate(Long id, String password)
     {
-        User usr = userdao.findById(id);
+        if (password == null) throw new IllegalArgumentException("Password is null.");
+        User usr = getUserById(id);
         return validatePassword(password, usr.getPasswordHash());
     }
     
     @Override
     public boolean isEmployee(Long id)
     {
-        User usr = userdao.findById(id);
+        User usr = getUserById(id);
         return usr.getRole() == Role.EMPLOYEE;
     }
     
     @Override
     public User getUserById(Long id)
     {
-        return userdao.findById(id);
+        if (id == null) throw new IllegalArgumentException("Id is null");
+        try
+        {
+            return userdao.findById(id);
+        }
+        catch(Exception e)
+        {
+            throw new TransientDataAccessResourceException("Finding of a user by id failed", e);
+        }
+        
     }
     
     @Override
     public User getUserByEmail(String email)
     {
-        return userdao.findUserByEmail(email);
+        if (email == null) throw new IllegalArgumentException("Email is null.");
+        try
+        {
+            return userdao.findUserByEmail(email);
+        }
+        catch(Exception e)
+        {
+            throw new TransientDataAccessResourceException("Finding of a user by email failed", e);
+        }
+        
     }
     
     @Override
     public List<User> getAllUsers() {
-        return userdao.findAll();
+        try
+        {
+            return userdao.findAll();
+        }
+        catch(Exception e)
+        {
+            throw new TransientDataAccessResourceException("Finding of all users failed", e);
+        }
     }
     
     private static String createHash(String password)
