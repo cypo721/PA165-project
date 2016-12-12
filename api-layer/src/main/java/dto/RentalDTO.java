@@ -6,6 +6,7 @@
 package dto;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -78,5 +79,42 @@ public class RentalDTO {
                 ", user=" + user +
                 ", machine=" + machine +
                 '}';
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = dateFrom != null ? dateFrom.hashCode() : 0;
+        result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (machine != null ? machine.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RentalDTO other = (RentalDTO) obj;
+        if (!Objects.equals(this.dateFrom, other.dateFrom)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateTo, other.dateTo)) {
+            return false;
+        }
+        if (!Objects.equals(this.price, other.price)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.machine, other.machine)) {
+            return false;
+        }
+        return true;
     }
 }
