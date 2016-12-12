@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import org.springframework.dao.DataAccessException;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class    MachineDaoImpl implements MachineDao {
     }
 
     @Override
-    public void update(Machine machine) throws IllegalArgumentException {
+    public void update(Machine machine) throws DataAccessException {
         em.merge(machine); 
     }
 
