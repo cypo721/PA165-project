@@ -8,6 +8,7 @@ package dto;
 import enums.PersonType;
 import enums.Role;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -107,13 +108,53 @@ public class UserDTO {
         this.role = role;
     }
     
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((personType == null) ? 0 : personType.hashCode());
+        result = prime * result + ((role == null) ? 0 : role.hashCode());
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserDTO other = (UserDTO) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.passwordHash, other.passwordHash)) {
+            return false;
+        }
+        if (!Objects.equals(this.givenName, other.givenName)) {
+            return false;
+        }
+        if (!Objects.equals(this.surname, other.surname)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (this.personType != other.personType) {
+            return false;
+        }
+        if (this.role != other.role) {
+            return false;
+        }
+        if (!Objects.equals(this.joinedDate, other.joinedDate)) {
+            return false;
+        }
+        return true;
+    }
     
+    @Override
     public String toString() {
         return "User{" +
                 "givenName='" + givenName + '\'' +
