@@ -70,33 +70,6 @@ public class RentalDTO {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof RentalDTO))
-            return false;
-        RentalDTO rental = (RentalDTO) o;
-
-        if (dateFrom != null ? !dateFrom.equals(rental.dateFrom) : rental.dateFrom != null) return false;
-        if (dateTo != null ? !dateTo.equals(rental.dateTo) : rental.dateTo != null) return false;
-        if (price != null ? !price.equals(rental.price) : rental.price != null) return false;
-        if (user != null ? !user.equals(rental.user) : rental.user != null) return false;
-        return machine != null ? machine.equals(rental.machine) : rental.machine == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = dateFrom != null ? dateFrom.hashCode() : 0;
-        result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (machine != null ? machine.hashCode() : 0);
-        return result;
-    }
-    
-
-    @Override
     public String toString() {
         return "RentalDTO{" +
                 "id=" + id +
