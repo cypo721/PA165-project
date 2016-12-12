@@ -1,6 +1,7 @@
 package dto;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Marek Bohm on 23.11.2016.
@@ -76,5 +77,40 @@ public class RevisionDTO {
                 ", info='" + info + '\'' +
                 ", isFunctionable=" + isFunctionable +
                 '}';
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 13;
+        int result = 1;
+        result = prime * result + ((dateOfRevision == null) ? 0 : dateOfRevision.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((machine == null) ? 0 : machine.hashCode());
+        result = prime * result + ((info == null) ? 0 : info.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RevisionDTO other = (RevisionDTO) obj;
+        if (!Objects.equals(this.dateOfRevision, other.dateOfRevision)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.machine, other.machine)) {
+            return false;
+        }
+        if (!Objects.equals(this.info, other.info)) {
+            return false;
+        }
+        return true;
     }
 }
