@@ -14,6 +14,7 @@
         <module>dao-layer</module>
         <module>service-layer</module>
         <module>rest</module>
+        <module>Sample Data</module>
     </modules>
 
     <!-- defines compatible versions of many libraries -->

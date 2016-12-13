@@ -16,4 +16,5 @@ import service.config.ServiceConfiguration;
 @Import(ServiceConfiguration.class)
 @ComponentScan(basePackageClasses = {MachineController.class})
 public class RestConfiguration extends WebMvcConfigurerAdapter {
+    
 }
