@@ -13,12 +13,6 @@
     <packaging>jar</packaging>
     <name>DAO Layer</name>
 
-    <properties>
-        <spring.version>4.3.3.RELEASE</spring.version>
-        <!--<log4j.version>2.7</log4j.version>-->
-    </properties>
-
-
     <dependencies>
         <dependency>
             <groupId>team6</groupId>
@@ -33,12 +27,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.0.5.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>4.3.3.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -54,12 +48,17 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.3.Final</version>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.3.1.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <dependency>

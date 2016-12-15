@@ -24,7 +24,7 @@ public class MachineController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String findAll(Model model) {
         logger.info("Showing all additional services");
-        model.addAttribute("machine", machineFacade.findAllMachines());
+        model.addAttribute("machines", machineFacade.findAllMachines());
         return "machine/list";
     }
 

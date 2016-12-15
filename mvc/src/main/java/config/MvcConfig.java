@@ -2,6 +2,8 @@ package config;
 
 import controllers.MachineController;
 import data.SampleDataConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class MvcConfig  extends WebMvcConfigurerAdapter {
 
+    final static Logger log = LoggerFactory.getLogger(MvcConfig.class);
+
     /**
      * Enables default Tomcat servlet that serves static files.
      */
@@ -32,11 +36,13 @@ public class MvcConfig  extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        log.debug("mapping URL / to home view");
         registry.addViewController("/").setViewName("home");
     }
 
     @Bean
     public ViewResolver viewResolver() {
+        log.debug("registering JSP in /WEB-INF/jsp/ as views");
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");

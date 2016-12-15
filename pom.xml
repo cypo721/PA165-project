@@ -18,6 +18,19 @@
         <module>mvc</module>
     </modules>
 
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>4.3.4.RELEASE</spring.version>
+        <hibernate.version>5.2.4.Final</hibernate.version>
+        <!--<log4j.version>2.7</log4j.version>-->
+    </properties>
+
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+
     <!-- defines compatible versions of many libraries -->
     <!-- see http://docs.spring.io/platform/docs/1.1.4.RELEASE/reference/htmlsingle/#getting-started-using-spring-io-platform-maven -->
     <!--<parent>-->
@@ -39,15 +52,6 @@
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
-    <prerequisites>
-        <maven>3.0.0</maven>
-    </prerequisites>
-
 
 
     <dependencyManagement>
@@ -59,19 +63,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-api</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>net.sf.dozer</groupId>
                 <artifactId>dozer</artifactId>
                 <version>5.5.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-                <version>1.2.0</version><!-- spring-test 4.1.8 uses this version as compile dependency -->
             </dependency>
         </dependencies>
     </dependencyManagement>
