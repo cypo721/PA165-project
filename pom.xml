@@ -15,6 +15,7 @@
         <module>service-layer</module>
         <module>rest</module>
         <module>Sample Data</module>
+        <module>mvc</module>
     </modules>
 
     <!-- defines compatible versions of many libraries -->
