@@ -18,9 +18,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 /**
  * Created by pato on 14.12.2016.
  */
+
 @Configuration
 @Import({SampleDataConfiguration.class})
-@ComponentScan(basePackageClasses = {MachineController.class})
+@ComponentScan(basePackages = "controllers")
 @EnableWebMvc
 public class MvcConfig  extends WebMvcConfigurerAdapter {
 
