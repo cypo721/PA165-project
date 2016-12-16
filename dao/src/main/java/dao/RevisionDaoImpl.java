@@ -18,7 +18,6 @@ import java.util.List;
  *
  * @author Václav Zouzalík
  */
-@Transactional
 @Repository
 public class RevisionDaoImpl implements RevisionDao {
     @PersistenceContext

@@ -109,11 +109,15 @@
 
 
         <!-- For embedded usage -->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.derby</groupId>-->
+            <!--<artifactId>derby</artifactId>-->
+            <!--<version>10.12.1.1</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.12.1.1</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.192</version>
         </dependency>
-
     </dependencies>
 </project>

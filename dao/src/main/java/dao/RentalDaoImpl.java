@@ -18,7 +18,6 @@ import java.util.List;
  *
  * @author Marek Bohm
  */
-@Transactional
 @Repository
 public class RentalDaoImpl implements RentalDao {
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="27" failures="0" name="TestSuite" time="11.301" errors="0" skipped="0">
+<testsuite tests="13" failures="0" name="TestSuite" time="4.778" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2016.2.4"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -11,7 +11,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7532"/>
+    <property name="idea.launcher.port" value="7544"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="SK"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -63,31 +63,17 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="MachineDaoTest" name="createFindDeleteTest" time="0.332"/>
-  <testcase classname="MachineDaoTest" name="testCreate" time="0.019"/>
-  <testcase classname="MachineDaoTest" name="testNullDateOfBuy" time="0"/>
-  <testcase classname="MachineDaoTest" name="testNullName" time="0"/>
-  <testcase classname="MachineDaoTest" name="testUpdate" time="0.031"/>
-  <testcase classname="MachineDaoTest" name="testfindById" time="0.016"/>
-  <testcase classname="RentalDaoTest" name="testCreate" time="0.015"/>
-  <testcase classname="RentalDaoTest" name="testEquals" time="0"/>
-  <testcase classname="RentalDaoTest" name="testNullMachine" time="0"/>
-  <testcase classname="RentalDaoTest" name="testNullUser" time="0.016"/>
-  <testcase classname="RentalDaoTest" name="testUpdate" time="0.037"/>
-  <testcase classname="RentalDaoTest" name="testfindById" time="0.063"/>
-  <testcase classname="RevisionDaoTest" name="createFindDeleteTest" time="0.037"/>
-  <testcase classname="RevisionDaoTest" name="testCreate" time="0.016"/>
-  <testcase classname="RevisionDaoTest" name="testNullMachine" time="0.015"/>
-  <testcase classname="RevisionDaoTest" name="testNullUser" time="0"/>
-  <testcase classname="RevisionDaoTest" name="testUpdate" time="0.016"/>
-  <testcase classname="RevisionDaoTest" name="testfindById" time="0.016"/>
+  <testcase classname="MachineDaoTest" name="createFindDeleteTest" time="0.202"/>
+  <testcase classname="MachineDaoTest" name="testCreate" time="0.003"/>
+  <testcase classname="MachineDaoTest" name="testNullName" time="0.015"/>
+  <testcase classname="MachineDaoTest" name="testUpdate" time="0"/>
+  <testcase classname="MachineDaoTest" name="testfindById" time="0"/>
   <testcase classname="UserDaoTest" name="testCreate" time="0"/>
   <testcase classname="UserDaoTest" name="testEmailBadPattern" time="0.016"/>
-  <testcase classname="UserDaoTest" name="testFindAll" time="0.031"/>
-  <testcase classname="UserDaoTest" name="testFindByEmail" time="0.044"/>
-  <testcase classname="UserDaoTest" name="testNullDateOfJoined" time="0.047"/>
+  <testcase classname="UserDaoTest" name="testFindAll" time="0.016"/>
+  <testcase classname="UserDaoTest" name="testFindByEmail" time="0.015"/>
   <testcase classname="UserDaoTest" name="testNullEmail" time="0.015"/>
-  <testcase classname="UserDaoTest" name="testUpdate" time="0.038"/>
-  <testcase classname="UserDaoTest" name="testcreateFindDelete" time="0.063"/>
-  <testcase classname="UserDaoTest" name="testfindById" time="0.032"/>
+  <testcase classname="UserDaoTest" name="testUpdate" time="0"/>
+  <testcase classname="UserDaoTest" name="testcreateFindDelete" time="0.016"/>
+  <testcase classname="UserDaoTest" name="testfindById" time="0"/>
 </testsuite>

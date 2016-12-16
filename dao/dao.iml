@@ -48,6 +48,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-classic:1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-core:1.1.7" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.derby:derby:10.12.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.192" level="project" />
   </component>
 </module>

@@ -19,7 +19,6 @@ import java.util.List;
  *
  * @author eduard
  */
-@Transactional
 @Repository
 public class    MachineDaoImpl implements MachineDao {
     
