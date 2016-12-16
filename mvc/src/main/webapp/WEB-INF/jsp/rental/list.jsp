@@ -1,12 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Rentals</title>
-</head>
-<body>
-    
-<h1>Rentals</h1>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<my:template title="Rentals">
+<jsp:attribute name="body">
 
 <div class="container">
     <table class="table">
@@ -36,5 +33,5 @@
         </tbody>
     </table>
 </div>
-</body>
-</html>
+</jsp:attribute>
+</my:template>

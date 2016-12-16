@@ -14,17 +14,17 @@ import java.util.Objects;
  */
 public class RentalCreateDTO {
     
-    private Date dateFrom;
-    private Date dateTo;
+    private String dateFrom;
+    private String dateTo;
     private Integer price;
     private String user;
     private String machine;
 
-    public Date getDateFrom() {
+    public String getDateFrom() {
         return dateFrom;
     }
 
-    public Date getDateTo() {
+    public String getDateTo() {
         return dateTo;
     }
 
@@ -32,11 +32,11 @@ public class RentalCreateDTO {
         return price;
     }
 
-    public void setDateFrom(Date dateFrom) {
+    public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
     }
 
-    public void setDateTo(Date dateTo) {
+    public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
     }
 
