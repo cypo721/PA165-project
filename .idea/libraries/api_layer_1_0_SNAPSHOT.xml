@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="api-layer-1.0-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../project/PA165-project/api-layer/target/api-layer-1.0-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
