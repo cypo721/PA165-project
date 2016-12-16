@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" total="13" passed="13">
   <reporter-output>
   </reporter-output>
-  <suite name="Command line suite" duration-ms="4367" started-at="2016-12-16T14:20:32Z" finished-at="2016-12-16T14:20:37Z">
+  <suite name="Command line suite" duration-ms="5916" started-at="2016-12-16T14:27:39Z" finished-at="2016-12-16T14:27:44Z">
     <groups>
     </groups>
-    <test name="Command line test" duration-ms="4367" started-at="2016-12-16T14:20:32Z" finished-at="2016-12-16T14:20:37Z">
+    <test name="Command line test" duration-ms="5916" started-at="2016-12-16T14:27:39Z" finished-at="2016-12-16T14:27:44Z">
       <class name="MachineDaoTest">
-        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="21" started-at="2016-12-16T15:20:32Z" finished-at="2016-12-16T15:20:32Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="16" started-at="2016-12-16T15:27:39Z" finished-at="2016-12-16T15:27:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="1944" started-at="2016-12-16T15:20:32Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-12-16T15:20:34Z">
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="3023" started-at="2016-12-16T15:27:39Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="66" started-at="2016-12-16T15:20:34Z" finished-at="2016-12-16T15:20:34Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="86" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -26,11 +26,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="createFindDeleteTest()[pri:0, instance:MachineDaoTest@17d0685f]" name="createFindDeleteTest" duration-ms="169" started-at="2016-12-16T15:20:34Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="createFindDeleteTest()[pri:0, instance:MachineDaoTest@17d0685f]" name="createFindDeleteTest" duration-ms="240" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createFindDeleteTest -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="15" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="8" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -41,7 +41,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void MachineDaoTest.testCreate()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testCreate()[pri:0, instance:MachineDaoTest@17d0685f]" name="testCreate" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreate -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -52,11 +67,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="testCreate()[pri:0, instance:MachineDaoTest@17d0685f]" name="testCreate" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCreate -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -67,7 +78,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testNullName()[pri:0, instance:MachineDaoTest@17d0685f]" name="testNullName" duration-ms="16" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="testNullName()[pri:0, instance:MachineDaoTest@17d0685f]" name="testNullName" duration-ms="15" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <exception class="org.springframework.orm.jpa.JpaSystemException">
             <message>
               <![CDATA[org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement]]>
@@ -191,18 +202,7 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNullName -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void MachineDaoTest.testCreate()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -213,18 +213,7 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="16" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void MachineDaoTest.testfindById()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -234,12 +223,12 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="testUpdate()[pri:0, instance:MachineDaoTest@17d0685f]" name="testUpdate" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testUpdate()[pri:0, instance:MachineDaoTest@17d0685f]" name="testUpdate" duration-ms="7" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUpdate -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -249,8 +238,23 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           </params>
           <reporter-output>
           </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void MachineDaoTest.testfindById()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="testfindById()[pri:0, instance:MachineDaoTest@17d0685f]" name="testfindById" duration-ms="4" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testfindById -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -261,29 +265,21 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestClass" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:MachineDaoTest@17d0685f]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->
-        <test-method status="PASS" signature="testfindById()[pri:0, instance:MachineDaoTest@17d0685f]" name="testfindById" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testfindById -->
       </class> <!-- MachineDaoTest -->
       <class name="UserDaoTest">
-        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method status="PASS" signature="testCreate()[pri:0, instance:UserDaoTest@3891771e]" name="testCreate" duration-ms="15" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCreate -->
-        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="5" started-at="2016-12-16T15:27:42Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-12-16T15:27:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -294,7 +290,11 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="testCreate()[pri:0, instance:UserDaoTest@3891771e]" name="testCreate" duration-ms="6" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreate -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="7" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -305,7 +305,7 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="301" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="431" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -316,7 +316,7 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testEmailBadPattern()[pri:0, instance:UserDaoTest@3891771e]" name="testEmailBadPattern" duration-ms="22" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="testEmailBadPattern()[pri:0, instance:UserDaoTest@3891771e]" name="testEmailBadPattern" duration-ms="30" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <exception class="javax.validation.ConstraintViolationException">
             <message>
               <![CDATA[Validation failed for classes [entity.User] during persist time for groups [javax.validation.groups.Default, ]
@@ -411,7 +411,7 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testEmailBadPattern -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="15" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:42Z">
           <params>
             <param index="0">
               <value>
@@ -422,7 +422,7 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="285" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="364" started-at="2016-12-16T15:27:42Z" finished-at="2016-12-16T15:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -433,11 +433,11 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testFindAll()[pri:0, instance:UserDaoTest@3891771e]" name="testFindAll" duration-ms="16" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="testFindAll()[pri:0, instance:UserDaoTest@3891771e]" name="testFindAll" duration-ms="15" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testFindAll -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:35Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -448,7 +448,7 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="300" started-at="2016-12-16T15:20:35Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="411" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -459,22 +459,11 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testFindByEmail()[pri:0, instance:UserDaoTest@3891771e]" name="testFindByEmail" duration-ms="16" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="testFindByEmail()[pri:0, instance:UserDaoTest@3891771e]" name="testFindByEmail" duration-ms="18" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testFindByEmail -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="269" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void UserDaoTest.testNullEmail()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -485,7 +474,7 @@ List of constraint violations:[
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="304" started-at="2016-12-16T15:27:43Z" finished-at="2016-12-16T15:27:44Z">
           <params>
             <param index="0">
               <value>
@@ -495,19 +484,8 @@ List of constraint violations:[
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="316" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void UserDaoTest.testUpdate()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testNullEmail()[pri:0, instance:UserDaoTest@3891771e]" name="testNullEmail" duration-ms="0" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="testNullEmail()[pri:0, instance:UserDaoTest@3891771e]" name="testNullEmail" duration-ms="5" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <exception class="org.springframework.orm.jpa.JpaSystemException">
             <message>
               <![CDATA[org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement]]>
@@ -631,7 +609,33 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNullEmail -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="16" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void UserDaoTest.testNullEmail()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="333" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void UserDaoTest.testUpdate()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testUpdate()[pri:0, instance:UserDaoTest@3891771e]" name="testUpdate" duration-ms="5" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdate -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <params>
             <param index="0">
               <value>
@@ -642,11 +646,7 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="testUpdate()[pri:0, instance:UserDaoTest@3891771e]" name="testUpdate" duration-ms="0" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdate -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="247" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="245" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <params>
             <param index="0">
               <value>
@@ -657,22 +657,11 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testcreateFindDelete()[pri:0, instance:UserDaoTest@3891771e]" name="testcreateFindDelete" duration-ms="23" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="testcreateFindDelete()[pri:0, instance:UserDaoTest@3891771e]" name="testcreateFindDelete" duration-ms="13" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcreateFindDelete -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="269" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:37Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void UserDaoTest.testfindById()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2016-12-16T15:20:36Z" finished-at="2016-12-16T15:20:36Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <params>
             <param index="0">
               <value>
@@ -683,11 +672,22 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="testfindById()[pri:0, instance:UserDaoTest@3891771e]" name="testfindById" duration-ms="5" started-at="2016-12-16T15:20:37Z" finished-at="2016-12-16T15:20:37Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="260" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void UserDaoTest.testfindById()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testfindById()[pri:0, instance:UserDaoTest@3891771e]" name="testfindById" duration-ms="4" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testfindById -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:20:37Z" finished-at="2016-12-16T15:20:37Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <params>
             <param index="0">
               <value>
@@ -698,7 +698,7 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2016-12-16T15:20:37Z" finished-at="2016-12-16T15:20:37Z">
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:UserDaoTest@3891771e]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2016-12-16T15:27:44Z" finished-at="2016-12-16T15:27:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->

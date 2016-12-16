@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+
+<my:template title="Machines">
+    <jsp:attribute name="body">
 <html>
 <head>
     <title>Test</title>
@@ -26,3 +30,5 @@
 
 </body>
 </html>
+    </jsp:attribute>
+</my:template>
