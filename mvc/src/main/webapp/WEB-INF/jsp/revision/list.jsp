@@ -9,11 +9,18 @@
         <th>Číslo</th>
         <th>Čas revízie</th>
         <th>Info</th>
+        <th>Stroj</th>
+        <th>Zadal uživatel</th>
+        
+
         <c:forEach items="${revisions}" var="r">
                 <tr>
                     <td><c:out value="${r.id}"/></td>
                     <td><c:out value="${r.dateOfRevision}"/></td>
                     <td><c:out value="${r.info}"/></td>
+                    <td><c:out value="${r.machine.name}"/> </td>
+                    <td><c:out value="${r.user.email}"/> </td>
+
                 </tr>
         </c:forEach>
     </table>

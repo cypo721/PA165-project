@@ -55,8 +55,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Machine m = machine("Best");
         Machine m2 = machine("Lorry");
         
-//        Revision r = revision(new Date());
-//        Revision r1 = revision(new Date());
+        User u = user("heslo", "Pepa", "Novák", "pepa@novak.cz", "603123456", toDate(2015, 5, 12), "Horní Kotěhůlky 12");
+        
+        Revision r = revision(new Date(), m, u);
+        Revision r1 = revision(new Date(), m , u);
 
 //        Category office = category("Office");
 //        Category flowers = category("Flowers");
@@ -127,33 +129,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return Date.from(LocalDate.of(year, month, day).atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
-    private Revision revision(Date date) {
+    private Revision revision(Date date, Machine m, User u) {
         Revision r = new Revision();
         
-        Machine machine1 = machine("stroj");
-
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2011);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        
-        User u = new User();
-        u.setGivenName("Bla");
-//        u.setPasswordHash("asdsf");
-        u.setEmail("xy@mail.com");
-        u.setPersonType(PersonType.NATURAL);
-        u.setSurname("Alb");
-        Calendar cal2 = Calendar.getInstance();
-        cal2.set(Calendar.YEAR, 2012);
-        cal2.set(Calendar.MONTH, 0);
-        cal2.set(Calendar.DAY_OF_MONTH, 20);
-        u.setJoinedDate(cal1.getTime());
-        u.setPhone("0915702236");
-        u.setRole(Role.EMPLOYEE);  
-        
-        userService.createUser(u, "asdj");
-        
-        r.setMachine(machine1);
+        r.setMachine(m);
         r.setUser(u);    
         r.setInfo("blabla");
         r.setIsFunctionable(true);
@@ -174,6 +153,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private User user(String password, String givenName, String surname, String email, String phone, Date joined, String address) {
         User u = new User();
         u.setGivenName(givenName);
+        u.setPasswordHash("asdasd");
         u.setSurname(surname);
         u.setEmail(email);
         u.setPhone(phone);
