@@ -58,13 +58,7 @@
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
                     
                     <li><a href="${pageContext.request.contextPath}/user/list">Users</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#/admin/products">Products</a></li>
-                            <li><a href="#/admin/categories">Categories</a></li>
-                        </ul>
-                    </li>
+
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
