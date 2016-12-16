@@ -44,40 +44,39 @@ public class RentalController {
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(Model model, @PathVariable Long id) {
-        model.addAttribute("rental", rentalFacade.findById(id));
+    public String edit(Model model, @PathVariable Long id) throws ParseException {
+        RentalDTO rental = rentalFacade.findById(id);
+        RentalCreateDTO rentalDTO = new RentalCreateDTO();
+        
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        rentalDTO.setDateFrom(parser.format(rental.getDateFrom()));
+        rentalDTO.setDateTo(parser.format(rental.getDateTo()));
+        rentalDTO.setPrice(rental.getPrice());
+        
+        model.addAttribute("rental", rentalDTO);
         return "rental/edit";
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String submitEdit(@PathVariable long id,
-                             @ModelAttribute("rental") RentalDTO rentalDTO,
+                             @ModelAttribute("rental") RentalCreateDTO rentalDTO,
                              Model model, RedirectAttributes redirectAttributes,
-                             UriComponentsBuilder uriBuilder) {
+                             UriComponentsBuilder uriBuilder) throws ParseException {
         RentalDTO rental = rentalFacade.findById(id);
 
-        if (rentalDTO.getDateFrom() != null) {
-            rental.setDateFrom(rentalDTO.getDateFrom());
-        }
-        
-        if (rentalDTO.getDateTo() != null) {
-            rental.setDateTo(rentalDTO.getDateTo());
-        }
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
 
-        if (rentalDTO.getId() != null) {
-            rental.setId(rentalDTO.getId());
+        if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
+            rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
         }
         
-        if (rentalDTO.getMachine() != null) {
-            rental.setMachine(rentalDTO.getMachine());
+        if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
+            rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
         }
         
         if (rentalDTO.getPrice() != null) {
             rental.setPrice(rentalDTO.getPrice());
-        }
-        
-        if (rentalDTO.getUser() != null) {
-            rental.setUser(rentalDTO.getUser());
         }
 
         rentalFacade.updateRental(rental);

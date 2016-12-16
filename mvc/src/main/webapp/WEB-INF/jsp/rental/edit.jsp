@@ -1,23 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Edit rental</title>
-</head>
-<body>
-    
-<h1>Edit rental</h1>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<my:template title="Edit rental">
+<jsp:attribute name="body">
     
 <div class="container">
-    <div class="col-md-2">
+    <div class="col-md-4">
         <form:form method="post" modelAttribute="rental" action="${editAction}">
             <div class="form-group">
                 <label for="dateFrom">From</label>
-                <form:input path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From" value="<fmt:formatDate value=\"${rental.dateFrom}\" pattern=\"yyyy-MM-dd\" />"/>
+                <form:input path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From" value="${rental.dateFrom}"/>
             </div>
             <div class="form-group">
                 <label for="dateTo">To</label>
-                <form:password path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="<fmt:formatDate value=\"${rental.dateFrom}\" pattern=\"yyyy-MM-dd\" />"/>
+                <form:input path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="${rental.dateFrom}"/>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
@@ -30,5 +27,5 @@
         <a href="${pageContext.request.contextPath}/rental/list">Back to rentals</a>
     </p>
 </div>
-</body>
-</html>
+</jsp:attribute>
+</my:template>

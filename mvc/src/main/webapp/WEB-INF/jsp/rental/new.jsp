@@ -9,7 +9,7 @@
     <div class="col-md-4">
         <form:form method="post" modelAttribute="rental" action="${editAction}">
             <div class="form-group">
-                <label for="dateFrom">From</label>
+                <label for="dateFrom">From (YYY-MM-DD)</label>
                 <form:input type="date" path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From"/>
             </div>
             <div class="form-group">
