@@ -45,6 +45,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @SuppressWarnings("unused")
     public void loadData() throws IOException {
         Machine crane = machine("Crane");
+        Machine m = machine("Best");
+        Machine m2 = machine("Lorry");
 //        Category office = category("Office");
 //        Category flowers = category("Flowers");
 //        Category toys = category("Toys");

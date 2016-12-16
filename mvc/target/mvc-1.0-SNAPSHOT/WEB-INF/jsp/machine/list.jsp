@@ -7,22 +7,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Test</title>
-    <div>blbabla</div>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 
-    <div class="row">,
+<my:template title="Machines">
+    <jsp:attribute name="body">
+<div class="row">
+    <table class=" table table-striped">
+        <th>Číslo</th>
+        <th>Meno</th>
+        <th>Cena</th>
+        <th>Typ</th>
+        <th>Dátum zakúpenia</th>
         <c:forEach items="${machines}" var="m">
-                        <tr><td>huha</td>
-                           <td><c:out value="${m.id}"/></td>
-                            <td><c:out value="${m.name}"/></td>
-                            <td><c:out value="${m.pricePerDay}"/></td>
-                        </tr>
-        </c:forEach>
-    </div>
-</head>
-<body>
+                <tr>
+                    <td><c:out value="${m.id}"/></td>
+                    <td><c:out value="${m.name}"/></td>
+                    <td><c:out value="${m.pricePerDay}"/> [CZK]</td>
+                    <td><c:out value="${m.machineType}"/> </td>
+                    <td><c:out value="${m.dateOfBuy}"/> </td>
 
-</body>
-</html>
+
+                </tr>
+        </c:forEach>
+    </table>
+</div>
+
+    </jsp:attribute>
+</my:template>

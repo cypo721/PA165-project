@@ -17,7 +17,7 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Hi!</h1>
-        <p>Welcome, to our project from PA165 course at FI MUNI.</p>
+        <p>Welcome to our project from PA165 course at FI MUNI.</p>
     </div>
     <p><h2>Autors:</h2></p>
     <p>
