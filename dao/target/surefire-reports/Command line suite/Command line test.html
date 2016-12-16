@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>13/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Dec 16 14:55:56 CET 2016</td>
+<td>Started on:</td><td>Fri Dec 16 15:20:32 CET 2016</td>
 </tr>
-<tr><td>Total time:</td><td>4 seconds (4120 ms)</td>
+<tr><td>Total time:</td><td>4 seconds (4367 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -127,8 +127,8 @@ List of constraint violations:[
 	at com.sun.proxy.$Proxy50.create(Unknown Source)
 	at UserDaoTest.testEmailBadPattern(UserDaoTest.java:149)
 	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:175)
-... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1021592569", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1021592569'><pre>javax.validation.ConstraintViolationException: Validation failed for classes [entity.User] during persist time for groups [javax.validation.groups.Default, ]
+... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1476116591", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1476116591'><pre>javax.validation.ConstraintViolationException: Validation failed for classes [entity.User] during persist time for groups [javax.validation.groups.Default, ]
 List of constraint violations:[
 	ConstraintViolationImpl{interpolatedMessage=&apos;must match &quot;.+@.+\....?&quot;&apos;, propertyPath=email, rootBeanClass=class entity.User, messageTemplate=&apos;{javax.validation.constraints.Pattern.message}&apos;}
 ]
@@ -291,8 +291,8 @@ insert into Users (id, email, givenName, joinedDate, passwordHash, personType, p
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:146)
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:204)
 	... 77 more
-... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace783682673", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace783682673'><pre>org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace142449153", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace142449153'><pre>org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:418)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:492)
 	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:59)
@@ -477,8 +477,8 @@ insert into Machines (id, dateOfBuy, dateOfLastRevision, machineType, name, pric
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:146)
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:204)
 	... 77 more
-... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace393183035", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace393183035'><pre>org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+... Removed 44 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace818546553", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace818546553'><pre>org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not execute statement; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:418)
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:492)
 	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:59)

@@ -25,8 +25,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>eshop-api</artifactId>
+            <groupId>test</groupId>
+            <artifactId>api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

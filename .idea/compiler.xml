@@ -24,11 +24,17 @@
         <processorPath useClasspath="true" />
         <module name="api" />
         <module name="dao" />
+        <module name="data" />
+        <module name="mvc" />
+        <module name="service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="1.5" />
       <module name="dao" target="1.7" />
+      <module name="data" target="1.6" />
+      <module name="mvc" target="1.5" />
+      <module name="service" target="1.7" />
       <module name="test" target="1.5" />
     </bytecodeTargetLevel>
   </component>
