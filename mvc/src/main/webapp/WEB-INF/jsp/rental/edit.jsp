@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,6 +16,7 @@
             <div class="form-group">
                 <label for="dateTo">To</label>
                 <form:input path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="${rental.dateFrom}"/>
+
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
@@ -29,3 +31,4 @@
 </div>
 </jsp:attribute>
 </my:template>
+

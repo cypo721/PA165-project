@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,7 @@ public class RentalController {
         rentalDTO.setPrice(rental.getPrice());
         
         model.addAttribute("rental", rentalDTO);
+
         return "rental/edit";
     }
     
@@ -73,11 +75,13 @@ public class RentalController {
         
         if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
             rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
+
         }
         
         if (rentalDTO.getPrice() != null) {
             rental.setPrice(rentalDTO.getPrice());
         }
+
 
         rentalFacade.updateRental(rental);
         model.addAttribute("rental", rental);
@@ -106,6 +110,7 @@ public class RentalController {
         
         if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
             rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
+
         }
         
         if (rentalDTO.getMachine() != null && !rentalDTO.getMachine().trim().isEmpty()) {
@@ -125,6 +130,7 @@ public class RentalController {
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
         return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(newId).encode().toUriString();
+
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

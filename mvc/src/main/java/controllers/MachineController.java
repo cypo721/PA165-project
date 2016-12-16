@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  * Created by pato on 14.12.2016.
  */
@@ -29,6 +30,7 @@ public class MachineController {
 
     @Autowired
     private MachineFacade machineFacade;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAll(Model model) {

@@ -10,6 +10,7 @@
 
 
 <!DOCTYPE html>
+
 <html lang="${pageContext.request.locale}">
 <head>
     <meta charset="utf-8">
@@ -68,6 +69,7 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+
     <c:if test="${not empty title}">
         <div class="page-header">
             <h1><c:out value="${title}"/></h1>
@@ -94,10 +96,12 @@
     <jsp:invoke fragment="body"/>
 
     <!-- footer -->
+
     <footer class="footer text-center">
         <hr/>
         <div class="container">
             <p class="text-muted">&copy; FI MUNI 2016 - PA165 - Team 6</p>
+
         </div>
     </footer>
 

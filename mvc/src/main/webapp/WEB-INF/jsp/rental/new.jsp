@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,6 +16,7 @@
             <div class="form-group">
                 <label for="dateTo">To</label>
                 <form:input type="date" path="dateTo" cssClass="form-control" id="dateTo" placeholder="To"/>
+
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
@@ -22,11 +24,13 @@
             </div>
             <div class="form-group">
                 <label for="mchn">Machine (id)</label>
+
                 <form:input path="machine" cssClass="form-control" id="mchn" placeholder="Machine"/>
             </div>
             <div class="form-group">
                 <label for="usr">User (email)</label>
                 <form:input path="user" cssClass="form-control" id="usr" placeholder="User"/>
+
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form:form>

@@ -1,6 +1,5 @@
 package config;
 
-
 import data.SampleDataConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
 import service.config.ServiceConfiguration;
+
 
 /**
  * Created by pato on 14.12.2016.
@@ -41,6 +42,7 @@ public class MvcConfig  extends WebMvcConfigurerAdapter {
         log.debug("mapping URL / to home view");
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
+
     }
 
     @Bean
