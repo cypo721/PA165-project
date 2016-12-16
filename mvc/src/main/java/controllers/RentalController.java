@@ -5,8 +5,9 @@
  */
 package controllers;
 
+import dto.RentalCreateDTO;
 import dto.RentalDTO;
-import facade.RentalFacade;
+import facade.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +26,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 @RequestMapping("/rental")
 public class RentalController {
+    
     @Autowired
     private RentalFacade rentalFacade;
+    
+    @Autowired
+    private MachineFacade machineFacade;
+    
+    @Autowired
+    private UserFacade userFacade;
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String findAll(Model model)
@@ -77,6 +85,45 @@ public class RentalController {
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
         return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+    }
+    
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newRental(Model model) {
+        model.addAttribute("rental", new RentalCreateDTO());
+        return "rental/new";
+    }
+    
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String submitNew(@ModelAttribute("rental") RentalCreateDTO rentalDTO,
+                             Model model, RedirectAttributes redirectAttributes,
+                             UriComponentsBuilder uriBuilder) {
+        RentalDTO rental = new RentalDTO();
+
+        if (rentalDTO.getDateFrom() != null) {
+            rental.setDateFrom(rentalDTO.getDateFrom());
+        }
+        
+        if (rentalDTO.getDateTo() != null) {
+            rental.setDateTo(rentalDTO.getDateTo());
+        }
+        
+        if (rentalDTO.getMachine() != null) {
+            rental.setMachine(machineFacade.findById(new Long(rentalDTO.getMachine().trim())));
+        }
+        
+        if (rentalDTO.getPrice() != null) {
+            rental.setPrice(rentalDTO.getPrice());
+        }
+        
+        if (rentalDTO.getUser() != null) {
+            rental.setUser(userFacade.findByEmail(rentalDTO.getUser().trim()));
+        }
+
+        rentalFacade.createRental(rental);
+        model.addAttribute("rental", rental);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
+        return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(rental.getId()).encode().toUriString();
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
