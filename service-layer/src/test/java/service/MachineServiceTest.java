@@ -13,8 +13,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import org.hibernate.service.spi.ServiceException;
-import org.junit.Assert;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doAnswer;
@@ -23,6 +21,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -37,7 +36,6 @@ import org.springframework.dao.DataAccessException;
  *
  * @author eduard
  */
-@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class MachineServiceTest extends AbstractTransactionalTestNGSpringContextTests {
     

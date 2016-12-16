@@ -127,7 +127,7 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
         }).when(userDao).create(any(User.class));
 
         userService.createUser(user1, "password");
-        org.junit.Assert.assertEquals(userId, user1.getId());
+        Assert.assertEquals(userId, user1.getId());
     }
 
     @Test

@@ -13,7 +13,7 @@
         <module>api-layer</module>
         <module>dao-layer</module>
         <module>service-layer</module>
-        <module>rest</module>
+        <!--<module>rest</module>-->
         <module>Sample Data</module>
         <module>mvc</module>
     </modules>

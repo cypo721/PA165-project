@@ -14,15 +14,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
-import junit.framework.Assert;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -39,7 +38,6 @@ import service.config.ServiceConfiguration;
  *
  * @author eduard
  */
-@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class MachineFacadeTest extends AbstractTransactionalTestNGSpringContextTests{
         

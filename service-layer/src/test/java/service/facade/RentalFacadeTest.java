@@ -3,7 +3,6 @@ package service.facade;
 import entity.Machine;
 import entity.Rental;
 import entity.User;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -17,11 +16,9 @@ import enums.PersonType;
 import enums.Role;
 import facade.MachineFacade;
 import facade.RentalFacade;
-import facade.UserFacade;
-import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import service.BeanMappingService;
@@ -39,7 +36,6 @@ import static org.mockito.Mockito.when;
 /**
  * Created by pato on 23.11.2016.
  */
-@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class RentalFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 

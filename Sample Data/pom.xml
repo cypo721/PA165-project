@@ -17,29 +17,5 @@
         <artifactId>service-layer</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
-    <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>6.8</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${spring.version}</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.0.13</version>
-        <scope>test</scope><!-- logging implementation should not be part of a library, but is needed for tests -->
-    </dependency>
-    <dependency>
-        <groupId>org.glassfish</groupId>
-        <artifactId>javax.el</artifactId>
-        <version>3.0.0</version>
-        <scope>test</scope><!-- conflicts with tomcat libraries, but needed for tests -->
-    </dependency>
 </dependencies>
 </project>

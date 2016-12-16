@@ -8,7 +8,6 @@ import enums.MachineType;
 import enums.PersonType;
 import enums.Role;
 import org.hibernate.service.spi.ServiceException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

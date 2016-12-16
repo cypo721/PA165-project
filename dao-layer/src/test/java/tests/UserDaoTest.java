@@ -14,7 +14,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
@@ -23,6 +22,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  *
@@ -41,7 +42,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         
         userDao.create(user1);
         Assert.assertNotNull(user1.getId());
-        Assert.assertEquals(user1.getEmail(), "test.test@gmail.com");  
+        assertEquals(user1.getEmail(), "test.test@gmail.com");
     }
     
     @Test
@@ -49,7 +50,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         User user1 = getUser();
         user1.setEmail("test1.test1@gmail.com");
         userDao.create(user1);
-        Assert.assertEquals(user1.getGivenName(), userDao.findById(user1.getId()).getGivenName());
+        assertEquals(user1.getGivenName(), userDao.findById(user1.getId()).getGivenName());
     }
     
     @Test
@@ -60,7 +61,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user1.setEmail("test2.test2@gmail.com");
         user1.setGivenName("Janko");
         userDao.update(user1);
-        Assert.assertEquals(userDao.findById(user1.getId()).getGivenName(), "Janko");
+        assertEquals(userDao.findById(user1.getId()).getGivenName(), "Janko");
     }
     
     @Test
@@ -75,13 +76,13 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         userDao.create(user1);
         userDao.create(user2);
         
-        Assert.assertEquals(userDao.findById(user1.getId()).getGivenName(), "test");
+        assertEquals(userDao.findById(user1.getId()).getGivenName(), "test");
 
-        Assert.assertEquals(userDao.findAll().size(), 2);
+        assertEquals(userDao.findAll().size(), 2);
         userDao.delete(user1);
-        Assert.assertEquals(userDao.findAll().size(), 1);
+        assertEquals(userDao.findAll().size(), 1);
         userDao.delete(user2);
-        Assert.assertEquals(userDao.findAll().size(), 0);
+        assertEquals(userDao.findAll().size(), 0);
     }
     
     @Test(expectedExceptions = DataAccessException.class)
@@ -117,7 +118,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user1.setEmail("test7.test7@gmail.com");
 
         userDao.create(user1);
-        Assert.assertEquals(user1.getId(), userDao.findUserByEmail("test7.test7@gmail.com").getId());
+        assertEquals(user1.getId(), userDao.findUserByEmail("test7.test7@gmail.com").getId());
     }
     
     @Test
@@ -131,7 +132,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
             userDao.update(user);
             Assert.fail("Day of joined cannot be null");
         } catch(Exception e) {
-            Assert.assertEquals("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction", e.getMessage());
+            assertEquals("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction", e.getMessage());
         }
     }
     

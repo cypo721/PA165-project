@@ -1,14 +1,13 @@
 package service.facade;
 
-import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import dto.*;
 import entity.*;
 import enums.*;
 import facade.*;
-import org.junit.Assert;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.when;
 /**
  * @author Václav Zouzalík
  */
-@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes=ServiceConfiguration.class)
 public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContextTests{
         
