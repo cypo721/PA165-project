@@ -13,15 +13,15 @@
         <form:form method="post" modelAttribute="rental" action="${editAction}">
             <div class="form-group">
                 <label for="dateFrom">From</label>
-                <form:input path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From"/>
+                <form:input path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From" value="<fmt:formatDate value=\"${rental.dateFrom}\" pattern=\"yyyy-MM-dd\" />"/>
             </div>
             <div class="form-group">
                 <label for="dateTo">To</label>
-                <form:password path="dateTo" cssClass="form-control" id="dateTo" placeholder="To"/>
+                <form:password path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="<fmt:formatDate value=\"${rental.dateFrom}\" pattern=\"yyyy-MM-dd\" />"/>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <form:input path="price" cssClass="form-control" id="price" placeholder="Price"/>
+                <form:input path="price" cssClass="form-control" id="price" placeholder="Price" value="${rental.price}"/>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form:form>

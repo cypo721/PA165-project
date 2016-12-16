@@ -107,7 +107,7 @@ public class RentalController {
             rental.setDateTo(rentalDTO.getDateTo());
         }
         
-        if (rentalDTO.getMachine() != null) {
+        if (rentalDTO.getMachine() != null && !rentalDTO.getMachine().trim().isEmpty()) {
             rental.setMachine(machineFacade.findById(new Long(rentalDTO.getMachine().trim())));
         }
         
@@ -115,7 +115,7 @@ public class RentalController {
             rental.setPrice(rentalDTO.getPrice());
         }
         
-        if (rentalDTO.getUser() != null) {
+        if (rentalDTO.getUser() != null && !rentalDTO.getUser().trim().isEmpty()) {
             rental.setUser(userFacade.findByEmail(rentalDTO.getUser().trim()));
         }
 
