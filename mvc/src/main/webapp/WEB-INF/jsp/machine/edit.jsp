@@ -24,16 +24,19 @@
         <div class="form-group">
             <label for="name">Name</label>
             <form:input path="name" cssClass="form-control" id="name" placeholder="Name"/>
+            <p><form:errors path="name" cssClass="error" /></p>
         </div>
 
         <div class="form-group">
             <label for="name">Date of buy</label>
             <form:input type="date" class="date" path="dateOfBuy" cssClass="form-control" id="name" placeholder="Name"/>
+            <p><form:errors path="dateOfBuy" cssClass="error" /></p>
         </div>
 
         <div class="form-group">
             <label for="name">Date of buy</label>
             <form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Name"/>
+            <p><form:errors path="dateOfLastRevision" cssClass="error" /></p>
         </div>
 
             <div class="form-group">
@@ -49,7 +52,7 @@
         <div class="form-group">
             <label for="price">Price</label>
             <div class="input-group">
-                <form:input path="pricePerDay" cssClass="form-control" id="price" placeholder="Price"
+                <form:input type="number" path="pricePerDay" cssClass="form-control" id="price" placeholder="Price"
                             aria-describedby="currency-addon"/>
                 <span class="input-group-addon" id="currency-addon">CZK</span>
                 </div>

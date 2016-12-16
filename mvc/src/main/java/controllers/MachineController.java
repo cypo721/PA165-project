@@ -13,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+import validators.MachineDtoValidator;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -79,10 +80,10 @@ public class MachineController {
     }
 
     @InitBinder
-    public void dataBinding(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, "dob", new CustomDateEditor(dateFormat, true));
+    protected void dataBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+        binder.registerCustomEditor(Date.class, editor);
     }
 
 

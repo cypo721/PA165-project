@@ -15,9 +15,9 @@ public class MachineDTO {
 
     private String name;
 
-    @DateTimeFormat(pattern ="dd.mm.yyyy")
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBuy;
-    @DateTimeFormat(pattern = "dd.mm.yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfLastRevision;
 
     private BigDecimal pricePerDay;
