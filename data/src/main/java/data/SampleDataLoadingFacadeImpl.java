@@ -1,10 +1,7 @@
 package data;
 
-import entity.Machine;
-import entity.Revision;
-import entity.User;
+import entity.*;
 import enums.MachineType;
-import enums.PersonType;
 import enums.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +31,7 @@ import java.util.Date;
 @Component
 @Transactional //transactions are handled on facade layer
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
- 
+
     final static Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImpl.class);
 
     public static final String JPEG = "image/jpeg";
@@ -55,8 +52,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Machine m = machine("Best");
         Machine m2 = machine("Lorry");
         
-        User u = user("heslo", "Pepa", "Novák", "pepa@novak.cz", "603123456", toDate(2015, 5, 12), "Horní Kotěhůlky 12");
         
+        User u = user("123456", "Luna", "Lovegood", "luna@hog.uk", "800123456", new Date(), true);
+
         Revision r = revision(new Date(), m, u);
         Revision r1 = revision(new Date(), m , u);
 
@@ -141,7 +139,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         return r;
     }
-//
+
 //    private OrderItem orderItem(Product product, int amount) {
 //        OrderItem oi = new OrderItem();
 //        oi.setProduct(product);
@@ -150,7 +148,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 //        return oi;
 //    }
 //
-    private User user(String password, String givenName, String surname, String email, String phone, Date joined, String address) {
+    private User user(String password, String givenName, String surname, String email, String phone, Date joined, boolean admin) {
         User u = new User();
         u.setGivenName(givenName);
         u.setPasswordHash("asdasd");
@@ -158,10 +156,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         u.setEmail(email);
         u.setPhone(phone);
         u.setJoinedDate(joined);
-        u.setRole(Role.ADMIN);
-        u.setPersonType(PersonType.LEGAL);
+        if(admin) u.setRole(Role.ADMIN);
+        else u.setRole(Role.CUSTOMER);
         userService.createUser(u, password);
-        
         return u;
     }
 //
