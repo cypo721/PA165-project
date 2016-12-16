@@ -1,6 +1,7 @@
 package dto;
 
 import enums.MachineType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,8 +15,9 @@ public class MachineDTO {
 
     private String name;
 
+    @DateTimeFormat(pattern ="dd.mm.yyyy")
     private Date dateOfBuy;
-
+    @DateTimeFormat(pattern = "dd.mm.yyyy")
     private Date dateOfLastRevision;
 
     private BigDecimal pricePerDay;

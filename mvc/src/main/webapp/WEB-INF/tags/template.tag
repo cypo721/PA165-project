@@ -8,6 +8,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
+
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
 <head>
@@ -49,7 +50,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="${pageContext.request.contextPath}/machine/list">Machines</a></li>
+                    <li><a href="${pageContext.request.contextPath}/machine/">Machines</a></li>
 
                     <li><a href="${pageContext.request.contextPath}/revision/list">Revisions</a></li>
 
