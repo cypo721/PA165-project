@@ -1,10 +1,7 @@
 package data;
 
-import entity.Machine;
-import entity.Revision;
-import entity.User;
+import entity.*;
 import enums.MachineType;
-import enums.PersonType;
 import enums.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 
 import java.util.Date;
@@ -34,7 +29,7 @@ import java.util.Date;
 @Component
 @Transactional //transactions are handled on facade layer
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
- 
+
     final static Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImpl.class);
 
     public static final String JPEG = "image/jpeg";
@@ -54,10 +49,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Machine crane = machine("Crane");
         Machine m = machine("Best");
         Machine m2 = machine("Lorry");
-        
-//        Revision r = revision(new Date());
-//        Revision r1 = revision(new Date());
-
+        User u = user("123456", "Luna", "Lovegood", "luna@hog.uk", "800123456", new Date(), true);
 //        Category office = category("Office");
 //        Category flowers = category("Flowers");
 //        Category toys = category("Toys");
@@ -122,46 +114,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         machineService.create(m);
         return m;
     }
-    
-    private static Date toDate(int year, int month, int day) {
-        return Date.from(LocalDate.of(year, month, day).atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-
-    private Revision revision(Date date) {
-        Revision r = new Revision();
-        
-        Machine machine1 = machine("stroj");
-
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2011);
-        cal1.set(Calendar.MONTH, 0);
-        cal1.set(Calendar.DAY_OF_MONTH, 20);
-        
-        User u = new User();
-        u.setGivenName("Bla");
-//        u.setPasswordHash("asdsf");
-        u.setEmail("xy@mail.com");
-        u.setPersonType(PersonType.NATURAL);
-        u.setSurname("Alb");
-        Calendar cal2 = Calendar.getInstance();
-        cal2.set(Calendar.YEAR, 2012);
-        cal2.set(Calendar.MONTH, 0);
-        cal2.set(Calendar.DAY_OF_MONTH, 20);
-        u.setJoinedDate(cal1.getTime());
-        u.setPhone("0915702236");
-        u.setRole(Role.EMPLOYEE);  
-        
-        userService.createUser(u, "asdj");
-        
-        r.setMachine(machine1);
-        r.setUser(u);    
-        r.setInfo("blabla");
-        r.setIsFunctionable(true);
-        r.setDateOfRevision(date);
-        revisionService.create(r);
-        
-        return r;
-    }
 //
 //    private OrderItem orderItem(Product product, int amount) {
 //        OrderItem oi = new OrderItem();
@@ -171,17 +123,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 //        return oi;
 //    }
 //
-    private User user(String password, String givenName, String surname, String email, String phone, Date joined, String address) {
+    private User user(String password, String givenName, String surname, String email, String phone, Date joined, boolean admin) {
         User u = new User();
         u.setGivenName(givenName);
         u.setSurname(surname);
         u.setEmail(email);
         u.setPhone(phone);
         u.setJoinedDate(joined);
-        u.setRole(Role.ADMIN);
-        u.setPersonType(PersonType.LEGAL);
+        if(admin) u.setRole(Role.ADMIN);
+        else u.setRole(Role.CUSTOMER);
         userService.createUser(u, password);
-        
         return u;
     }
 //

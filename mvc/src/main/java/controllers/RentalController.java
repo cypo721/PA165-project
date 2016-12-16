@@ -121,11 +121,11 @@ public class RentalController {
             rental.setUser(userFacade.findByEmail(rentalDTO.getUser().trim()));
         }
 
-        rentalFacade.createRental(rental);
+        Long newId = rentalFacade.createRental(rental);
         model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
-        return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(rental.getId()).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(newId).encode().toUriString();
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
