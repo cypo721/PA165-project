@@ -12,7 +12,7 @@
         <module>dao</module>
         <module>api</module>
         <module>service</module>
-        <module>mvc</module>
+        <module>web</module>
         <module>data</module>
         <module>rest</module>
     </modules>
