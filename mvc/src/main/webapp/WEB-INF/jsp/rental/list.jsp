@@ -6,6 +6,7 @@
 <jsp:attribute name="body">
 
 <div class="container">
+    <a href="${pageContext.request.contextPath}/rental/new" class="btn btn-success">New rental</a>
     <table class="table">
         <thead>
         <tr>
@@ -27,7 +28,7 @@
                 <td><c:out value="${rental.dateFrom}"/></td>
                 <td><c:out value="${rental.dateTo}"/></td>
                 <td><c:out value="${rental.price}"/></td>
-                <td><a href="${pageContext.request.contextPath}/rental/edit/${rental.id}">Edit</a></td>
+                <td><a href="${pageContext.request.contextPath}/rental/edit/${rental.id}" class="btn btn-success">Edit</a></td>
             </tr>
         </c:forEach>
         </tbody>
