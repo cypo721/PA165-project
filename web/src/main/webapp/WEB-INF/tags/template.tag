@@ -59,6 +59,8 @@
                     
                     <li><a href="${pageContext.request.contextPath}/user/list">Users</a></li>
 
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

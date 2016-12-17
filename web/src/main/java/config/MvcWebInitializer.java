@@ -2,6 +2,8 @@ package config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import security.AuthenticationProviderImpl;
+import security.SecurityConfig;
 
 import javax.servlet.Filter;
 
@@ -11,7 +13,7 @@ import javax.servlet.Filter;
 public class MvcWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{MvcConfig.class};
+        return new Class<?>[]{MvcConfig.class, SecurityConfig.class, AuthenticationProviderImpl.class};
     }
 
     @Override

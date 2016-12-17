@@ -12,6 +12,8 @@
             <th>Id</th>
             <th>Email</th>
             <th>Joined date</th>
+            <th>Role</th>
+
         </tr>
         </thead>
         <tbody>
@@ -20,6 +22,8 @@
                 <td><c:out value="${user.id}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.joinedDate}"/></td>
+                <td><c:out value="${user.role}"/></td>
+
             </tr>
         </c:forEach>
         </tbody>

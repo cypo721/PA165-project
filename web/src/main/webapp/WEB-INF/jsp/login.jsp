@@ -11,7 +11,7 @@
         </c:if>
         <form action="${pageContext.request.contextPath}/login" method="post">
                 <sec:csrfInput/>
-                <div class="form-group"><label for="username"> Email: <input type="text" class="form-control"
+                <div class="form-group"><label for="email"> Email: <input type="text" class="form-control"
                                                                                   name="email" id="email"/>
                 </label></div>
                 <div class="form-group"><label for="password"> Password: <input type="password" class="form-control"
