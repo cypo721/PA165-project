@@ -80,9 +80,7 @@
         <dependency>
             <groupId>test</groupId>
             <artifactId>data</artifactId>
-
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 </project>

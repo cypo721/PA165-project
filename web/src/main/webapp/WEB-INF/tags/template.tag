@@ -53,7 +53,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/machine/">Machines</a></li>
 
-                    <li><a href="${pageContext.request.contextPath}/revision/list">Revisions</a></li>
+                    <li><a href="${pageContext.request.contextPath}/revision/">Revisions</a></li>
 
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
                     

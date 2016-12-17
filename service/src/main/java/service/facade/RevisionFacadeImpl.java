@@ -56,5 +56,12 @@ public class RevisionFacadeImpl implements RevisionFacade {
         return  beanMappingService.mapTo(revisionService.findAllRevisions(), RevisionDTO.class);
     }
 
+    @Override
+    public void deleteRevision(Long id) {
+        Revision revision = new Revision(); //todo
+        revision.setId(id);
+        revisionService.delete(revision);  
+    }
+
 
 }

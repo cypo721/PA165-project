@@ -16,6 +16,4 @@
         <module>data</module>
         <module>rest</module>
     </modules>
-
-
 </project>
