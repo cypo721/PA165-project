@@ -80,7 +80,6 @@
         <dependency>
             <groupId>test</groupId>
             <artifactId>data</artifactId>
-
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -109,5 +108,4 @@
             <version>4.2.0.RELEASE</version>
         </dependency>
     </dependencies>
-
 </project>

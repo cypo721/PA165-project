@@ -22,6 +22,7 @@ public interface RevisionFacade {
      */
     void updateRevision(RevisionDTO revisionDTO);
     
+    void deleteRevision(Long id);
     /**
      * Find revision by id
      * @param id
