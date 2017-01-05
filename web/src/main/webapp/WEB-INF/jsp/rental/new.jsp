@@ -23,9 +23,12 @@
                 <form:input path="price" cssClass="form-control" id="price" placeholder="Price"/>
             </div>
             <div class="form-group">
-                <label for="mchn">Machine (id)</label>
-
-                <form:input path="machine" cssClass="form-control" id="mchn" placeholder="Machine"/>
+                <label for="price">Machine</label>
+                <form:select path="machine" cssClass="form-control">
+                    <c:forEach items="${machines}" var="m">
+                        <form:option value="${m.id}">${m.name}</form:option>
+                    </c:forEach>
+                </form:select>
             </div>
             <div class="form-group">
                 <label for="usr">User (email)</label>

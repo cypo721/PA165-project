@@ -9,6 +9,7 @@ import dto.*;
 import facade.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,5 +139,10 @@ public class RentalController {
     {
         rentalFacade.deleteRental(id);
         return "redirect:" + uriBuilder.path("/rental/list").toUriString();
+    }
+    
+    @ModelAttribute("machines")
+    public List<MachineDTO> machines() {
+        return machineFacade.findAllMachines();
     }
 }
