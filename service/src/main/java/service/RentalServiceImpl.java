@@ -37,7 +37,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public void update(Rental rental) {
         Validate.notNull(rental.getId());
-        rentalDao.create(rental);
+        rentalDao.update(rental);
     }
     
     @Override
