@@ -31,9 +31,12 @@
                 </form:select>
             </div>
             <div class="form-group">
-                <label for="usr">User (email)</label>
-                <form:input path="user" cssClass="form-control" id="usr" placeholder="User"/>
-
+                <label for="usr">User</label>
+                <form:select path="user" cssClass="form-control">
+                    <c:forEach items="${users}" var="u">
+                        <form:option value="${u.email}">${u.email}</form:option>
+                    </c:forEach>
+                </form:select>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form:form>

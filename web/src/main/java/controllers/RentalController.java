@@ -9,6 +9,7 @@ import dto.*;
 import facade.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -144,5 +145,10 @@ public class RentalController {
     @ModelAttribute("machines")
     public List<MachineDTO> machines() {
         return machineFacade.findAllMachines();
+    }
+    
+    @ModelAttribute("users")
+    public Collection<UserDTO> users() {
+        return userFacade.getAllUsers();
     }
 }
