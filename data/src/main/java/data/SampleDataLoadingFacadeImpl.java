@@ -54,6 +54,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         
         User u = user("123456", "Luna", "Lovegood", "luna@hog.uk", "800123456", new Date(), true);
+        User u1 = user("123456", "Sme", "taky", "sme@taky.uk", "800223456", new Date(), true);
+
 
         Revision r = revision(new Date(), m, u);
         Revision r1 = revision(new Date(), m , u);

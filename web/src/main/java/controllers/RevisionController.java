@@ -6,11 +6,13 @@
 package controllers;
 
 import dto.MachineDTO;
+import dto.RevisionCreateDTO;
 import dto.RevisionDTO;
 import dto.UserDTO;
 import facade.MachineFacade;
 import facade.RevisionFacade;
 import facade.UserFacade;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -60,35 +62,91 @@ public class RevisionController {
         return "revision/list";
     }
     
-    @GetMapping("/new")
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newRevision(Model model) {
-        model.addAttribute("revision", new RevisionDTO());
-        return "revision/edit";
+        model.addAttribute("revision", new RevisionCreateDTO());
+        return "revision/new";
     }
+    
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String submitNew(@ModelAttribute("revision") RevisionCreateDTO revisionDTO,
+                             Model model, RedirectAttributes redirectAttributes,
+                             UriComponentsBuilder uriBuilder) throws ParseException {
+        RevisionDTO revision = new RevisionDTO();
+        
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
 
-    @GetMapping("/edit/{id}")
-    public String editRevision(@PathVariable Long id, Model model) {
-        model.addAttribute("revision", revisionFacade.findById(id));
+        if (revisionDTO.getDateOfRevision() != null && !revisionDTO.getDateOfRevision().trim().isEmpty()) {
+            revision.setDateOfRevision(parser.parse(revisionDTO.getDateOfRevision().trim()));
+        }
+        
+        if (revisionDTO.getInfo() != null && !revisionDTO.getInfo().trim().isEmpty()) {
+            revision.setInfo(revisionDTO.getInfo());
+        }
+        
+        if (revisionDTO.getMachine() != null && !revisionDTO.getMachine().trim().isEmpty()) {
+            revision.setMachine(machineFacade.findById(new Long(revisionDTO.getMachine().trim())));
+        }
+                
+        if (revisionDTO.getUser() != null && !revisionDTO.getUser().trim().isEmpty()) {
+            revision.setUser(userFacade.findByEmail(revisionDTO.getUser().trim()));
+        }
+
+        Long newId = revisionFacade.createRevision(revision);
+        model.addAttribute("revision", revision);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Revision details saved successfully.");
+        return "redirect:" + uriBuilder.path("/revision/edit/{id}").buildAndExpand(newId).encode().toUriString();
+
+    }
+    
+    
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(Model model, @PathVariable Long id) throws ParseException {
+        RevisionDTO revision = revisionFacade.findById(id);
+        RevisionCreateDTO revisionDTO = new RevisionCreateDTO();
+        
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        revisionDTO.setDateOfRevision(parser.format(revision.getDateOfRevision()));
+        revisionDTO.setInfo(revision.getInfo());
+        
+        model.addAttribute("revision", revisionDTO);
+
         return "revision/edit";
     }
     
-    @PostMapping("/save")
-    public String saveRevision(@Valid @ModelAttribute("revision") RevisionDTO dto,
-                                        BindingResult bindingResult,
-                                        Model model,
-                                        RedirectAttributes redirectAttributes,
-                                        UriComponentsBuilder uriBuilder) {
-        logger.info("Saving revisionDTO: {}", dto);
-        if (bindingResult.hasErrors()) {
-            return "revision/edit";
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String submitEdit(@PathVariable long id,
+                             @ModelAttribute("rental") RevisionCreateDTO revisionDTO,
+                             Model model, RedirectAttributes redirectAttributes,
+                             UriComponentsBuilder uriBuilder) throws ParseException {
+        RevisionDTO revision = revisionFacade.findById(id);
+
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (revisionDTO.getDateOfRevision() != null && !revisionDTO.getDateOfRevision().trim().isEmpty()) {
+            revision.setDateOfRevision(parser.parse(revisionDTO.getDateOfRevision().trim()));
         }
-        if (dto.getId() != null) {
-            revisionFacade.updateRevision(dto);
+            
+        if (revisionDTO.getInfo() != null) {
+            revision.setInfo(revisionDTO.getInfo());
         }
-        else {
-            revisionFacade.updateRevision(dto);
+        
+        if (revisionDTO.getMachine() != null && !revisionDTO.getMachine().trim().isEmpty()) {
+            revision.setMachine(machineFacade.findById(new Long(revisionDTO.getMachine().trim())));
         }
-        return "redirect:" + uriBuilder.path("/revision/").toUriString();
+                
+        if (revisionDTO.getUser() != null && !revisionDTO.getUser().trim().isEmpty()) {
+            revision.setUser(userFacade.findByEmail(revisionDTO.getUser().trim()));
+        }
+
+        revisionFacade.updateRevision(revision);
+        model.addAttribute("revision", revision);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Revision details saved successfully.");
+        return "redirect:" + uriBuilder.path("/revision/edit/{id}").buildAndExpand(id).encode().toUriString();
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -109,13 +167,11 @@ public class RevisionController {
     
     @ModelAttribute("machines")
     public List<MachineDTO> machines() {
-        logger.debug("machines()");
         return machineFacade.findAllMachines();
     }
     
     @ModelAttribute("users")
     public Collection<UserDTO> users() {
-        logger.debug("users()");
         return userFacade.getAllUsers();
     }
 }
