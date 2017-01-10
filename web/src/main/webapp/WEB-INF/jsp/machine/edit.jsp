@@ -29,13 +29,13 @@
 
         <div class="form-group">
             <label for="name">Date of buy</label>
-            <form:input type="date" class="date" path="dateOfBuy" cssClass="form-control" id="name" placeholder="Name"/>
+            <form:input type="date" class="date" path="dateOfBuy" cssClass="form-control" id="name" placeholder="Date of buy"/>
             <p><form:errors path="dateOfBuy" cssClass="error" /></p>
         </div>
 
         <div class="form-group">
-            <label for="name">Date of buy</label>
-            <form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Name"/>
+            <label for="name">Date of last revision</label>
+            <form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Date of last revision" />
             <p><form:errors path="dateOfLastRevision" cssClass="error" /></p>
         </div>
 
