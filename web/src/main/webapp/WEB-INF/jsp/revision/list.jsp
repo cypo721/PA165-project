@@ -8,11 +8,11 @@
     <a href="${pageContext.request.contextPath}/revision/new"
        class="btn btn-success">New revision</a>
     <table class=" table table-striped">
-        <th>Číslo</th>
-        <th>Čas revízie</th>
+        <th>Id</th>
+        <th>Date of revision</th>
         <th>Info</th>
-        <th>Stroj</th>
-        <th>Zadal uživatel</th>
+        <th>Machine</th>
+        <th>Submited by user</th>
         
 
         <c:forEach items="${revisions}" var="r">

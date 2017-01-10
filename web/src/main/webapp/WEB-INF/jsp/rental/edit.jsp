@@ -12,15 +12,17 @@
             <div class="form-group">
                 <label for="dateFrom">From</label>
                 <form:input path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From" value="${rental.dateFrom}"/>
+                <p><form:errors path="dateFrom" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="dateTo">To</label>
                 <form:input path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="${rental.dateFrom}"/>
-
+                <p><form:errors path="dateTo" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
                 <form:input path="price" cssClass="form-control" id="price" placeholder="Price" value="${rental.price}"/>
+                <p><form:errors path="price" cssClass="error" /></p>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form:form>

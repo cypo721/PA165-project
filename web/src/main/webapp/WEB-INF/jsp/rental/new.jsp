@@ -10,17 +10,19 @@
     <div class="col-md-4">
         <form:form method="post" modelAttribute="rental" action="${editAction}">
             <div class="form-group">
-                <label for="dateFrom">From (YYY-MM-DD)</label>
+                <label for="dateFrom">From (YYYY-MM-DD)</label>
                 <form:input type="date" path="dateFrom" cssClass="form-control" id="dateFrom" placeholder="From"/>
+                <p><form:errors path="dateFrom" cssClass="error" /></p>
             </div>
             <div class="form-group">
-                <label for="dateTo">To</label>
+                <label for="dateTo">To (YYYY-MM-DD)</label>
                 <form:input type="date" path="dateTo" cssClass="form-control" id="dateTo" placeholder="To"/>
-
+                <p><form:errors path="dateTo" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
                 <form:input path="price" cssClass="form-control" id="price" placeholder="Price"/>
+                <p><form:errors path="price" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="price">Machine</label>
@@ -29,6 +31,7 @@
                         <form:option value="${m.id}">${m.name}</form:option>
                     </c:forEach>
                 </form:select>
+                <p><form:errors path="machine" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="usr">User</label>
@@ -37,6 +40,7 @@
                         <form:option value="${u.email}">${u.email}</form:option>
                     </c:forEach>
                 </form:select>
+                <p><form:errors path="user" cssClass="error" /></p>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form:form>

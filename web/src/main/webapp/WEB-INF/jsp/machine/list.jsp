@@ -16,12 +16,12 @@
     <a href="${pageContext.request.contextPath}/machine/new"
        class="btn btn-success">New machine</a>
     <table class=" table table-striped">
-        <th>Číslo</th>
-        <th>Meno</th>
-        <th>Cena</th>
-        <th>Typ</th>
-        <th>Dátum zakúpenia</th>
-        <th>Dátum revizie</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Date of buy</th>
+        <th>Date of revision</th>
         <th></th>
         <c:forEach items="${machines}" var="m">
                 <tr>

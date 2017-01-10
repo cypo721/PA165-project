@@ -9,7 +9,7 @@
     <div class="col-md-4">
         <form:form method="post" modelAttribute="revision" action="${editAction}">
             <div class="form-group">
-                <label for="dateOfRevision">From (YYYY-MM-DD)</label>
+                <label for="dateOfRevision">Date of revision (YYYY-MM-DD)</label>
                 <form:input type="date" path="dateOfRevision" cssClass="form-control" id="dateOfRevision" placeholder="Date of revision"/>
             </div>
             <div class="form-group">
