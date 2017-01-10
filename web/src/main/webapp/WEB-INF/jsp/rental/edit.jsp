@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="dateTo">To</label>
-                <form:input path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="${rental.dateFrom}"/>
+                <form:input path="dateTo" cssClass="form-control" id="dateTo" placeholder="To" value="${rental.dateTo}"/>
                 <p><form:errors path="dateTo" cssClass="error" /></p>
             </div>
             <div class="form-group">

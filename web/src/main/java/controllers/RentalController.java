@@ -10,6 +10,7 @@ import facade.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,26 +71,46 @@ public class RentalController {
         RentalDTO rental = rentalFacade.findById(id);
 
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        Date from = null;
+        Date to = null;
 
         if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
-            rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
+            //rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
+            from = parser.parse(rentalDTO.getDateFrom().trim());
         }
         
         if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
-            rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
-
+            //rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
+            to = parser.parse(rentalDTO.getDateTo().trim());
         }
         
-        if (rentalDTO.getPrice() != null) {
-            rental.setPrice(rentalDTO.getPrice());
+        if(from != null && to != null && from.after(to))
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot precede \"Date from\".");
+            return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
         }
-
+        
+        if(from != null) rental.setDateFrom(from);
+        if(to != null) rental.setDateTo(to);
+        
+        int price = 0;
+        if (rentalDTO.getPrice() != null) {
+            price = rentalDTO.getPrice();
+            if(price < 0)
+            {
+                redirectAttributes.addFlashAttribute("alert_danger", "Price can't be negative.");
+                return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+            }
+            rental.setPrice(price);
+        }
 
         rentalFacade.updateRental(rental);
         model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
-        return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+        //return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:/rental/list";
     }
     
     @RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -105,22 +126,45 @@ public class RentalController {
         RentalDTO rental = new RentalDTO();
         
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        Date from = null;
+        Date to = null;
 
         if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
-            rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
+            //rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
+            from = parser.parse(rentalDTO.getDateFrom().trim());
         }
         
         if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
-            rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
-
+            //rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
+            to = parser.parse(rentalDTO.getDateTo().trim());
         }
+        
+        if(from != null && to != null && from.after(to))
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date\" to cannot precede \"Date from\".");
+            return "redirect:new";
+        }
+        
+        if(from != null) rental.setDateFrom(from);
+        if(to != null) rental.setDateTo(to);
         
         if (rentalDTO.getMachine() != null && !rentalDTO.getMachine().trim().isEmpty()) {
             rental.setMachine(machineFacade.findById(new Long(rentalDTO.getMachine().trim())));
         }
         
+        int price = 0;
+        
         if (rentalDTO.getPrice() != null) {
-            rental.setPrice(rentalDTO.getPrice());
+            price = rentalDTO.getPrice();
+            
+            if(price < 0)
+            {
+                redirectAttributes.addFlashAttribute("alert_danger", "Price can't be negative.");
+                return "redirect:new";
+            }
+            
+            rental.setPrice(price);
         }
         
         if (rentalDTO.getUser() != null && !rentalDTO.getUser().trim().isEmpty()) {
@@ -131,8 +175,8 @@ public class RentalController {
         model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
-        return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(newId).encode().toUriString();
-
+        //return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(newId).encode().toUriString();
+        return "redirect:list";
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
