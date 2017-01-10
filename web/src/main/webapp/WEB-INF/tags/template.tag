@@ -28,7 +28,6 @@
 </head>
 <body>
 
-</form>
 <%--<!-- navigation bar -->--%>
 <%--<nav class="navbar navbar-default">--%>
     <%--<div class="container-fluid">--%>
