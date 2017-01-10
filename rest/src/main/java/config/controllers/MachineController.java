@@ -27,10 +27,10 @@ public class MachineController {
      * Get list of Machines curl -i -X GET
      * http://localhost:8080/rest/machines
      *
-     * @return ProductDTO
+     * @return list of MachineDTO
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<MachineDTO> getProducts() {
+    public final List<MachineDTO> getMachines() {
         logger.debug("rest getMachines()");
         return machineFacade.findAllMachines();
     }
@@ -47,9 +47,9 @@ public class MachineController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final MachineDTO getMachine(@PathVariable("id") long id) throws Exception {
         logger.debug("rest getMachine({})", id);
-        MachineDTO productDTO = machineFacade.findById(id);
-        if (productDTO != null) {
-            return productDTO;
+        MachineDTO machineDTO = machineFacade.findById(id);
+        if (machineDTO != null) {
+            return machineDTO;
         } else {
             throw new IllegalArgumentException();
         }
@@ -57,14 +57,14 @@ public class MachineController {
     }
 
     /**
-     * Delete one product by id curl -i -X DELETE
+     * Delete one machine by id curl -i -X DELETE
      * http://localhost:8080/rest/machines/1
      *
-     * @param id identifier for product
+     * @param id identifier for a machine
      * @throws IllegalArgumentException
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void deleteProduct(@PathVariable("id") long id) throws Exception {
+    public final void deleteMachine(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteMachine({})", id);
         try {
             machineFacade.deleteMachine(id);
@@ -74,7 +74,7 @@ public class MachineController {
     }
 
     /**
-     * Create a new product by POST method
+     * Create a new machine by POST method
      * curl -X POST -i -H "Content-Type: application/json" --data
      * '{"name":"test", "dateOfBuy":"2016-12-12","machineType":"CRANE","pricePerDay":"200",
      *  "dateOfLastRevision":"2016-12-12"}'
@@ -86,7 +86,7 @@ public class MachineController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MachineDTO createProduct(@RequestBody MachineDTO machine) throws Exception {
+    public final MachineDTO createMachine(@RequestBody MachineDTO machine) throws Exception {
 
         logger.debug("rest createMachine()");
 
