@@ -31,7 +31,8 @@
                 <td><c:out value="${rental.dateTo}"/></td>
                 <td><c:out value="${rental.price}"/></td>
 
-                <td><a href="${pageContext.request.contextPath}/rental/edit/${rental.id}" class="btn btn-success">Edit</a></td>
+                <td><a href="${pageContext.request.contextPath}/rental/edit/${rental.id}" class="btn btn-success">Edit</a>
+                <a href="${pageContext.request.contextPath}/rental/delete/${rental.id}" class="btn btn-danger">Delete</a></td>
 
             </tr>
         </c:forEach>

@@ -135,10 +135,11 @@ public class RentalController {
 
     }
     
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes)
     {
         rentalFacade.deleteRental(id);
+        redirectAttributes.addFlashAttribute("alert_success", "Rental \"" + id + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/rental/list").toUriString();
     }
     
