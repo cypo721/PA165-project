@@ -76,12 +76,10 @@ public class RentalController {
         Date to = null;
 
         if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
-            //rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
             from = parser.parse(rentalDTO.getDateFrom().trim());
         }
         
         if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
-            //rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
             to = parser.parse(rentalDTO.getDateTo().trim());
         }
         
@@ -109,7 +107,6 @@ public class RentalController {
         model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
-        //return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
         return "redirect:/rental/list";
     }
     
@@ -131,21 +128,31 @@ public class RentalController {
         Date to = null;
 
         if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
-            //rental.setDateFrom(parser.parse(rentalDTO.getDateFrom().trim()));
             from = parser.parse(rentalDTO.getDateFrom().trim());
         }
-        
-        if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
-            //rental.setDateTo(parser.parse(rentalDTO.getDateTo().trim()));
-            to = parser.parse(rentalDTO.getDateTo().trim());
-        }
-        
-        if(from != null && to != null && from.after(to))
+        else
         {
-            redirectAttributes.addFlashAttribute("alert_danger", "\"Date\" to cannot precede \"Date from\".");
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date from\" cannot be empty.");
             return "redirect:new";
         }
         
+        if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
+            to = parser.parse(rentalDTO.getDateTo().trim());
+        }
+        else
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot be empty.");
+            return "redirect:new";
+        }
+        
+        // checks if "date to" doesn't precede "date from"
+        if(from != null && to != null && from.after(to))
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot precede \"Date from\".");
+            return "redirect:new";
+        }
+        
+        // saves the rental dates
         if(from != null) rental.setDateFrom(from);
         if(to != null) rental.setDateTo(to);
         
@@ -153,10 +160,8 @@ public class RentalController {
             rental.setMachine(machineFacade.findById(new Long(rentalDTO.getMachine().trim())));
         }
         
-        int price = 0;
-        
         if (rentalDTO.getPrice() != null) {
-            price = rentalDTO.getPrice();
+            int price = rentalDTO.getPrice();
             
             if(price < 0)
             {
@@ -171,11 +176,10 @@ public class RentalController {
             rental.setUser(userFacade.findByEmail(rentalDTO.getUser().trim()));
         }
 
-        Long newId = rentalFacade.createRental(rental);
+        rentalFacade.createRental(rental);
         model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
-        //return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(newId).encode().toUriString();
         return "redirect:list";
     }
     

@@ -21,7 +21,10 @@
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <form:input path="price" cssClass="form-control" id="price" placeholder="Price" value="${rental.price}"/>
+                <div class="input-group">
+                    <form:input path="price" cssClass="form-control" id="price" placeholder="Price" value="${rental.price}"/>
+                    <span class="input-group-addon" id="currency-addon">CZK</span>
+                </div>
                 <p><form:errors path="price" cssClass="error" /></p>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
