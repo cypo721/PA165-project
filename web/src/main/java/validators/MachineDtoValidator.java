@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 /**
  * Created by pato on 16.12.2016.
  */
-public class MachineDtoValidator implements Validator {
+public class MachineDtoValidator{
     public boolean supports(Class<?> clazz) {
         return false;
     }

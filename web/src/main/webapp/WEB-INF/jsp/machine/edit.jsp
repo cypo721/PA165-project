@@ -24,19 +24,16 @@
         <div class="form-group">
             <label for="name">Name</label>
             <form:input path="name" cssClass="form-control" id="name" placeholder="Name"/>
-            <p><form:errors path="name" cssClass="error" /></p>
         </div>
 
         <div class="form-group">
             <label for="name">Date of buy</label>
             <form:input type="date" class="date" path="dateOfBuy" cssClass="form-control" id="name" placeholder="Date of buy"/>
-            <p><form:errors path="dateOfBuy" cssClass="error" /></p>
         </div>
 
         <div class="form-group">
             <label for="name">Date of last revision</label>
             <form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Date of last revision" />
-            <p><form:errors path="dateOfLastRevision" cssClass="error" /></p>
         </div>
 
             <div class="form-group">
@@ -46,7 +43,6 @@
                             <form:option value="${c}">${c}</form:option>
                         </c:forEach>
                     </form:select>
-                    <form:errors path="machineType" cssClass="error"/>
                 </div>
 
         <div class="form-group">
@@ -60,6 +56,9 @@
 
         <button type="submit" class="btn btn-default">Submit</button>
         </form:form>
+        <br>
+        <br>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/machine/">Back to Machines </a>
     </div>
 </div>
 </jsp:attribute>

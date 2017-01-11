@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * "*" and all operations "Access-Control-Allow-Methods", "GET, POST, PUT,
  * DELETE, OPTIONS"
  *
- * @author brossi
+ * @author pato
  */
 public class AllowOriginInterceptor extends HandlerInterceptorAdapter {
 

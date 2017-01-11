@@ -3,6 +3,9 @@ package dto;
 import enums.MachineType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,15 +16,20 @@ public class MachineDTO {
 
     private Long id;
 
+    @NotNull
+    @Size(min=1)
     private String name;
 
+    @NotNull
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBuy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfLastRevision;
 
+    @NotNull
+    @Min(value = 0)
     private BigDecimal pricePerDay;
-
+    @NotNull
     private MachineType machineType;
 
     public Long getId() {

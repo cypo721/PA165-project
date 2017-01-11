@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a possible representation of errors to be used 
  * with @ControllerAdvice global exception handler
  * 
- * @author brossi
+ * @author pato
  */
 @XmlRootElement
 public class ApiError {

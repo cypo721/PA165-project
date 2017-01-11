@@ -60,6 +60,11 @@ public class MachineController {
                                         UriComponentsBuilder uriBuilder) {
         logger.info("Saving machineDTO: {}", dto);
         if (bindingResult.hasErrors()) {
+            StringBuilder builder = new StringBuilder("Validation failed for fields: ");
+            bindingResult.getFieldErrors().forEach(fieldError -> builder.append(fieldError.getField()).append(", "));
+            builder.setLength(builder.length() - 2);
+
+            model.addAttribute("alert_danger", builder.toString());
             return "machine/edit";
         }
         if (dto.getId() != null) {
@@ -75,9 +80,14 @@ public class MachineController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         MachineDTO machine = machineFacade.findById(id);
-        machineFacade.deleteMachine(id);
+        try{
+            machineFacade.deleteMachine(id);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Machine \"" + machine.getName() + "\" cannot be deleted.");
+            return "redirect:" + uriBuilder.path("/machine/").toUriString();
+        }
         logger.debug("delete({})", id);
-        redirectAttributes.addFlashAttribute("alert_success", "Product \"" + machine.getName() + "\" was deleted.");
+        redirectAttributes.addFlashAttribute("alert_success", "Machine \"" + machine.getName() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/machine/").toUriString();
     }
 

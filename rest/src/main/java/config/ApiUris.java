@@ -6,7 +6,7 @@ package config;
  * other URIs also for the sub-resources so that it can 
  * reused globally from all the controllers
  * 
- * @author brossi
+ * @author pato
  */
 public abstract class ApiUris {
     public static final String ROOT_URI_MACHINES   = "/machines";
