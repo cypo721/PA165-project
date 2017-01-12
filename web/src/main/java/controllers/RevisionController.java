@@ -95,8 +95,8 @@ public class RevisionController {
         Long newId = revisionFacade.createRevision(revision);
         model.addAttribute("revision", revision);
 
-        redirectAttributes.addFlashAttribute("alert_success", "Revision details saved successfully.");
-        return "redirect:" + uriBuilder.path("/revision/edit/{id}").buildAndExpand(newId).encode().toUriString();
+        redirectAttributes.addFlashAttribute("alert_success", "Revision was successfully added.");
+        return "redirect:";
 
     }
     
@@ -146,7 +146,7 @@ public class RevisionController {
         model.addAttribute("revision", revision);
 
         redirectAttributes.addFlashAttribute("alert_success", "Revision details saved successfully.");
-        return "redirect:" + uriBuilder.path("/revision/edit/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:/revision/";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

@@ -5,8 +5,12 @@
 <my:template title="Revisions">
     <jsp:attribute name="body">
 <div class="row">
-    <a href="${pageContext.request.contextPath}/revision/new"
+    <br>
+    <div>
+    <a href="${pageContext.request.contextPath}/revision/new"      
        class="btn btn-success">New revision</a>
+    </div>
+    <br>
     <table class=" table table-striped">
         <th>Id</th>
         <th>Date of revision</th>

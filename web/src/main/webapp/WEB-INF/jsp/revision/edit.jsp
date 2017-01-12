@@ -33,12 +33,12 @@
                     </c:forEach>
                 </form:select>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" color="green" class="btn btn-success">Submit</button>
         </form:form>
+            <br>
+        <a class="btn btn-danger" color="red" href="${pageContext.request.contextPath}/revision/">Back to revisions</a>
     </div>
-    <p>
-        <a href="${pageContext.request.contextPath}/revision/">Back to revision</a>
-    </p>
+    
 </div>
 </jsp:attribute>
 </my:template>
