@@ -4,6 +4,8 @@
   <test name="Command line test" preserve-order="false">
     <classes>
       <class name="MachineDaoTest"/>
+      <class name="RentalDaoTest"/>
+      <class name="RevisionDaoTest"/>
       <class name="UserDaoTest"/>
     </classes>
   </test> <!-- Command line test -->
