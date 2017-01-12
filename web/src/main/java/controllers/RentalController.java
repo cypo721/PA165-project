@@ -111,8 +111,15 @@ public class RentalController {
     }
     
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String newRental(Model model) {
-        model.addAttribute("rental", new RentalCreateDTO());
+    public String newRental(@ModelAttribute("rental") RentalCreateDTO rentalDTO, Model model) {
+        if(rentalDTO == null)
+        {
+            model.addAttribute("rental", new RentalCreateDTO());
+        }
+        else
+        {
+            model.addAttribute("rental", rentalDTO);
+        }
         return "rental/new";
     }
     
@@ -133,6 +140,7 @@ public class RentalController {
         else
         {
             redirectAttributes.addFlashAttribute("alert_danger", "\"Date from\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("rental", rentalDTO);
             return "redirect:new";
         }
         
@@ -142,6 +150,7 @@ public class RentalController {
         else
         {
             redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("rental", rentalDTO);
             return "redirect:new";
         }
         
@@ -149,6 +158,7 @@ public class RentalController {
         if(from != null && to != null && from.after(to))
         {
             redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot precede \"Date from\".");
+            redirectAttributes.addFlashAttribute("rental", rentalDTO);
             return "redirect:new";
         }
         
@@ -166,6 +176,7 @@ public class RentalController {
             if(price < 0)
             {
                 redirectAttributes.addFlashAttribute("alert_danger", "Price can't be negative.");
+                redirectAttributes.addFlashAttribute("rental", rentalDTO);
                 return "redirect:new";
             }
             
@@ -177,7 +188,6 @@ public class RentalController {
         }
 
         rentalFacade.createRental(rental);
-        model.addAttribute("rental", rental);
 
         redirectAttributes.addFlashAttribute("alert_success", "Rental details saved successfully.");
         return "redirect:list";
