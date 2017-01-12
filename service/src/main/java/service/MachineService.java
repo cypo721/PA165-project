@@ -48,4 +48,10 @@ public interface MachineService {
      * @return all unrevisioned machines in last year
      */
     public List<Machine> getMachinesInLastYearWithoutRevision();
+
+    /**
+     * Return all free machines.
+     * @return free machines
+     */
+    public List<Machine> getFreeMachines();
 }

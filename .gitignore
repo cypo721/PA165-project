@@ -4,12 +4,9 @@
 test-output
 .classpath
 *.iml
+*.class
 *~
 target
-
-*.class
-
-.idea/*
 
 .idea/*
 

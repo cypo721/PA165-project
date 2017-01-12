@@ -8,13 +8,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<my:template title="Machines">
+<my:template title="${selected == 1 ? 'Machines' :  selected == 2 ? 'Free machines' : 'Unrevisioned machines'}" activeNav="machines">
     <jsp:attribute name="body">
 <div class="row">
+    <div class="machine-filters">
+        <div class="row">
+            <div class="col-lg-6">
+                <select class="form-control" id="list-machines">
+                    <option ${selected == 1 ? 'selected' : ''} value="${pageContext.request.contextPath}/machine/">
+                        All machines
+                    </option>
+                    <option ${selected == 2 ? 'selected' : ''}
+                        value="${pageContext.request.contextPath}/machine/free">
+                        Free machines
+                    </option>
+                    <option ${selected == 3 ? 'selected' : ''}
+                            value="${pageContext.request.contextPath}/machine/unrevisioned">
+                        Unrevisioned machines in last year
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
     <a href="${pageContext.request.contextPath}/machine/new"
        class="btn btn-success">New machine</a>
+    </div>
+    <br>
     <table class=" table table-striped">
         <th>Id</th>
         <th>Name</th>
@@ -44,5 +72,18 @@
 </div>
 
     </jsp:attribute>
+<jsp:attribute name="script">
+<script>
+    $(function () {
+        $('#list-machines').on('change', function () {
+            var url = $(this).val();
+            if (url) {
+                window.location = url;
+            }
+            return false;
+        });
+    });
+</script>
+</jsp:attribute>
 </my:template>
 

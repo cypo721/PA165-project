@@ -47,4 +47,10 @@ public interface MachineFacade {
      * @return all unrevisioned machines in last year
      */
     public List<MachineDTO> getMachinesInLastYearWithoutRevision();
+
+    /**
+     * Return list of free machines.
+     * @return list of free machines.
+     */
+    public List<MachineDTO> getFreeMachines();
 }

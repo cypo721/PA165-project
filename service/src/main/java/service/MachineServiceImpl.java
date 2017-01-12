@@ -1,7 +1,9 @@
 package service;
 
 import dao.MachineDao;
+import dao.RentalDao;
 import entity.Machine;
+import entity.Rental;
 import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class MachineServiceImpl implements MachineService {
 
     @Inject
     private MachineDao machineDao;
+
+    @Inject
+    private RentalDao rentalDao;
 
     @Override
     public Machine create(Machine machine) {
@@ -71,4 +76,19 @@ public class MachineServiceImpl implements MachineService {
 
         return unrevisionedMachines;
     }
+
+    @Override
+    public List<Machine> getFreeMachines() {
+        List<Machine> machines = findAllMachines();
+        List<Machine> rentedMachines = new ArrayList<>();
+        List<Rental> rentals = rentalDao.findAllRentals();
+
+        for(Rental r : rentals) {
+            rentedMachines.add(r.getMachine());
+        }
+        machines.removeAll(rentedMachines);
+        return machines;
+    }
+
+
 }

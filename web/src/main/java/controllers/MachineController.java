@@ -34,8 +34,25 @@ public class MachineController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAll(Model model) {
-        logger.info("Showing all additional services");
+        logger.info("Showing all machines");
         model.addAttribute("machines", machineFacade.findAllMachines());
+        model.addAttribute("selected", 1);
+        return "machine/list";
+    }
+
+    @RequestMapping(value = "/free", method = RequestMethod.GET)
+    public String findFreeMachines(Model model) {
+        logger.info("Showing free machines");
+        model.addAttribute("machines", machineFacade.getFreeMachines());
+        model.addAttribute("selected", 2);
+        return "machine/list";
+    }
+
+    @RequestMapping(value = "/unrevisioned", method = RequestMethod.GET)
+    public String findUnrevisionedMachines(Model model) {
+        logger.info("Showing unrevisioned machines.");
+        model.addAttribute("machines", machineFacade.getMachinesInLastYearWithoutRevision());
+        model.addAttribute("selected", 3);
         return "machine/list";
     }
 
