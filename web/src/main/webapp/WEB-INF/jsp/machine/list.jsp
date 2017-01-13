@@ -11,6 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <my:template title="${selected == 1 ? 'Machines' :  selected == 2 ? 'Free machines' : 'Unrevisioned machines'}" activeNav="machines">
     <jsp:attribute name="body">
@@ -39,8 +40,10 @@
     </div>
     <br>
     <div>
+        <sec:authorize access="hasAuthority('ADMIN')">
     <a href="${pageContext.request.contextPath}/machine/new"
        class="btn btn-success">New machine</a>
+        </sec:authorize>
     </div>
     <br>
     <table class=" table table-striped">
@@ -61,10 +64,12 @@
                     <td><fmt:formatDate value="${m.dateOfLastRevision}" pattern="yyyy-MM-dd"/> </td>
 
                     <td>
+                        <sec:authorize access="hasAuthority('ADMIN')">
                         <a href="${pageContext.request.contextPath}/machine/edit/${m.id}"
                            class="btn btn-default">Edit</a>
                         <a href="${pageContext.request.contextPath}/machine/delete/${m.id}"
                            class="btn btn-danger">Delete</a>
+                        </sec:authorize>
                     </td>
                 </tr>
         </c:forEach>

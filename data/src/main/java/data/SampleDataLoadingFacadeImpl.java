@@ -52,10 +52,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Machine m = machine("Best", toDate(2016, 12, 24));
         Machine m2 = machine("Lorry", toDate(2015, 12, 12));
 
-        User u = user("123456", "Luna", "Lovegood", "luna@hog.uk", "800123456", new Date(), true);
-        User u1 = user("123456", "Sme", "taky", "sme@taky.uk", "800223456", new Date(), true);
-        User u3 = user("pwd", "Laszlo", "Admin", "admin@admin.sk", "904355662", new Date(), true);
-        User u4 = user("pwd", "Fero", "Customer", "customer@customer.sk", "903030132", new Date(), false);
+        User u = user("123456", "Luna", "Lovegood", "luna@hog.uk", "800123456", new Date(), "C");
+        User u1 = user("123456", "Sme", "taky", "sme@taky.uk", "800223456", new Date(), "C");
+        User u3 = user("pwd", "Laszlo", "Admin", "admin@admin.sk", "904355662", new Date(), "A");
+        User u4 = user("pwd", "Fero", "Customer", "customer@customer.sk", "903030132", new Date(), "C");
+        User e = user("pwd", "Jozo", "Employee", "employee@employee.sk", "903030132", new Date(), "E");
 
         Revision r = revision(new Date(), m, u);
         Revision r1 = revision(new Date(), m , u);
@@ -112,7 +113,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return r;
     }
 
-    private User user(String password, String givenName, String surname, String email, String phone, Date joined, boolean admin) {
+    private User user(String password, String givenName, String surname, String email, String phone, Date joined, String role) {
         User u = new User();
         u.setGivenName(givenName);
         u.setPasswordHash("asdasd");
@@ -120,8 +121,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         u.setEmail(email);
         u.setPhone(phone);
         u.setJoinedDate(joined);
-        if(admin) u.setRole(Role.ADMIN);
-        else u.setRole(Role.CUSTOMER);
+        if(role == "A") u.setRole(Role.ADMIN);
+        if(role == "C") u.setRole(Role.CUSTOMER);
+        if(role == "E") u.setRole(Role.EMPLOYEE);
+
         userService.createUser(u, password);
         return u;
     }
