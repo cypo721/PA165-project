@@ -22,12 +22,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
+import javax.persistence.PersistenceException;
 import java.math.BigDecimal;
 import java.util.*;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
+import static org.testng.Assert.fail;
 
 /**
  * Created by pato on 23.11.2016.
@@ -124,67 +126,79 @@ public class RentalServiceTest extends AbstractTransactionalTestNGSpringContextT
 
     @Test
     public void findAllRentals() {
-        when(rentalService.findAllRentals()).thenReturn(Arrays.asList(rental1, rental2));
-
-        Assert.assertEquals(rentalService.findAllRentals().size(), 2);
+//        when(rentalService.findAllRentals()).thenReturn(Arrays.asList(rental1, rental2));
+        rentalService.findAllRentals();
+        verify(rentalDao, times(1)).findAllRentals();
+//        Assert.assertEquals(rentalService.findAllRentals().size(), 2);
     }
 
     @Test
     public void findById() {
-        when(rentalService.findRentalById(2L)).thenReturn(rental2);
-
-        Assert.assertEquals(rentalService.findRentalById(2L), rental2);
+      //  when(rentalService.findRentalById(2L)).thenReturn(rental2);
+        rentalService.findRentalById(2L);
+        verify(rentalDao, times(1)).findById(2L);
+//        Assert.assertEquals(rentalService.findRentalById(2L), rental2);
     }
 
-    @Test
+    @Test(expectedExceptions = {PersistenceException.class})
     public void findByNonExistingId() {
-        long nonExitstingId = -3L;
-        when(rentalService.findRentalById(-3L)).thenReturn(null);
+//        long nonExitstingId = -3L;
+//        when(rentalService.findRentalById(-3L)).thenReturn(null);
+        doThrow(new PersistenceException("")).when(rentalDao).findById(any(Long.class));
+        rentalService.findRentalById(2L);
 
-        Assert.assertNull(rentalService.findRentalById(-3L));
+        fail("Expected PersistanceException");
+
+//        Assert.assertNull(rentalService.findRentalById(-3L));
     }
 
     @Test
     public void testCreate() {
-        Long userId = 1L;
-        doAnswer(invocation -> {
-            Object arg = invocation.getArguments()[0];
-            Rental rental = (Rental) arg;
-            rental.setId(userId);
-            return null;
-        }).when(rentalDao).create(any(Rental.class));
+//        Long userId = 1L;
+//        doAnswer(invocation -> {
+//            Object arg = invocation.getArguments()[0];
+//            Rental rental = (Rental) arg;
+//            rental.setId(userId);
+//            return null;
+//        }).when(rentalDao).create(any(Rental.class));
 
         rentalService.create(rental1);
-//        verify(rentalDao).create(rental1);
-        Assert.assertEquals(userId, rental1.getId());
+        verify(rentalDao, times(1)).create(rental1);
+//        Assert.assertEquals(userId, rental1.getId());
     }
 
     @Test
     public void testDelete() {
-        when(rentalService.findRentalById(eq(rental2.getId()))).thenReturn(rental2).thenReturn(null);
-        Assert.assertNotNull(rentalService.findRentalById(rental2.getId()));
+//        when(rentalService.findRentalById(eq(rental2.getId()))).thenReturn(rental2).thenReturn(null);
+//        Assert.assertNotNull(rentalService.findRentalById(rental2.getId()));
         rentalService.delete(rental2);
-        Assert.assertNull(rentalService.findRentalById(rental2.getId()));
+        verify(rentalDao, times(1)).delete(rental2);
+//        Assert.assertNull(rentalService.findRentalById(rental2.getId()));
     }
 
     @Test(expectedExceptions = {DataAccessException.class})
     public void testDeleteNonExistingRental(){
-        doThrow(new DataAccessException("Deleting non existing rental") {}).when(rentalDao).delete(eq(rental3));
+//        doThrow(new DataAccessException("Deleting non existing rental") {}).when(rentalDao).delete(eq(rental3));
+        doThrow(new DataAccessException("deleting") {}).when(rentalDao).delete(any(Rental.class));
+
         rentalService.delete(rental3);
+
+        fail("Expected dataAccessException");
     }
 
     @Test
     public void testUpdate() {
-        when(rentalService.findRentalById(2L)).thenReturn(rental2);
-        doAnswer(invocation -> {
-            Object arg = invocation.getArguments()[0];
-            Rental rental = (Rental) arg;
-            return rental;
-        }).when(rentalDao).update(any(Rental.class));
-        rental2.setPrice(999);
+//        when(rentalService.findRentalById(2L)).thenReturn(rental2);
+//        doAnswer(invocation -> {
+//            Object arg = invocation.getArguments()[0];
+//            Rental rental = (Rental) arg;
+//            return rental;
+//        }).when(rentalDao).update(any(Rental.class));
+//        rental2.setPrice(999);
         rentalService.update(rental2);
-        Rental updated = rentalService.findRentalById(2L);
-        Assert.assertEquals(updated.getPrice(), rental2.getPrice());
+        verify(rentalDao, times(1)).update(rental2);
+//        Rental updated = rentalService.findRentalById(2L);
+//        Assert.assertEquals(updated.getPrice(), rental2.getPrice());
     }
 
     @Test
