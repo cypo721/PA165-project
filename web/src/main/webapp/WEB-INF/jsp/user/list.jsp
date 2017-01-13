@@ -1,29 +1,55 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<my:template title="Users">
-<jsp:attribute name="body">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>Joined date</th>
-        </tr>
-        </thead>
-        <tbody>
+<my:template title="Users">
+    <jsp:attribute name="body">
+<div class="row">
+    <br>
+    <div>
+        <a href="${pageContext.request.contextPath}/machine/new"
+           class="btn btn-success">New machine</a>
+    </div>
+    <br>
+    <table class=" table table-striped">
+        <th>Id</th>
+        <th>E-mail</th>
+        <th>Role</th>
+        <th>Joined</th>
+        <th></th>
         <c:forEach items="${users}" var="user">
-            <tr>
-                <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.email}"/></td>
-                <td><c:out value="${user.joinedDate}"/></td>
-            </tr>
+                <tr>
+                    <td><c:out value="${user.id}"/></td>
+                    <td><c:out value="${user.email}"/></td>
+                    <td><c:out value="${user.role}"/> [CZK]</td>
+                    <td><c:out value="${user.joinedDate}"/> </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/machine/edit/${m.id}"
+                           class="btn btn-default">Edit</a>
+                        <a href="${pageContext.request.contextPath}/machine/delete/${m.id}"
+                           class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
         </c:forEach>
-        </tbody>
     </table>
 </div>
+
+    </jsp:attribute>
+    <jsp:attribute name="script">
+<script>
+    $(function () {
+        $('#list-machines').on('change', function () {
+            var url = $(this).val();
+            if (url) {
+                window.location = url;
+            }
+            return false;
+        });
+    });
+</script>
 </jsp:attribute>
 </my:template>
+
