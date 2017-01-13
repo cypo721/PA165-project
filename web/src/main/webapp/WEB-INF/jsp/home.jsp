@@ -1,7 +1,6 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: xjavorka
@@ -19,7 +18,9 @@
     <div class="jumbotron">
         <h1>Hi!</h1>
         <p>Welcome to our project from PA165 course at FI MUNI.</p>
+        <sec:authorize access="isAnonymous()">
         <p>If you want to see and manage all information, please <a href="${pageContext.request.contextPath}/login">log in</a>.</p>
+        </sec:authorize>
     </div>
     <p><h2>Authors:</h2></p>
     <p>
