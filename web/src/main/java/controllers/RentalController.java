@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,10 +84,52 @@ public class RentalController {
             to = parser.parse(rentalDTO.getDateTo().trim());
         }
         
+        if (rentalDTO.getDateFrom() != null && !rentalDTO.getDateFrom().trim().isEmpty()) {
+            from = parser.parse(rentalDTO.getDateFrom().trim());
+        }
+        else
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date from\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("rental", rentalDTO);
+            return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        
+        if (rentalDTO.getDateTo() != null && !rentalDTO.getDateTo().trim().isEmpty()) {
+            to = parser.parse(rentalDTO.getDateTo().trim());
+        }
+        else
+        {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("rental", rentalDTO);
+            return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        
         if(from != null && to != null && from.after(to))
         {
             redirectAttributes.addFlashAttribute("alert_danger", "\"Date to\" cannot precede \"Date from\".");
             return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        
+        // checks if rental desn't overlap with another rental
+        List<RentalDTO> listOfRentals = rentalFacade.findAllRentals();
+        
+        Iterator<RentalDTO> it = listOfRentals.iterator();
+        if(!it.hasNext()) return "redirect:new";
+        while(it.hasNext())
+        {
+            RentalDTO existingRental = it.next();
+            if(existingRental.getId().equals(rental.getId()) || !existingRental.getMachine().getId().equals(rental.getMachine().getId()))
+            {
+                System.err.println("Přeskakuje se výpůjčka " + existingRental.getId());
+                continue;
+            }
+            
+            if( from.before(existingRental.getDateTo()) && existingRental.getDateFrom().before(to) )
+            {
+                redirectAttributes.addFlashAttribute("alert_danger", "Rentals cannot overal each other.");
+                redirectAttributes.addFlashAttribute("rental", rentalDTO);
+                return "redirect:" + uriBuilder.path("/rental/edit/{id}").buildAndExpand(id).encode().toUriString();
+            }
         }
         
         if(from != null) rental.setDateFrom(from);
@@ -162,10 +205,6 @@ public class RentalController {
             return "redirect:new";
         }
         
-        // saves the rental dates
-        if(from != null) rental.setDateFrom(from);
-        if(to != null) rental.setDateTo(to);
-        
         if (rentalDTO.getMachine() != null && !rentalDTO.getMachine().trim().isEmpty()) {
             rental.setMachine(machineFacade.findById(new Long(rentalDTO.getMachine().trim())));
         }
@@ -182,6 +221,32 @@ public class RentalController {
             
             rental.setPrice(price);
         }
+        
+        // checks if rental desn't overlap with another rental
+        List<RentalDTO> listOfRentals = rentalFacade.findAllRentals();
+        
+        Iterator<RentalDTO> it = listOfRentals.iterator();
+        if(!it.hasNext()) return "redirect:new";
+        while(it.hasNext())
+        {
+            RentalDTO existingRental = it.next();
+            if(!existingRental.getMachine().getId().equals(rental.getMachine().getId()))
+            {
+                System.err.println("Přeskakuje se výpůjčka " + existingRental.getId());
+                continue;
+            }
+            
+            if( from.before(existingRental.getDateTo()) && existingRental.getDateFrom().before(to) )
+            {
+                redirectAttributes.addFlashAttribute("alert_danger", "Rentals cannot overal each other.");
+                redirectAttributes.addFlashAttribute("rental", rentalDTO);
+                return "redirect:new";
+            }
+        }
+        
+        // saves the rental dates
+        if(from != null) rental.setDateFrom(from);
+        if(to != null) rental.setDateTo(to);
         
         if (rentalDTO.getUser() != null && !rentalDTO.getUser().trim().isEmpty()) {
             rental.setUser(userFacade.findByEmail(rentalDTO.getUser().trim()));
