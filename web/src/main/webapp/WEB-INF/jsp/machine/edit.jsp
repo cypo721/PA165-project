@@ -21,6 +21,7 @@
         <form:form id="${machine.id}" method="post" modelAttribute="machine"
                    action="${pageContext.request.contextPath}/machine/save">
         <form:hidden path="id"  style="display:none"/>
+        <form:hidden path="dateOfLastRevision"  style="display:none"/>
         <div class="form-group">
             <label for="name">Name</label>
             <form:input path="name" cssClass="form-control" id="name" placeholder="Name"/>
@@ -31,10 +32,10 @@
             <form:input type="date" class="date" path="dateOfBuy" cssClass="form-control" id="name" placeholder="Date of buy"/>
         </div>
 
-        <div class="form-group">
-            <label for="name">Date of last revision</label>
-            <form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Date of last revision" />
-        </div>
+        <%--<div class="form-group">--%>
+            <%--<label for="name">Date of last revision</label>--%>
+            <%--<form:input type="date" class="date" path="dateOfLastRevision" cssClass="form-control" id="name" placeholder="Date of last revision" />--%>
+        <%--</div>--%>
 
             <div class="form-group">
                 <label for="machineType">Machine Type</label>

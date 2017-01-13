@@ -57,7 +57,7 @@
                     </sec:authorize>
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
                     <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
-                    <li><a href="${pageContext.request.contextPath}/user/">Users</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/list">Users</a></li>
                     </sec:authorize>
                     </ul>
                 <ul  class="nav navbar-nav navbar-right">
