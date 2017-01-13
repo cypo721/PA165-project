@@ -12,8 +12,10 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.PersistenceException;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.any;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doAnswer;
 import org.mockito.MockitoAnnotations;
@@ -26,11 +28,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.springframework.dao.DataAccessException;
+import static org.testng.Assert.fail;
+import org.testng.annotations.BeforeTest;
 
 /**
  *
@@ -53,13 +58,8 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
     private Machine machine4;
     private Machine machine5;
  
-    @BeforeClass
-    public void setup() throws ServiceException
-    {
-        MockitoAnnotations.initMocks(this);
-    }
     
-    @BeforeMethod
+    @BeforeTest
     public void setUpMachines()
     {
         Calendar cal = Calendar.getInstance();
@@ -91,82 +91,70 @@ public class MachineServiceTest extends AbstractTransactionalTestNGSpringContext
         machine4.setMachineType(MachineType.EXCAVATOR);
         
         cal.set(Calendar.YEAR, 2016);
-        
-        machine5 = new Machine();
-        machine5.setId(4L);
-        machine5.setName("Ex 200");
-        machine5.setPricePerDay(new BigDecimal("10.00"));
-        machine5.setDateOfBuy(cal.getTime());
-        machine5.setDateOfLastRevision(cal.getTime());
-        machine5.setMachineType(MachineType.EXCAVATOR);
+       
     }   
     
+    @BeforeMethod
+    public void setup() throws ServiceException
+    {
+        MockitoAnnotations.initMocks(this);
+    }
+    
     @Test
-    public void createMachineTest(){
-        Long machineId = 1L;
-        doAnswer(invocation -> {
-            Object arg = invocation.getArguments()[0];
-            Machine machine = (Machine) arg;
-            machine.setId(machineId);
-            return null;
-        }).when(machineDao).create(any(Machine.class));
+    public void testCreate(){
+       
 
         machineService.create(machine1);
-        Assert.assertEquals(machineId, machine1.getId());             
+        verify(machineDao, times(1)).create(machine1);
     } 
     
     @Test
     public void testDelete() {
-        when(machineService.findById(eq(machine2.getId()))).thenReturn(machine2).thenReturn(null);
-        Assert.assertNotNull(machineService.findById(machine2.getId()));
-        machineService.delete(machine2);
-        org.testng.Assert.assertNull(machineService.findById(machine2.getId()));
+        machineService.delete(machine3);
+        verify(machineDao, times(1)).delete(machine3);
+
     }
     
     @Test(expectedExceptions = {DataAccessException.class})
     public void testDeleteNonExistingRental(){
-        doThrow(new DataAccessException("Deleting non existing rental") {}).when(machineDao).delete(eq(machine3));
-        machineService.delete(machine3);
+        doThrow(new DataAccessException("Deleting non existing machine") {}).when(machineDao).delete(any(Machine.class));
+        machineService.delete(machine5);
+        
+        fail("Expected dataAccessException");
+
     }
     
     @Test
     public void findAllMachine() {
-        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2));
-
-        Assert.assertEquals(2, machineService.findAllMachines().size());
+        machineService.findAllMachines();
+        verify(machineDao, times(1)).findAllMachines();
+                                
     }
     
     @Test
     public void findMachineById() {
-        when(machineService.findById(2L)).thenReturn(machine2);
-
-        Assert.assertEquals(machineService.findById(2L), machine2);
+        machineService.findById(2L);
+        verify(machineDao, times(1)).findById(2L);
     }
     
-    @Test
+    @Test(expectedExceptions = {PersistenceException.class})
     public void findByNonExistingId() {
-        when(machineService.findById(-3L)).thenReturn(null);
+        doThrow(new PersistenceException("")).when(machineDao).findById(any(Long.class));
+        machineService.findById(50L);
+        
+        fail("Expected PersistanceException");
 
-        Assert.assertNull(machineService.findById(-3L));
     }
     
     @Test
     public void testUpdate() {
-        when(machineService.findById(2L)).thenReturn(machine2);
-        doAnswer(invocation -> {
-            Object arg = invocation.getArguments()[0];
-            Machine machine = (Machine) arg;
-            return machine;
-        }).when(machineDao).update(any(Machine.class));
-        machine2.setName("TestName");
         machineService.update(machine2);
-        Machine updated = machineService.findById(2L);
-        Assert.assertEquals(updated.getName(), machine2.getName());
+        verify(machineDao, times(1)).update(machine2);
     }
     
     @Test
     public void testGetMachinesInLastYearWithoutRevision() {        
-        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2, machine4, machine5));
+        when(machineService.findAllMachines()).thenReturn(Arrays.asList(machine1, machine2, machine4));
              
         List<Machine> machines = machineService.getMachinesInLastYearWithoutRevision();
         
