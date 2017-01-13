@@ -6,6 +6,7 @@ import facade.MachineFacade;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,19 +57,21 @@ public class MachineController {
         return "machine/list";
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String newMachine(Model model) {
         model.addAttribute("machine", new MachineDTO());
         return "machine/edit";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/edit/{id}")
     public String editMachine(@PathVariable Long id, Model model) {
         model.addAttribute("machine", machineFacade.findById(id));
         return "machine/edit";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/save")
     public String saveMachine(@Valid @ModelAttribute("machine") MachineDTO dto,
                                         BindingResult bindingResult,
@@ -93,7 +96,7 @@ public class MachineController {
         return "redirect:" + uriBuilder.path("/machine/").toUriString();
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         MachineDTO machine = machineFacade.findById(id);

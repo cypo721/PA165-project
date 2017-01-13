@@ -10,9 +10,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
-
-
 <!DOCTYPE html>
 
 <html lang="${pageContext.request.locale}">
@@ -55,12 +52,13 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/machine/">Machines</a></li>
-
+                    <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
                     <li><a href="${pageContext.request.contextPath}/revision/">Revisions</a></li>
-
+                    </sec:authorize>
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
-
+                    <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
                     <li><a href="${pageContext.request.contextPath}/user/">Users</a></li>
+                    </sec:authorize>
                     </ul>
                 <ul  class="nav navbar-nav navbar-right">
                     <sec:authorize access="isAnonymous()">
