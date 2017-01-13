@@ -1,5 +1,6 @@
 package dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import enums.MachineType;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,8 +23,11 @@ public class MachineDTO {
 
     @NotNull
     @DateTimeFormat(pattern ="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBuy;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfLastRevision;
 
     @NotNull
