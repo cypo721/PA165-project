@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,19 +56,22 @@ public class RevisionController {
     @Autowired
     private UserFacade userFacade;
 
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAll(Model model) {
         logger.info("Showing all additional services");
         model.addAttribute("revisions", revisionFacade.findAllRevisions());
         return "revision/list";
     }
-    
+   
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newRevision(Model model) {
         model.addAttribute("revision", new RevisionCreateDTO());
         return "revision/new";
     }
     
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String submitNew(@ModelAttribute("revision") RevisionCreateDTO revisionDTO,
                              Model model, RedirectAttributes redirectAttributes,
@@ -109,7 +113,7 @@ public class RevisionController {
     }
     
     
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable Long id) throws ParseException {
         RevisionDTO revision = revisionFacade.findById(id);
@@ -125,6 +129,7 @@ public class RevisionController {
         return "revision/edit";
     }
     
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String submitEdit(@PathVariable long id,
                              @ModelAttribute("rental") RevisionCreateDTO revisionDTO,
@@ -161,6 +166,7 @@ public class RevisionController {
         return "redirect:/revision/";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         RevisionDTO revision = revisionFacade.findById(id);
@@ -184,6 +190,6 @@ public class RevisionController {
     
     @ModelAttribute("users")
     public Collection<UserDTO> users() {
-        return userFacade.getAllUsers();
+        return userFacade.getAllUsers();    
     }
 }
