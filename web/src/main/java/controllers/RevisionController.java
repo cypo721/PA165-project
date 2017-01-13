@@ -78,10 +78,18 @@ public class RevisionController {
 
         if (revisionDTO.getDateOfRevision() != null && !revisionDTO.getDateOfRevision().trim().isEmpty()) {
             revision.setDateOfRevision(parser.parse(revisionDTO.getDateOfRevision().trim()));
+        } else {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Date of revision\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("revision", revisionDTO);
+            return "redirect:new";
         }
         
         if (revisionDTO.getInfo() != null && !revisionDTO.getInfo().trim().isEmpty()) {
             revision.setInfo(revisionDTO.getInfo());
+        } else {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Info\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("revision", revisionDTO);
+            return "redirect:new";
         }
         
         if (revisionDTO.getMachine() != null && !revisionDTO.getMachine().trim().isEmpty()) {
@@ -125,13 +133,17 @@ public class RevisionController {
         RevisionDTO revision = revisionFacade.findById(id);
 
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-
+        
         if (revisionDTO.getDateOfRevision() != null && !revisionDTO.getDateOfRevision().trim().isEmpty()) {
             revision.setDateOfRevision(parser.parse(revisionDTO.getDateOfRevision().trim()));
         }
-            
-        if (revisionDTO.getInfo() != null) {
+        
+        if (revisionDTO.getInfo() != null && !revisionDTO.getInfo().trim().isEmpty()) {
             revision.setInfo(revisionDTO.getInfo());
+        } else {
+            redirectAttributes.addFlashAttribute("alert_danger", "\"Info\" cannot be empty.");
+            redirectAttributes.addFlashAttribute("revision", revisionDTO);
+            return "redirect:" + uriBuilder.path("/revision/edit/{id}").buildAndExpand(id).encode().toUriString();   
         }
         
         if (revisionDTO.getMachine() != null && !revisionDTO.getMachine().trim().isEmpty()) {

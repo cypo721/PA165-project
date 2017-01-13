@@ -3,19 +3,21 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<my:template title="Edit rental">
+<my:template title="Edit revision">
 <jsp:attribute name="body">
     
 <div class="container">
     <div class="col-md-4">
         <form:form method="post" modelAttribute="revision" action="${editAction}">
             <div class="form-group">
-                <label for="dateOfRevision">Date of Revision</label>
-                <form:input path="dateOfRevision" cssClass="form-control" id="dateOfRevision" placeholder="dateOfRevision" value="${revision.dateOfRevision}"/>
+                <label for="dateOfRevision">Date of revision (YYYY-MM-DD)</label>
+                <form:input type="date" path="dateOfRevision" cssClass="form-control" id="dateOfRevision" placeholder="Date of revision"/>
+                <p><form:errors path="dateOfRevision" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="info">Info</label>
-                <form:input path="info" cssClass="form-control" id="info" placeholder="info" value="${revision.info}"/>
+                <form:input path="info" cssClass="form-control" id="info" placeholder="Info"/>
+                <p><form:errors path="info" cssClass="error" /></p>
             </div>
             <div class="form-group">
                 <label for="price">Machine</label>
