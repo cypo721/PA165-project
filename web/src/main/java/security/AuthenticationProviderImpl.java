@@ -14,7 +14,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class AuthenticationProviderImpl implements AuthenticationProvider {
 
 	@Inject
@@ -23,15 +23,15 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
 		String email = auth.getName();
 
-                UserDTO user;
-                
+		UserDTO user;
+
 		try {
-                    user = userFacade.findByEmail(email);
-                }
-                catch(Exception e)
-                {
-                    throw new UsernameNotFoundException("Provide valid email: " + email);
-                }
+			user = userFacade.findByEmail(email);
+		}
+		catch(Exception e)
+		{
+			throw new UsernameNotFoundException("Provide valid email: " + email);
+		}
 
 		String password = (String) auth.getCredentials();
 
@@ -39,11 +39,11 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 			throw new BadCredentialsException("Provide valid email or password");
 		}
 
-		
+
 		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(user.getRole().toString());
 		return new UsernamePasswordAuthenticationToken(email, password, authorities);
 	}
-	
+
 	public boolean supports(Class<?> auth) {
 		return true;
 	}

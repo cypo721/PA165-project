@@ -8,6 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 
 
@@ -32,15 +34,15 @@
 
 <%--<!-- navigation bar -->--%>
 <%--<nav class="navbar navbar-default">--%>
-    <%--<div class="container-fluid">--%>
-        <%--<!-- Brand and toggle get grouped for better mobile display -->--%>
+<%--<div class="container-fluid">--%>
+<%--<!-- Brand and toggle get grouped for better mobile display -->--%>
 
-    <%--</div>--%>
+<%--</div>--%>
 <%--</nav>--%>
 
 <div class="container">
     <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -57,16 +59,22 @@
                     <li><a href="${pageContext.request.contextPath}/revision/">Revisions</a></li>
 
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
-                    
-                    <li><a href="${pageContext.request.contextPath}/user/list">Users</a></li>
-                </ul>
-                    <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="${pageContext.request.contextPath}/user/">Users</a></li>
+
                     <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+
+                    <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+
+
+
+
 
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+    </a> <sec:authentication property="principal"/> </a>
 
     <c:if test="${not empty title}">
         <div class="page-header">
