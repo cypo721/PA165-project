@@ -10,9 +10,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
-
-
 <!DOCTYPE html>
 
 <html lang="${pageContext.request.locale}">
@@ -42,7 +39,7 @@
 
 <div class="container">
     <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -55,26 +52,26 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/machine/">Machines</a></li>
-
+                    <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
                     <li><a href="${pageContext.request.contextPath}/revision/">Revisions</a></li>
-
+                    </sec:authorize>
                     <li><a href="${pageContext.request.contextPath}/rental/list">Rentals</a></li>
-
+                    <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
                     <li><a href="${pageContext.request.contextPath}/user/">Users</a></li>
-
+                    </sec:authorize>
+                    </ul>
+                <ul  class="nav navbar-nav navbar-right">
+                    <sec:authorize access="isAnonymous()">
                     <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                    <li><a><sec:authentication property="principal"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-
-
-
-
-
+                    </sec:authorize>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    </a> <sec:authentication property="principal"/> </a>
 
     <c:if test="${not empty title}">
         <div class="page-header">
