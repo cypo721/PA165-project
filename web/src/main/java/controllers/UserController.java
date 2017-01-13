@@ -1,7 +1,6 @@
 package controllers;
 
 import dto.UserDTO;
-//import enums.Roles;
 import facade.UserFacade;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.Date;
 
 
 /**
- * Created by pato on 14.12.2016.
+ * Created by marek
  */
 @Controller
 @RequestMapping("/user")
