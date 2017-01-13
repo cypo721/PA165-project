@@ -38,11 +38,6 @@ public class RevisionFacadeImpl implements RevisionFacade {
         Revision revision =  beanMappingService.mapTo(revisionDTO, Revision.class);
         Revision saved = revisionService.create(revision);
         
-        Machine machine = saved.getMachine();
-        machine.setDateOfLastRevision(saved.getDateOfRevision());
-        
-        machineService.update(machine);
-        
         return saved.getId();
     }
 
@@ -51,10 +46,6 @@ public class RevisionFacadeImpl implements RevisionFacade {
         Validate.notNull(revisionDTO.getId());
         Revision entity =  beanMappingService.mapTo(revisionDTO, Revision.class);
         
-        Machine machine = entity.getMachine();
-        machine.setDateOfLastRevision(entity.getDateOfRevision());
-        
-        machineService.update(machine);
         revisionService.update(entity);
     }
 

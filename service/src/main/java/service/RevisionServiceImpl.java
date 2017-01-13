@@ -1,6 +1,8 @@
 package service;
 
+import dao.MachineDao;
 import dao.RevisionDao;
+import entity.Machine;
 import entity.Revision;
 import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,18 @@ public class RevisionServiceImpl implements RevisionService {
 
     @Inject
     private RevisionDao revisionDao;
+    
+    @Inject
+    private MachineDao machineDao;
 
     @Override
     public Revision create(Revision revision) {
         Validate.isTrue(revision.getId() == null);
         revisionDao.create(revision);
+        Machine machine = revision.getMachine();
+        machine.setDateOfLastRevision(revision.getDateOfRevision());
+        machineDao.update(machine);
+        
         return revision;
     }
 
@@ -29,6 +38,10 @@ public class RevisionServiceImpl implements RevisionService {
     public Revision update(Revision revision) {
         Validate.notNull(revision.getId());
         revisionDao.update(revision);
+        Machine machine = revision.getMachine();
+        machine.setDateOfLastRevision(revision.getDateOfRevision());
+        machineDao.update(machine);
+        
         return revision;
 
     }

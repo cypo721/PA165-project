@@ -59,7 +59,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User e = user("pwd", "Jozo", "Employee", "employee@employee.sk", "903030132", new Date(), "E");
 
         Revision r = revision(new Date(), m, u);
-        Revision r1 = revision(new Date(), m , u);
+        Revision r1 = revision(new Date(), m2 , u);
 
         Rental rent = rental(u, m);
         log.info("loaded date of application");

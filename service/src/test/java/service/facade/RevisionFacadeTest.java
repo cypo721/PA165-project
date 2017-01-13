@@ -99,21 +99,21 @@ public class RevisionFacadeTest extends AbstractTransactionalTestNGSpringContext
         revision2.setUser(user);
     }
     
-//    @Test
-//    public void testCreateRevision() {
-//        when(revisionService.create(any(Revision.class))).thenReturn(revision);
-//        RevisionDTO revisionDTO = mappingService.mapTo(revision, RevisionDTO.class);
-//        revisionFacade.createRevision(revisionDTO);
-//        verify(revisionService).create(any(Revision.class));
-//    }
+    @Test
+    public void testCreateRevision() {
+        when(revisionService.create(any(Revision.class))).thenReturn(revision);
+        RevisionDTO revisionDTO = mappingService.mapTo(revision, RevisionDTO.class);
+        revisionFacade.createRevision(revisionDTO);
+        verify(revisionService).create(any(Revision.class));
+    }
     
-//    @Test
-//    public void testUpdateRevision() {
-//        RevisionDTO revisionDTO = mappingService.mapTo(revision2, RevisionDTO.class);
-//        revisionDTO.setInfo("Test3");
-//        revisionFacade.updateRevision(revisionDTO);
-//        verify(revisionService).update(any(Revision.class));
-//    }
+    @Test
+    public void testUpdateRevision() {
+        RevisionDTO revisionDTO = mappingService.mapTo(revision2, RevisionDTO.class);
+        revisionDTO.setInfo("Test3");
+        revisionFacade.updateRevision(revisionDTO);
+        verify(revisionService).update(any(Revision.class));
+    }
 
     @Test
     public void testFindById() {
