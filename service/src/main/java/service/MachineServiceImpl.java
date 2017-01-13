@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,9 +83,12 @@ public class MachineServiceImpl implements MachineService {
         List<Machine> machines = findAllMachines();
         List<Machine> rentedMachines = new ArrayList<>();
         List<Rental> rentals = rentalDao.findAllRentals();
+        Date today = new Date();
 
         for(Rental r : rentals) {
-            rentedMachines.add(r.getMachine());
+            if (r.getDateFrom().before(today) && r.getDateTo().after(today)) {
+                rentedMachines.add(r.getMachine());
+            }
         }
         machines.removeAll(rentedMachines);
         return machines;
