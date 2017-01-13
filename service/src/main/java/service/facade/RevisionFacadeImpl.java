@@ -1,6 +1,7 @@
 package service.facade;
 
 import dto.RevisionDTO;
+import entity.Machine;
 import entity.Revision;
 import facade.RevisionFacade;
 import org.apache.commons.lang3.Validate;
@@ -11,6 +12,7 @@ import service.RevisionService;
 
 import javax.inject.Inject;
 import java.util.List;
+import service.MachineService;
 
 /**
  * Created by Marek Bohm on 23.11.2016.
@@ -21,6 +23,9 @@ public class RevisionFacadeImpl implements RevisionFacade {
 
     @Inject
     private RevisionService revisionService;
+    
+    @Inject
+    private MachineService machineService;
 
     @Inject
     private BeanMappingService beanMappingService;
@@ -32,7 +37,12 @@ public class RevisionFacadeImpl implements RevisionFacade {
 
         Revision revision =  beanMappingService.mapTo(revisionDTO, Revision.class);
         Revision saved = revisionService.create(revision);
-
+        
+        Machine machine = saved.getMachine();
+        machine.setDateOfLastRevision(saved.getDateOfRevision());
+        
+        machineService.update(machine);
+        
         return saved.getId();
     }
 
@@ -40,6 +50,11 @@ public class RevisionFacadeImpl implements RevisionFacade {
     public void updateRevision(RevisionDTO revisionDTO) {
         Validate.notNull(revisionDTO.getId());
         Revision entity =  beanMappingService.mapTo(revisionDTO, Revision.class);
+        
+        Machine machine = entity.getMachine();
+        machine.setDateOfLastRevision(entity.getDateOfRevision());
+        
+        machineService.update(machine);
         revisionService.update(entity);
     }
 
