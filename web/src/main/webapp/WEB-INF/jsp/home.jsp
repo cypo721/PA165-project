@@ -19,6 +19,7 @@
     <div class="jumbotron">
         <h1>Hi!</h1>
         <p>Welcome to our project from PA165 course at FI MUNI.</p>
+        <p>If you want to see and manage all information, please <a href="${pageContext.request.contextPath}/login">log in</a>.</p>
     </div>
     <p><h2>Authors:</h2></p>
     <p>
