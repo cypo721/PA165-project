@@ -36,11 +36,11 @@ public class UserFacadeImpl implements UserFacade {
     private BeanMappingService beanMappingService;
     
     @Override
-    public UserDTO createUser(UserDTO userDTO, String password)
+    public UserDTO createUser(UserDTO userDTO)
     {
         log.debug("Trying to create userDto {}", userDTO);
         User usr = beanMappingService.mapTo(userDTO, User.class);
-        userService.createUser(usr, password);
+        userService.createUser(usr, userDTO.getPassword());
         userDTO.setId(usr.getId());
         return userDTO;
     }

@@ -22,7 +22,7 @@ public interface UserFacade {
      * @param password
      * @return newly created user
      */
-    UserDTO createUser(UserDTO userDTO, String password);
+    UserDTO createUser(UserDTO userDTO);
 
     /**
      * Authenticate user in the system

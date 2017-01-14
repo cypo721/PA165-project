@@ -53,4 +53,33 @@ public class UserController {
         return "redirect:" + uriBuilder.path("/user/").toUriString();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new UserDTO());
+        return "user/edit";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/save")
+    public String saveUser(@Valid @ModelAttribute("user") UserDTO dto,
+                              BindingResult bindingResult,
+                              Model model,
+                              RedirectAttributes redirectAttributes,
+                              UriComponentsBuilder uriBuilder) {
+        logger.info("Saving userDTO: {}", dto);
+        if (bindingResult.hasErrors()) {
+            StringBuilder builder = new StringBuilder("Validation failed for fields: ");
+            bindingResult.getFieldErrors().forEach(fieldError -> builder.append(fieldError.getField()).append(", "));
+            builder.setLength(builder.length() - 2);
+
+            model.addAttribute("alert_danger", builder.toString());
+            return "user/edit";
+        }
+
+
+            userFacade.createUser(dto);
+
+        return "redirect:" + uriBuilder.path("/user/").toUriString();
+    }
 }
