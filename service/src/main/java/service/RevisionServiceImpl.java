@@ -4,6 +4,7 @@ import dao.MachineDao;
 import dao.RevisionDao;
 import entity.Machine;
 import entity.Revision;
+import java.util.Date;
 import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,16 @@ public class RevisionServiceImpl implements RevisionService {
         Validate.isTrue(revision.getId() == null);
         revisionDao.create(revision);
         Machine machine = revision.getMachine();
-        machine.setDateOfLastRevision(revision.getDateOfRevision());
-        machineDao.update(machine);
+        Date lastRevision = machine.getDateOfLastRevision();
         
+        if (lastRevision == null) {
+            machine.setDateOfLastRevision(revision.getDateOfRevision());
+            machineDao.update(machine);
+        } else if (revision.getDateOfRevision().after(lastRevision)) {
+            machine.setDateOfLastRevision(revision.getDateOfRevision());
+            machineDao.update(machine);
+        }
+              
         return revision;
     }
 
@@ -39,8 +47,15 @@ public class RevisionServiceImpl implements RevisionService {
         Validate.notNull(revision.getId());
         revisionDao.update(revision);
         Machine machine = revision.getMachine();
-        machine.setDateOfLastRevision(revision.getDateOfRevision());
-        machineDao.update(machine);
+        Date lastRevision = machine.getDateOfLastRevision();
+        
+        if (lastRevision == null) {
+            machine.setDateOfLastRevision(revision.getDateOfRevision());
+            machineDao.update(machine);
+        } else if (revision.getDateOfRevision().after(lastRevision)) {
+            machine.setDateOfLastRevision(revision.getDateOfRevision());
+            machineDao.update(machine);
+        }
         
         return revision;
 
