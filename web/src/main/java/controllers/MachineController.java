@@ -57,21 +57,21 @@ public class MachineController {
         return "machine/list";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN','EMPLOYEE')")
     @GetMapping("/new")
     public String newMachine(Model model) {
         model.addAttribute("machine", new MachineDTO());
         return "machine/edit";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN','EMPLOYEE')")
     @GetMapping("/edit/{id}")
     public String editMachine(@PathVariable Long id, Model model) {
         model.addAttribute("machine", machineFacade.findById(id));
         return "machine/edit";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN','EMPLOYEE')")
     @PostMapping("/save")
     public String saveMachine(@Valid @ModelAttribute("machine") MachineDTO dto,
                                         BindingResult bindingResult,
@@ -96,7 +96,7 @@ public class MachineController {
         return "redirect:" + uriBuilder.path("/machine/").toUriString();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN','EMPLOYEE')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes ) {
         MachineDTO machine = machineFacade.findById(id);
