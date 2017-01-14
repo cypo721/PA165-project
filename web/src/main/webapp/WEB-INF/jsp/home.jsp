@@ -22,6 +22,7 @@
         <p>If you want to see and manage all information, please <a href="${pageContext.request.contextPath}/login">log in</a>.</p>
         </sec:authorize>
     </div>
+    
     <p><h2>Authors:</h2></p>
     <p>
     <ul>

@@ -24,7 +24,7 @@
                 <tr>
                     <td><c:out value="${user.id}"/></td>
                     <td><c:out value="${user.email}"/></td>
-                    <td><c:out value="${user.role}"/> [CZK]</td>
+                    <td><c:out value="${user.role}"/></td>
                     <td><c:out value="${user.joinedDate}"/> </td>
                     <td>
                         <a href="${pageContext.request.contextPath}/user/edit/${m.id}"
