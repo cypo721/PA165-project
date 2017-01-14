@@ -65,7 +65,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createUser() {
         UserDTO userDTO = mappingService.mapTo(user1, UserDTO.class);
-        userFacade.createUser(userDTO, password);
+        userFacade.createUser(userDTO);
         Assert.assertNotNull(userFacade.findById(1L));
 
     }
