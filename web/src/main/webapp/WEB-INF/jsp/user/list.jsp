@@ -29,8 +29,10 @@
                     <td><c:out value="${user.role}"/></td>
                     <td>
 
+                        <sec:authorize access="hasAuthority('ADMIN')">
                         <a href="${pageContext.request.contextPath}/user/delete/${user.id}"
                            class="btn btn-danger">Delete</a>
+                        </sec:authorize>
                     </td>
                 </tr>
         </c:forEach>
