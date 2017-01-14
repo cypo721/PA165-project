@@ -10,8 +10,8 @@
 <div class="row">
     <br>
     <div>
-        <a href="${pageContext.request.contextPath}/machine/new"
-           class="btn btn-success">New machine</a>
+        <a href="${pageContext.request.contextPath}/user/new"
+           class="btn btn-success">New user</a>
     </div>
     <br>
     <table class=" table table-striped">
@@ -27,9 +27,9 @@
                     <td><c:out value="${user.role}"/> [CZK]</td>
                     <td><c:out value="${user.joinedDate}"/> </td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/machine/edit/${m.id}"
+                        <a href="${pageContext.request.contextPath}/user/edit/${m.id}"
                            class="btn btn-default">Edit</a>
-                        <a href="${pageContext.request.contextPath}/machine/delete/${m.id}"
+                        <a href="${pageContext.request.contextPath}/user/delete/${m.id}"
                            class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
@@ -41,7 +41,7 @@
     <jsp:attribute name="script">
 <script>
     $(function () {
-        $('#list-machines').on('change', function () {
+        $('#list-users').on('change', function () {
             var url = $(this).val();
             if (url) {
                 window.location = url;
