@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
@@ -19,12 +20,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import service.config.ServiceConfiguration;
 
+import javax.persistence.PersistenceException;
 import java.util.Arrays;
 import java.util.Calendar;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.testng.Assert.fail;
 
 /**
  * Created by Marek Bohm on 25.11.2016.
@@ -97,42 +99,48 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
 
     @Test
     public void getAllUsers() {
-        when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2, user3));
-
-        Assert.assertEquals(userService.getAllUsers().size(), 3);
+        userService.getAllUsers();
+        verify(userDao, times(1)).findAll();
     }
 
     @Test
     public void getUserById() {
-        when(userService.getUserById(2L)).thenReturn(user2);
-
-        Assert.assertEquals(userService.getUserById(2L), user2);
+        userService.getUserById(2L);
+        verify(userDao, times(1)).findById(2L);
     }
 
-    @Test
+    @Test(expectedExceptions = {PersistenceException.class})
     public void findByNonExistingId() {
-        when(userService.getUserById(-3L)).thenReturn(null);
+        doThrow(new PersistenceException("")).when(userDao).findById(any(Long.class));
+        userService.getUserById(50L);
 
-        Assert.assertNull(userService.getUserById(-3L));
+        fail("Expected PersistanceException");
     }
 
     @Test
     public void createUser() {
-        Long userId = 1L;
-        doAnswer(invocation -> {
-            Object arg = invocation.getArguments()[0];
-            User user = (User) arg;
-            user.setId(userId);
-            return null;
-        }).when(userDao).create(any(User.class));
+        userService.createUser(user1, "pwd");
+        verify(userDao, times(1)).create(user1);
+    }
 
-        userService.createUser(user1, "password");
-        Assert.assertEquals(userId, user1.getId());
+    @Test
+    public void testDelete() {
+        userService.delete(user2);
+        verify(userDao, times(1)).delete(user2);
+
+    }
+
+    @Test(expectedExceptions = {DataAccessException.class})
+    public void testDeleteNonExistingRental(){
+        doThrow(new DataAccessException("deleting") {}).when(userDao).delete(any(User.class));
+
+        userService.delete(user1);
+
+        fail("Expected dataAccessException");
     }
 
     @Test
     public void authenticate() {
-
         when(userService.getUserById(1L)).thenReturn(user1);
 
         Long userId = 1L;

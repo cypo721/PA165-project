@@ -69,16 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id)
     {
-        if (id == null) throw new IllegalArgumentException("Id is null");
-        try
-        {
             return userdao.findById(id);
-        }
-        catch(Exception e)
-        {
-            throw new TransientDataAccessResourceException("Finding of a user by id failed", e);
-        }
-        
     }
     
     @Override
