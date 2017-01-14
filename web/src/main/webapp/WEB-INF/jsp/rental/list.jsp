@@ -3,11 +3,15 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <my:template title="Rentals">
 <jsp:attribute name="body">
 
 <div class="container">
-    <a href="${pageContext.request.contextPath}/rental/new" class="btn btn-success">New rental</a>
+    <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
+        <a href="${pageContext.request.contextPath}/rental/new" class="btn btn-success">New rental</a>
+    </sec:authorize>
 
     <table class="table">
         <thead>
@@ -27,12 +31,14 @@
                 <td><c:out value="${rental.id}"/></td>
                 <td><c:out value="${rental.machine.name}"/></td>
                 <td><c:out value="${rental.user.email}"/></td>
-                <td><c:out value="${rental.dateFrom}"/></td>
-                <td><c:out value="${rental.dateTo}"/></td>
+                <td><fmt:formatDate value="${rental.dateFrom}" pattern="yyyy-MM-dd"/></td>
+                <td><fmt:formatDate value="${rental.dateTo}" pattern="yyyy-MM-dd"/></td>
                 <td><c:out value="${rental.price}"/></td>
 
-                <td><a href="${pageContext.request.contextPath}/rental/edit/${rental.id}" class="btn btn-success">Edit</a>
-                <a href="${pageContext.request.contextPath}/rental/delete/${rental.id}" class="btn btn-danger">Delete</a></td>
+                <td><sec:authorize access="hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')">
+                        <a href="${pageContext.request.contextPath}/rental/edit/${rental.id}" class="btn btn-success">Edit</a>
+                        <a href="${pageContext.request.contextPath}/rental/delete/${rental.id}" class="btn btn-danger">Delete</a>
+                    </sec:authorize></td>
 
             </tr>
         </c:forEach>
