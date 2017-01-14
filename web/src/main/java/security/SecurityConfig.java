@@ -30,10 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                    .antMatchers("/", "/home/", "/machine/","/login/", "/accessdenied").permitAll()
-//                    .antMatchers("/rental/list", "/revision/list").hasAnyAuthority("ADMIN", "CUSTOMER")
-//                    .antMatchers("/user/list", "/machine/edit/**", "/machine/new", "/rental/new").hasAuthority("ADMIN")
-//                    .anyRequest().authenticated()
+                    .antMatchers("/", "/home/", "/machine/","/login/", "/accessdenied").permitAll()
+                    .antMatchers("/rental/list").hasAnyAuthority("ADMIN", "CUSTOMER")
+                    .antMatchers("/user/**", "/machine/**", "/revision/**", "/rental/edit/**", "/rental/new", "/rental/delete").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied")
+                .exceptionHandling().accessDeniedPage("/accessdenied")
                 .and()
                 .csrf().disable();
     }

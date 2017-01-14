@@ -9,10 +9,7 @@
     <jsp:attribute name="body">
 <div class="row">
     <br>
-    <div>
-        <a href="${pageContext.request.contextPath}/user/new"
-           class="btn btn-success">New user</a>
-    </div>
+
     <br>
     <table class=" table table-striped">
         <th>Id</th>
@@ -27,8 +24,7 @@
                     <td><c:out value="${user.role}"/></td>
                     <td><c:out value="${user.joinedDate}"/> </td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/user/edit/${user.id}"
-                           class="btn btn-default">Edit</a>
+
                         <a href="${pageContext.request.contextPath}/user/delete/${user.id}"
                            class="btn btn-danger">Delete</a>
                     </td>
