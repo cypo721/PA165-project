@@ -26,13 +26,12 @@ public class User {
     private String passwordHash;
 
     private String givenName;
-    @NotNull
+
     private String surname;
 
     @Column(nullable=false, unique=true)
     @Pattern(regexp=".+@.+\\....?")
     private String email;
-    @NotNull
 
     @Pattern(regexp="\\+?\\d+")
     private String phone;
@@ -49,7 +48,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @NotNull
     @Temporal(TemporalType.DATE)
     private Date joinedDate;
 
