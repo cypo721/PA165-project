@@ -67,4 +67,9 @@ public interface UserService {
      * @return 
      */
     public List<User> getAllUsers();
+
+    /**
+     * Deletes specified user
+     */
+    public void delete(User user);
 }

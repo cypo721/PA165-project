@@ -74,4 +74,11 @@ public class UserFacadeImpl implements UserFacade {
     public Collection<UserDTO> getAllUsers() {
         return beanMappingService.mapTo(userService.getAllUsers(), UserDTO.class);
     }
+
+    @Override
+    public void deleteUser(Long id){
+        User user = new User();
+        user.setId(id);
+        userService.delete(user);
+    }
 }

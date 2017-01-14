@@ -107,4 +107,9 @@ public class UserServiceImpl implements UserService {
             throw new TransientDataAccessResourceException("Finding of all users failed", e);
         }
     }
+
+    @Override
+    public void delete(User user){
+        userdao.delete(user);
+    }
 }

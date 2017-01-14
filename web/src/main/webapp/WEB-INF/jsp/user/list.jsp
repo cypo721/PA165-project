@@ -27,9 +27,9 @@
                     <td><c:out value="${user.role}"/></td>
                     <td><c:out value="${user.joinedDate}"/> </td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/user/edit/${m.id}"
+                        <a href="${pageContext.request.contextPath}/user/edit/${user.id}"
                            class="btn btn-default">Edit</a>
-                        <a href="${pageContext.request.contextPath}/user/delete/${m.id}"
+                        <a href="${pageContext.request.contextPath}/user/delete/${user.id}"
                            class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
